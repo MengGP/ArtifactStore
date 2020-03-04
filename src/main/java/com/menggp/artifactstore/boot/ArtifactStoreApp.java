@@ -1,5 +1,8 @@
 package com.menggp.artifactstore.boot;
 
+import org.flywaydb.core.Flyway;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,8 +23,12 @@ import java.util.HashMap;
         "com.menggp.artifactstore.controllersREST",
         "com.menggp.artifactstore.services"
 } )
-// @PropertySource("classpath:/application.properties")
-public class ArtifactStoreApp {
+ @PropertySource("classpath:/application.properties")
+public class ArtifactStoreApp implements CommandLineRunner {
+
+    // получем строку подключения к БД из файла properties для Flyway
+    @Value("${spring.datasource.url}")
+    String dbUrl;
 
     // Запуск Spring Boot Application
     public static void main(String[] args){
@@ -34,6 +41,22 @@ public class ArtifactStoreApp {
                 .properties(props)
                 .run(args);
     } // end_main
+
+    // Задачи при старте
+    @Override
+    public void run(String... args) throws Exception {
+        migrateDB();
+    } // end_run
+
+    // запуск миграции БД из sql-скрипта средсвами Flyway
+    private void migrateDB() {
+        Flyway flyway = Flyway.configure().dataSource(
+                dbUrl,
+                "sa",
+                "")
+                .load();
+        flyway.migrate();
+    } // end_method
 
 } // end_class
 

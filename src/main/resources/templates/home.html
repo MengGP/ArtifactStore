@@ -6,9 +6,58 @@
 </head>
 
 <body>
-<h1>Welcome!</h1>
+<p>Welcome!</p>
+<p th:inline="text">Вы авторизованы - [[${#httpServletRequest.remoteUser}]]!</p>
+<p>--------------------------------------------------------</p>
+<table>
+    <tr>
+        <td>Поиск по:</td>
+        <td><!-- empty --></td>
+        <td>
+            <form th:action="@{/showAllArtifacts}">
+                <button>Все</button>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>категория</td>
+        <td><!-- empty --></td>
+        <td>
+            <form th:action="@{/showAllArtifacts}">
+                <button>Искать</button>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>пользователь</td>
+        <td><!-- empty --></td>
+        <td>
+            <form th:action="@{/showAllArtifacts}">
+                <button>Искать</button>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>описание</td>
+        <td><!-- empty --></td>
+        <td>
+            <form th:action="@{/showAllArtifacts}">
+                <button>Искать</button>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>содержание комментариев</td>
+        <td><!-- empty --></td>
+        <td>
+            <form th:action="@{/showAllArtifacts}">
+                <button>Искать</button>
+            </form>
+        </td>
+    </tr>
+</table>
 
-<h1 th:inline="text">Вы авторизованы - [[${#httpServletRequest.remoteUser}]]!</h1>
+
 
 
 
