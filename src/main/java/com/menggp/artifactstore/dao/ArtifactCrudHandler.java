@@ -23,4 +23,11 @@ public class ArtifactCrudHandler {
         return all;
     } // end_method
 
+    public  ArrayList<Artifact> findByCategory(String category) {
+        all = (ArrayList<Artifact>) artifactRepository.findByCategoryLike(category+"%");
+        return all;
+    }
+
+
+
 } // end_class

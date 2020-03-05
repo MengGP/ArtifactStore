@@ -3,6 +3,8 @@ package com.menggp.artifactstore.dao.repo;
 import com.menggp.artifactstore.dao.Artifact;
 import com.menggp.artifactstore.dao.Comment;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CommentRepository extends CrudRepository<Comment, Integer> {
+@Repository
+public interface CommentRepository extends CrudRepository<Comment, Long> {
 } // end_interface

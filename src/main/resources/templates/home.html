@@ -23,9 +23,16 @@
     </tr>
     <tr>
         <td align="right">Категория:</td>
-        <td><!-- empty --></td>
         <td>
-            <form th:action="@{/showAllArtifacts}">
+            <input
+                type="text"
+                name="artifactCatagory"
+                placeholder="Введите категорию"
+                form = "filterByCategory"
+            />
+        </td>
+        <td>
+            <form id="filterByCategory" th:action="@{/showArtifactFilterByCategory}">
                 <button>Искать</button>
             </form>
         </td>

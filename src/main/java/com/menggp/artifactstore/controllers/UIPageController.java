@@ -10,6 +10,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
@@ -25,6 +26,7 @@ public class UIPageController {
     private static final Logger Log = LoggerFactory.getLogger(UIPageController.class);
 
     private static final String REST_URL_ALL_ARTIFACTS_REQUEST = "http://localhost:8077/allArtifactsRequest";
+    private static final String REST_URL_ARTIFACTS_REQUEST = "http://localhost:8077/artifactsRequest";
 
     @Autowired
     RestTemplate restTemplate;
@@ -36,14 +38,31 @@ public class UIPageController {
 
     @RequestMapping("/showAllArtifacts")
     public String showAllArtifacts(Model model) {
-
         try {
 
             HttpHeaders headers = new HttpHeaders();
             HttpEntity<String> request = new HttpEntity<>(getHeaders());
             ResponseEntity<ArtifactList> responseResult
-                    // = restTemplate.getForEntity(REST_URL_ALL_ARTIFACTS_REQUEST, request, String.class);
                     = restTemplate.exchange(REST_URL_ALL_ARTIFACTS_REQUEST, HttpMethod.GET, request, ArtifactList.class);
+
+            List<Artifact> allArtifacts = new ArrayList<>();
+            allArtifacts = responseResult.getBody().getArtifactList();
+            model.addAttribute("artifactList", allArtifacts);
+        } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
+            Log.debug( ex.getMessage() );
+        }
+        return "home";
+    } // end_method
+
+    @RequestMapping("/showArtifactFilterByCategory")
+    public String showArtifactFilterByCategory(
+            @RequestParam(value = "artifactCatagory", required = false) String artifactCategory,
+            Model model) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            HttpEntity<String> request = new HttpEntity<>(getHeaders());
+            ResponseEntity<ArtifactList> responseResult
+                    = restTemplate.exchange(REST_URL_ARTIFACTS_REQUEST+"?cat="+artifactCategory, HttpMethod.GET, request, ArtifactList.class);
 
             List<Artifact> allArtifacts = new ArrayList<>();
             allArtifacts = responseResult.getBody().getArtifactList();
@@ -52,9 +71,9 @@ public class UIPageController {
         } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
             Log.debug( ex.getMessage() );
         }
-
         return "home";
     } // end_method
+
 
     //  Метод формирует HTTP-headers для использования Basic-Authentication в REST запросах
     private static HttpHeaders getHeaders(){
