@@ -1,6 +1,7 @@
 package com.menggp.artifactstore.dao.repo;
 
 import com.menggp.artifactstore.dao.Artifact;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -12,9 +13,11 @@ import java.util.List;
 public interface ArtifactRepository extends CrudRepository<Artifact, Long> {
 
     // Поиск по категории
-    // List<Artifact> findByCategory(String category);
-    // @Query("FROM artifacts WHERE category = ?cat")
-    List<Artifact> findByCategoryLike(String cat);
+    List<Artifact> findByCategoryLikeIgnoreCase(String cat);
+
+    // Поиск категорий
+    @Query(value = "SELECT category FROM artifacts GROUP BY category", nativeQuery = true)
+    List<String> findCategory();
 
 
 

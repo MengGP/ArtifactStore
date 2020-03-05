@@ -3,6 +3,7 @@ package com.menggp.artifactstore.boot;
 import com.menggp.artifactstore.dao.Artifact;
 import com.menggp.artifactstore.dao.ArtifactCrudHandler;
 import com.menggp.artifactstore.dao.Comment;
+import com.menggp.artifactstore.services.RestRequestHandler;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -49,6 +50,11 @@ public class ArtifactStoreApp implements CommandLineRunner {
     @Bean
     public ArtifactCrudHandler artifactCrudHandler() {
         return  new ArtifactCrudHandler();
+    }
+
+    @Bean
+    public RestRequestHandler restRequestHandler() {
+        return new RestRequestHandler();
     }
 
     // Запуск Spring Boot Application

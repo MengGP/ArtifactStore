@@ -3,6 +3,7 @@ package com.menggp.artifactstore.controllersREST;
 import com.menggp.artifactstore.dao.Artifact;
 import com.menggp.artifactstore.dao.ArtifactCrudHandler;
 import com.menggp.artifactstore.dto.ArtifactList;
+import com.menggp.artifactstore.dto.CategoreisList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,6 +41,18 @@ public class DataController {
         response.setArtifactList(artList);
         return response;
     } // end_method
+
+    @RequestMapping(value="/allCategories", method = RequestMethod.GET)
+    public CategoreisList getAllCategories() {
+        ArrayList<String> catList = new ArrayList<>();
+        CategoreisList response = new CategoreisList();
+
+        catList = artifactCrudHandler.readAllCategories();
+
+        response.setCategoriesList(catList);
+        return response;
+    } // end_method
+
 
 
 

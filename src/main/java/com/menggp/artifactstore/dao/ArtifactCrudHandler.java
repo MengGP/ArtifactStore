@@ -4,8 +4,6 @@ import com.menggp.artifactstore.dao.repo.ArtifactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
-import java.util.List;
-
 
 
 /*
@@ -13,20 +11,34 @@ import java.util.List;
  */
 public class ArtifactCrudHandler {
 
-    private ArrayList<Artifact> all;
+    private ArrayList<Artifact> allArtifact;
+    private ArrayList<String> allString;
 
     @Autowired
     ArtifactRepository artifactRepository;
 
+    // Все записи из таблицы ARTIFACTES
     public ArrayList<Artifact> readAll() {
-        all = (ArrayList<Artifact>) artifactRepository.findAll();
-        return all;
+        allArtifact = (ArrayList<Artifact>) artifactRepository.findAll();
+        return allArtifact;
     } // end_method
 
+    // ARTIFACTES - фильтр по категрии
     public  ArrayList<Artifact> findByCategory(String category) {
-        all = (ArrayList<Artifact>) artifactRepository.findByCategoryLike(category+"%");
-        return all;
+        String clause;
+        clause = category + "%";
+        clause.toUpperCase();
+        allArtifact = (ArrayList<Artifact>) artifactRepository.findByCategoryLikeIgnoreCase(clause);
+        return allArtifact;
+    } // end_method
+
+    public ArrayList<String> readAllCategories() {
+        allString = (ArrayList<String>) artifactRepository.findCategory();
+        return allString;
+
     }
+
+
 
 
 

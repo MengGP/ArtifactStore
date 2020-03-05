@@ -2,6 +2,7 @@ package com.menggp.artifactstore.controllers;
 
 import com.menggp.artifactstore.dao.Artifact;
 import com.menggp.artifactstore.dto.ArtifactList;
+import com.menggp.artifactstore.services.RestRequestHandler;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,66 +26,37 @@ public class UIPageController {
 
     private static final Logger Log = LoggerFactory.getLogger(UIPageController.class);
 
-    private static final String REST_URL_ALL_ARTIFACTS_REQUEST = "http://localhost:8077/allArtifactsRequest";
-    private static final String REST_URL_ARTIFACTS_REQUEST = "http://localhost:8077/artifactsRequest";
-
     @Autowired
-    RestTemplate restTemplate;
+    RestRequestHandler restRequestHandler;
+
+
 
     @RequestMapping("/")
     public String index(Model model) {
+        model.addAttribute("categoriesList", restRequestHandler.getAllCategories());
         return "home";
     }
 
     @RequestMapping("/showAllArtifacts")
     public String showAllArtifacts(Model model) {
-        try {
 
-            HttpHeaders headers = new HttpHeaders();
-            HttpEntity<String> request = new HttpEntity<>(getHeaders());
-            ResponseEntity<ArtifactList> responseResult
-                    = restTemplate.exchange(REST_URL_ALL_ARTIFACTS_REQUEST, HttpMethod.GET, request, ArtifactList.class);
-
-            List<Artifact> allArtifacts = new ArrayList<>();
-            allArtifacts = responseResult.getBody().getArtifactList();
-            model.addAttribute("artifactList", allArtifacts);
-        } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
-            Log.debug( ex.getMessage() );
-        }
+        model.addAttribute("categoriesList", restRequestHandler.getAllCategories());
+        model.addAttribute("artifactList", restRequestHandler.getAllArtifacs());
         return "home";
     } // end_method
 
     @RequestMapping("/showArtifactFilterByCategory")
     public String showArtifactFilterByCategory(
-            @RequestParam(value = "artifactCatagory", required = false) String artifactCategory,
+            @RequestParam(value = "artifactCatagory", required = false) String category,
             Model model) {
-        try {
-            HttpHeaders headers = new HttpHeaders();
-            HttpEntity<String> request = new HttpEntity<>(getHeaders());
-            ResponseEntity<ArtifactList> responseResult
-                    = restTemplate.exchange(REST_URL_ARTIFACTS_REQUEST+"?cat="+artifactCategory, HttpMethod.GET, request, ArtifactList.class);
-
-            List<Artifact> allArtifacts = new ArrayList<>();
-            allArtifacts = responseResult.getBody().getArtifactList();
-
-            model.addAttribute("artifactList", allArtifacts);
-        } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
-            Log.debug( ex.getMessage() );
-        }
+        model.addAttribute("categoriesList", restRequestHandler.getAllCategories());
+        model.addAttribute("artifactList", restRequestHandler.getArtifacatsFilterByCategory(category));
         return "home";
     } // end_method
 
 
-    //  Метод формирует HTTP-headers для использования Basic-Authentication в REST запросах
-    private static HttpHeaders getHeaders(){
-        String plainCredentials="user:user";
-        String base64Credentials = new String(Base64.encodeBase64(plainCredentials.getBytes()));
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Basic " + base64Credentials);
-        // headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        return headers;
-    } // end_class
+
 
 
 } // end_class

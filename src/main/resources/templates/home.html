@@ -6,11 +6,15 @@
 </head>
 
 <body>
-<p>Welcome!</p>
 <p th:inline="text">Вы авторизованы - [[${#httpServletRequest.remoteUser}]]!</p>
 
 <!-- Блок поиска -->
 <p>--------------------------------------------------------</p>
+
+<datalist id="artifactCategories">
+    <option th:each="iter : ${categoriesList}" th:value="${iter}"/>
+</datalist>
+
 <table>
     <tr>
         <td><h3>Поиск по:</h3></td>
@@ -27,6 +31,7 @@
             <input
                 type="text"
                 name="artifactCatagory"
+                list="artifactCategories"
                 placeholder="Введите категорию"
                 form = "filterByCategory"
             />
