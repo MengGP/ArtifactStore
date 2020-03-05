@@ -57,6 +57,19 @@ public class DataController {
         return response;
     } // end_method
 
+    @RequestMapping(value="/artRequestByDesc", method = RequestMethod.GET)
+    public ArtifactList getArtifactsByDescription(
+            @RequestParam String desc
+    ) {
+        ArrayList<Artifact> artList = new ArrayList<>();
+        ArtifactList response = new ArtifactList();
+
+        artList = artifactCrudHandler.findByDescription(desc);
+
+        response.setArtifactList(artList);
+        return response;
+    } // end_method
+
     @RequestMapping(value="/allCategories", method = RequestMethod.GET)
     public CategoriesList getAllCategories() {
         ArrayList<String> catList = new ArrayList<>();

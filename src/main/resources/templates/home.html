@@ -65,9 +65,16 @@
     </tr>
     <tr>
         <td align="right">Описание:</td>
-        <td><!-- empty --></td>
         <td>
-            <form th:action="@{/showAllArtifacts}">
+            <input
+                    type="text"
+                    name="artifactDescription"
+                    placeholder="Введите часть описания"
+                    form = "filterByDescription"
+            />
+        </td>
+        <td>
+            <form id="filterByDescription" th:action="@{/showArtifactFilterByDescription}">
                 <button>Искать</button>
             </form>
         </td>

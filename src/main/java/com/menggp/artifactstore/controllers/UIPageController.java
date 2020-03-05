@@ -70,7 +70,20 @@ public class UIPageController {
 
         model.addAttribute("artifactList", restRequestHandler.getArtifacatsFilterByUser(user));
         return "home";
-    }
+    } // end_method
+
+    @RequestMapping("/showArtifactFilterByDescription")
+    public String showArtifactFilterByDescription(
+            @RequestParam(value = "artifactDescription", required = false) String desc,
+            Model model
+    ) {
+
+        model.addAttribute("categoriesList", restRequestHandler.getAllCategories());
+        model.addAttribute("usersList", restRequestHandler.getAllUsers());
+
+        model.addAttribute("artifactList", restRequestHandler.getArtifacatsFilterByDescription(desc));
+        return "home";
+    } // end_method
 
 
 

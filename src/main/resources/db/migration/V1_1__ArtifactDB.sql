@@ -82,3 +82,15 @@ INSERT INTO artifacts(id, created, user_id, category, description) VALUES (
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (12, 4, 'user08', 'Комментарий к Cloud Dataproc API #1');
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (13, 4, 'user09', 'Комментарий к Cloud Dataproc API #2');
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (14, 4, 'user07', 'Комментарий к Cloud Dataproc API #3');
+
+-- Artifact and comments 6: --
+INSERT INTO artifacts(id, created, user_id, category, description) VALUES (
+    5,
+    '2020-02-13 15:22:28',
+    'Google',
+    'Service',
+    'Google Sheets API V4 Rev610 1.25.0 '
+);
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (15, 5, 'user62', 'Комментарий к Google Sheets API #1');
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (16, 5, 'user46', 'Комментарий к Google Sheets API #2');
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (17, 5, 'user12', 'Комментарий к Google Sheets API #3');

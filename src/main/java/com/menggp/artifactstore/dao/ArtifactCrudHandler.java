@@ -41,6 +41,15 @@ public class ArtifactCrudHandler {
         return allArtifact;
     } // end_method
 
+    // ARTIFACTES - фильтр по пользователю
+    public  ArrayList<Artifact> findByDescription(String desc) {
+        String clause;
+        clause = "%" + desc + "%";
+        clause.toUpperCase();
+        allArtifact = (ArrayList<Artifact>) artifactRepository.findByDescriptionLikeIgnoreCase(clause);
+        return allArtifact;
+    } // end_method
+
     // Список категорий - ARTIFACT
     public ArrayList<String> readAllCategories() {
         allString = (ArrayList<String>) artifactRepository.findCategory();
