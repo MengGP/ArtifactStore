@@ -29,6 +29,7 @@ public class RestRequestHandler {
     private static final String REST_URL_ARTIFACTS_REQUEST_BY_CAT = "http://localhost:8077/artRequestByCategory";
     private static final String REST_URL_ARTIFACTS_REQUEST_BY_USER = "http://localhost:8077/artRequestByUser";
     private static final String REST_URL_ARTIFACTS_REQUEST_BY_DESC = "http://localhost:8077/artRequestByDesc";
+    private static final String REST_URL_ARTIFACTS_REQUEST_BY_COMMENT = "http://localhost:8077/artRequestByCommentContent";
 
     @Autowired
     RestTemplate restTemplate;
@@ -85,6 +86,21 @@ public class RestRequestHandler {
             HttpEntity<String> request = new HttpEntity<>(getHeaders());
             ResponseEntity<ArtifactList> responseResult
                     = restTemplate.exchange(REST_URL_ARTIFACTS_REQUEST_BY_DESC +"?desc="+desc, HttpMethod.GET, request, ArtifactList.class);
+
+            return responseResult.getBody().getArtifactList();
+        } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
+            Log.debug( ex.getMessage() );
+        }
+        return null;
+    } // end_method
+
+    // Метод возвращает список артификтов - отфильтрованный по сожержанию комментариеы
+    public List<Artifact> getArtifacatsFilterByCommentContent(String comment) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            HttpEntity<String> request = new HttpEntity<>(getHeaders());
+            ResponseEntity<ArtifactList> responseResult
+                    = restTemplate.exchange(REST_URL_ARTIFACTS_REQUEST_BY_COMMENT +"?comment="+comment, HttpMethod.GET, request, ArtifactList.class);
 
             return responseResult.getBody().getArtifactList();
         } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {

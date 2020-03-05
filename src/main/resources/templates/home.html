@@ -81,9 +81,16 @@
     </tr>
     <tr>
         <td align="right">Содержание комментариев:</td>
-        <td><!-- empty --></td>
         <td>
-            <form th:action="@{/showAllArtifacts}">
+            <input
+                    type="text"
+                    name="artifactCommentContent"
+                    placeholder="Введите часть комментария"
+                    form = "filterByCommentContent"
+            />
+        </td>
+        <td>
+            <form id="filterByCommentContent" th:action="@{/showArtifactFilterByCommentContent}">
                 <button>Искать</button>
             </form>
         </td>

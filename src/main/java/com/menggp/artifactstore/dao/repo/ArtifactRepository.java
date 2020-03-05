@@ -21,6 +21,12 @@ public interface ArtifactRepository extends CrudRepository<Artifact, Long> {
     // Поиск по описанию
     List<Artifact> findByDescriptionLikeIgnoreCase(String user);
 
+    @Query(value = "SELECT * FROM artifacts where ID IN " +
+            "(" +
+            "SELECT artifact_id FROM commentaries where UPPER(content) LIKE ?1" +
+            ")", nativeQuery = true)
+    List<Artifact> findByCommentContent(String content);
+
     // Список категорий
     @Query(value = "SELECT category FROM artifacts GROUP BY category", nativeQuery = true)
     List<String> findCategory();

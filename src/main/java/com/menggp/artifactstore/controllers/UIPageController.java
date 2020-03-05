@@ -85,6 +85,19 @@ public class UIPageController {
         return "home";
     } // end_method
 
+    @RequestMapping("/showArtifactFilterByCommentContent")
+    public String showArtifactFilterByCommentContent(
+            @RequestParam(value = "artifactCommentContent", required = false) String comment,
+            Model model
+    ) {
+
+        model.addAttribute("categoriesList", restRequestHandler.getAllCategories());
+        model.addAttribute("usersList", restRequestHandler.getAllUsers());
+
+        model.addAttribute("artifactList", restRequestHandler.getArtifacatsFilterByCommentContent(comment));
+        return "home";
+    } // end_method
+
 
 
 
