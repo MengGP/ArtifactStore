@@ -17,6 +17,7 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.2.4.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.2.4.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.2.4.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.2.4.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '2.2.4.RELEASE', ext: 'pom'
     compile group: 'org.flywaydb', name: 'flyway-core', version: '6.2.4'
     compile group: 'com.h2database', name: 'h2', version: '1.4.200'
