@@ -47,7 +47,7 @@ INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (3, 1, 'user
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (4, 1, 'user03', 'Комментарий к Connector Routing API #2');
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (5, 1, 'user04', 'Комментарий к Connector Routing API #3');
 
--- Artifact and comments 2: --
+-- Artifact and comments 3: --
 INSERT INTO artifacts(id, created, user_id, category, description) VALUES (
     2,
     '2020-02-17 13:49:56',
@@ -58,4 +58,17 @@ INSERT INTO artifacts(id, created, user_id, category, description) VALUES (
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (6, 2, 'user02', 'Комментарий к Oracle Cloud Infrastructure SDK Events #1');
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (7, 2, 'user05', 'Комментарий к Oracle Cloud Infrastructure SDK Events #2');
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (8, 2, 'user04', 'Комментарий к Oracle Cloud Infrastructure SDK Events #3');
+
+-- Artifact and comments 3: --
+INSERT INTO artifacts(id, created, user_id, category, description) VALUES (
+    3,
+    '2020-02-14 21:13:37',
+    'Amazon',
+    'Cloud Computing',
+    'AWS Java SDK For Amazon Redshift'
+);
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (9, 3, 'user06', 'Комментарий к AWS Java SDK For Amazon Redshift #1');
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (10, 3, 'user07', 'Комментарий к AWS Java SDK For Amazon Redshift #2');
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (11, 3, 'user04', 'Комментарий к AWS Java SDK For Amazon Redshift #3');
+
 

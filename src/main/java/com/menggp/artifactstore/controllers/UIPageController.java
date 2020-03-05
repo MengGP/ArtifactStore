@@ -3,6 +3,8 @@ package com.menggp.artifactstore.controllers;
 import com.menggp.artifactstore.dao.Artifact;
 import com.menggp.artifactstore.dto.ArtifactList;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ import java.util.List;
 
 @Controller
 public class UIPageController {
+
+    private static final Logger Log = LoggerFactory.getLogger(UIPageController.class);
 
     private static final String REST_URL_ALL_ARTIFACTS_REQUEST = "http://localhost:8077/allArtifactsRequest";
 
@@ -40,21 +44,13 @@ public class UIPageController {
             ResponseEntity<ArtifactList> responseResult
                     // = restTemplate.getForEntity(REST_URL_ALL_ARTIFACTS_REQUEST, request, String.class);
                     = restTemplate.exchange(REST_URL_ALL_ARTIFACTS_REQUEST, HttpMethod.GET, request, ArtifactList.class);
-            // ArtifactList allArtifacts = new ArtifactList();
+
             List<Artifact> allArtifacts = new ArrayList<>();
-
-//            System.out.println( responseResult.getBody().toString() );
-
             allArtifacts = responseResult.getBody().getArtifactList();
 
-            for (Artifact iter : allArtifacts ) {
-                System.out.println( iter.getId());
-                System.out.println( iter.getCategory() );
-                System.out.println( iter.getUserId());
-            }
-
+            model.addAttribute("artifactList", allArtifacts);
         } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
-            System.out.println(ex.getMessage());
+            Log.debug( ex.getMessage() );
         }
 
         return "home";

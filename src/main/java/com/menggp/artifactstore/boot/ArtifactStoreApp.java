@@ -1,6 +1,7 @@
 package com.menggp.artifactstore.boot;
 
 import com.menggp.artifactstore.dao.Artifact;
+import com.menggp.artifactstore.dao.ArtifactCrudHandler;
 import com.menggp.artifactstore.dao.Comment;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,6 +44,11 @@ public class ArtifactStoreApp implements CommandLineRunner {
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();
+    }
+
+    @Bean
+    public ArtifactCrudHandler artifactCrudHandler() {
+        return  new ArtifactCrudHandler();
     }
 
     // Запуск Spring Boot Application

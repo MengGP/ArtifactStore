@@ -8,6 +8,8 @@
 <body>
 <p>Welcome!</p>
 <p th:inline="text">Вы авторизованы - [[${#httpServletRequest.remoteUser}]]!</p>
+
+<!-- Блок поиска -->
 <p>--------------------------------------------------------</p>
 <table>
     <tr>
@@ -57,6 +59,31 @@
     </tr>
 </table>
 
+<!-- Блок вывода -->
+<p>--------------------------------------------------------</p>
+<table border="1" bordercolor="grey">
+    <tr>
+        <th align="center">Категория</th>
+        <th align="center">Описание</th>
+        <th align="center">Автор</th>
+        <th align="center">Время создания</th>
+        <th align="center"><!-- empty --></th>
+        <th align="center"><!-- empty --></th>
+        <th align="center"><!-- empty --></th>
+    </tr>
+    <tr th:each="iter : ${artifactList}">
+        <td th:text="${iter.getCategory()}"></td>
+        <td th:text="${iter.getDescription()}"></td>
+        <td th:text="${iter.getUserId()}"></td>
+        <td th:text="${iter.getCreated()}"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+
+    </tr>
+
+
+</table>
 
 
 
@@ -65,6 +92,12 @@
 
 
 
+
+
+
+
+<!-- Блок выхода -->
+<p>--------------------------------------------------------</p>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Выйти из системы"/>
 </form>
