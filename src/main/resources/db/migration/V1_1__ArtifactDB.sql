@@ -89,8 +89,20 @@ INSERT INTO artifacts(id, created, user_id, category, description) VALUES (
     '2020-02-13 15:22:28',
     'Google',
     'Service',
-    'Google Sheets API V4 Rev610 1.25.0 '
+    'Google Sheets API V4 Rev610 1.25.0'
 );
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (15, 5, 'user62', 'Комментарий к Google Sheets API #1');
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (16, 5, 'user46', 'Комментарий к Google Sheets API #2');
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (17, 5, 'user12', 'Комментарий к Google Sheets API #3');
+
+-- Artifact and comments 7: --
+INSERT INTO artifacts(id, created, user_id, category, description) VALUES (
+    6,
+    '2020-02-16 11:18:29',
+    'Jboss',
+    'Logging',
+    'RESTEasy JAX RS JSAPI'
+);
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (18, 6, 'user62', 'Комментарий к RESTEasy JAX RS JSAPI #1');
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (19, 6, 'user46', 'Комментарий к RESTEasy JAX RS JSAPI #2');
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (20, 6, 'user12', 'Комментарий к RESTEasy JAX RS JSAPI #3');

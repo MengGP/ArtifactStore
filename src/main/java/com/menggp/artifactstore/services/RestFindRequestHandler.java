@@ -12,6 +12,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
@@ -19,9 +20,10 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-public class RestRequestHandler {
+@Service
+public class RestFindRequestHandler {
 
-    private static final Logger Log = LoggerFactory.getLogger(RestRequestHandler.class);
+    private static final Logger Log = LoggerFactory.getLogger(RestFindRequestHandler.class);
 
     private static final String REST_URL_ALL_ARTIFACTS_REQUEST = "http://localhost:8077/allArtifactsRequest";
     private static final String REST_URL_ALL_CATEGORIES_REQUEST = "http://localhost:8077/allCategories";
@@ -34,11 +36,14 @@ public class RestRequestHandler {
     @Autowired
     RestTemplate restTemplate;
 
+    @Autowired
+    RestBasicAuthHendler restBasicAuthHendler;
+
     // Метод возвращает список всех артификтов
     public List<Artifact> getAllArtifacs() {
         try {
             HttpHeaders headers = new HttpHeaders();
-            HttpEntity<String> request = new HttpEntity<>(getHeaders());
+            HttpEntity<String> request = new HttpEntity<>(restBasicAuthHendler.getHeaders());
             ResponseEntity<ArtifactList> responseResult
                     = restTemplate.exchange(REST_URL_ALL_ARTIFACTS_REQUEST, HttpMethod.GET, request, ArtifactList.class);
 
@@ -53,7 +58,7 @@ public class RestRequestHandler {
     public List<Artifact> getArtifacatsFilterByCategory(String cat) {
         try {
             HttpHeaders headers = new HttpHeaders();
-            HttpEntity<String> request = new HttpEntity<>(getHeaders());
+            HttpEntity<String> request = new HttpEntity<>(restBasicAuthHendler.getHeaders());
             ResponseEntity<ArtifactList> responseResult
                     = restTemplate.exchange(REST_URL_ARTIFACTS_REQUEST_BY_CAT +"?cat="+cat, HttpMethod.GET, request, ArtifactList.class);
 
@@ -68,7 +73,7 @@ public class RestRequestHandler {
     public List<Artifact> getArtifacatsFilterByUser(String user) {
         try {
             HttpHeaders headers = new HttpHeaders();
-            HttpEntity<String> request = new HttpEntity<>(getHeaders());
+            HttpEntity<String> request = new HttpEntity<>(restBasicAuthHendler.getHeaders());
             ResponseEntity<ArtifactList> responseResult
                     = restTemplate.exchange(REST_URL_ARTIFACTS_REQUEST_BY_USER +"?user="+user, HttpMethod.GET, request, ArtifactList.class);
 
@@ -83,7 +88,7 @@ public class RestRequestHandler {
     public List<Artifact> getArtifacatsFilterByDescription(String desc) {
         try {
             HttpHeaders headers = new HttpHeaders();
-            HttpEntity<String> request = new HttpEntity<>(getHeaders());
+            HttpEntity<String> request = new HttpEntity<>(restBasicAuthHendler.getHeaders());
             ResponseEntity<ArtifactList> responseResult
                     = restTemplate.exchange(REST_URL_ARTIFACTS_REQUEST_BY_DESC +"?desc="+desc, HttpMethod.GET, request, ArtifactList.class);
 
@@ -98,7 +103,7 @@ public class RestRequestHandler {
     public List<Artifact> getArtifacatsFilterByCommentContent(String comment) {
         try {
             HttpHeaders headers = new HttpHeaders();
-            HttpEntity<String> request = new HttpEntity<>(getHeaders());
+            HttpEntity<String> request = new HttpEntity<>(restBasicAuthHendler.getHeaders());
             ResponseEntity<ArtifactList> responseResult
                     = restTemplate.exchange(REST_URL_ARTIFACTS_REQUEST_BY_COMMENT +"?comment="+comment, HttpMethod.GET, request, ArtifactList.class);
 
@@ -113,7 +118,7 @@ public class RestRequestHandler {
     public List<String> getAllCategories() {
         try {
             HttpHeaders headers = new HttpHeaders();
-            HttpEntity<String> request = new HttpEntity<>(getHeaders());
+            HttpEntity<String> request = new HttpEntity<>(restBasicAuthHendler.getHeaders());
             ResponseEntity<CategoriesList> responseResult
                     = restTemplate.exchange(REST_URL_ALL_CATEGORIES_REQUEST, HttpMethod.GET, request, CategoriesList.class);
 
@@ -128,7 +133,7 @@ public class RestRequestHandler {
     public List<String> getAllUsers() {
         try {
             HttpHeaders headers = new HttpHeaders();
-            HttpEntity<String> request = new HttpEntity<>(getHeaders());
+            HttpEntity<String> request = new HttpEntity<>(restBasicAuthHendler.getHeaders());
             ResponseEntity<UserList> responseResult
                     = restTemplate.exchange(REST_URL_ALL_USERS_REQUEST, HttpMethod.GET, request, UserList.class);
 
@@ -139,16 +144,7 @@ public class RestRequestHandler {
         return null;
     } // end_method
 
-    //  Метод формирует HTTP-headers для использования Basic-Authentication в REST запросах
-    public static HttpHeaders getHeaders(){
-        String plainCredentials="user:user";
-        String base64Credentials = new String(Base64.encodeBase64(plainCredentials.getBytes()));
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Basic " + base64Credentials);
-        // headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        return headers;
-    } // end_class
 
 
 } // end_class

@@ -1,20 +1,23 @@
-package com.menggp.artifactstore.dao;
+package com.menggp.artifactstore.services;
 
-import com.menggp.artifactstore.controllers.UIPageController;
+import com.menggp.artifactstore.dao.Artifact;
 import com.menggp.artifactstore.dao.repo.ArtifactRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
 
 /*
-    Сласс предоставляющий CRUD операции для работы с сущностью Artifact
+    Класс предоставляющий CRUD операции для работы с сущностью Artifact
+        - только операции поиска
  */
-public class ArtifactCrudHandler {
+@Service
+public class ArtifactCrudSearchHandler {
 
-    private static final Logger Log = LoggerFactory.getLogger(ArtifactCrudHandler.class);
+    private static final Logger Log = LoggerFactory.getLogger(ArtifactCrudSearchHandler.class);
 
     private ArrayList<Artifact> allArtifact;
     private ArrayList<String> allString;

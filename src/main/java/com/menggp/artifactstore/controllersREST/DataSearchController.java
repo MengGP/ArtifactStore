@@ -1,12 +1,11 @@
 package com.menggp.artifactstore.controllersREST;
 
 import com.menggp.artifactstore.dao.Artifact;
-import com.menggp.artifactstore.dao.ArtifactCrudHandler;
+import com.menggp.artifactstore.services.ArtifactCrudSearchHandler;
 import com.menggp.artifactstore.dto.ArtifactList;
 import com.menggp.artifactstore.dto.CategoriesList;
 import com.menggp.artifactstore.dto.UserList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,17 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
-public class DataController {
+public class DataSearchController {
 
     @Autowired
-    ArtifactCrudHandler artifactCrudHandler;
+    ArtifactCrudSearchHandler artifactCrudSearchHandler;
 
     @RequestMapping(value="/allArtifactsRequest", method = RequestMethod.GET)
     public ArtifactList getAllArtifacts() {
         ArrayList<Artifact> artList = new ArrayList<>();
         ArtifactList response = new ArtifactList();
 
-        artList = artifactCrudHandler.readAll();
+        artList = artifactCrudSearchHandler.readAll();
 
         response.setArtifactList(artList);
         return response;
@@ -38,7 +37,7 @@ public class DataController {
         ArrayList<Artifact> artList = new ArrayList<>();
         ArtifactList response = new ArtifactList();
 
-        artList = artifactCrudHandler.findByCategory(cat);
+        artList = artifactCrudSearchHandler.findByCategory(cat);
 
         response.setArtifactList(artList);
         return response;
@@ -51,7 +50,7 @@ public class DataController {
         ArrayList<Artifact> artList = new ArrayList<>();
         ArtifactList response = new ArtifactList();
 
-        artList = artifactCrudHandler.findByUser(user);
+        artList = artifactCrudSearchHandler.findByUser(user);
 
         response.setArtifactList(artList);
         return response;
@@ -64,7 +63,7 @@ public class DataController {
         ArrayList<Artifact> artList = new ArrayList<>();
         ArtifactList response = new ArtifactList();
 
-        artList = artifactCrudHandler.findByDescription(desc);
+        artList = artifactCrudSearchHandler.findByDescription(desc);
 
         response.setArtifactList(artList);
         return response;
@@ -77,7 +76,7 @@ public class DataController {
         ArrayList<Artifact> artList = new ArrayList<>();
         ArtifactList response = new ArtifactList();
 
-        artList = artifactCrudHandler.findByCommentContent(comment);
+        artList = artifactCrudSearchHandler.findByCommentContent(comment);
 
         response.setArtifactList(artList);
         return response;
@@ -88,7 +87,7 @@ public class DataController {
         ArrayList<String> catList = new ArrayList<>();
         CategoriesList response = new CategoriesList();
 
-        catList = artifactCrudHandler.readAllCategories();
+        catList = artifactCrudSearchHandler.readAllCategories();
 
         response.setCategoriesList(catList);
         return response;
@@ -99,7 +98,7 @@ public class DataController {
         ArrayList<String> userList = new ArrayList<>();
         UserList response = new UserList();
 
-        userList = artifactCrudHandler.readAllUsers();
+        userList = artifactCrudSearchHandler.readAllUsers();
 
         response.setUserList(userList);
         return response;

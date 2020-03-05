@@ -10,7 +10,6 @@
 
 <!-- Блок поиска -->
 <p>--------------------------------------------------------</p>
-
 <datalist id="artifactCategories">
     <option th:each="iter : ${categoriesList}" th:value="${iter}"/>
 </datalist>
@@ -101,13 +100,29 @@
 <p>--------------------------------------------------------</p>
 <table border="1" bordercolor="grey">
     <tr>
-        <th align="center">Категория</th>
-        <th align="center">Описание</th>
-        <th align="center">Автор</th>
-        <th align="center">Время создания</th>
-        <th align="center"><!-- empty --></th>
-        <th align="center"><!-- empty --></th>
-        <th align="center"><!-- empty --></th>
+        <th>
+           <table>
+               <tr>
+                   <td>Категория</td>
+                   <td>
+                       <form th:action="@{/sortByCatASC}">
+                           <input hidden="true" name="searchParamCategory" th:value="${searchParamCategory}"/>
+                           <input hidden="true" name="searchParamUser" th:value="${searchParamUser}"/>
+                           <input hidden="true" name="searchParamDescription" th:value="${searchParamDescription}"/>
+                           <input hidden="true" name="searchParamComment" th:value="${searchParamComment}"/>
+                           <button>^</button>
+                       </form>
+                   </td>
+                   <td><button>v</button></td>
+               </tr>
+           </table>
+        </th>
+        <th>Описание</th>
+        <th>Автор<button>^</button><button>v</button></th>
+        <th>Время создания<button>^</button><button>v</button></th>
+        <th><!-- empty --></th>
+        <th><!-- empty --></th>
+        <th><!-- empty --></th>
     </tr>
     <tr th:each="iter : ${artifactList}">
         <td th:text="${iter.getCategory()}"></td>

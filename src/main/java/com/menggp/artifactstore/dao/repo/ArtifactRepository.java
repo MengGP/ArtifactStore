@@ -15,6 +15,9 @@ public interface ArtifactRepository extends CrudRepository<Artifact, Long> {
     // Поиск по категории
     List<Artifact> findByCategoryLikeIgnoreCase(String cat);
 
+    // Поиск по категории - с сортировкой по категории ASK
+    List<Artifact> findByCategoryLikeIgnoreCaseOrderByCategory(String cat);
+
     // Поиск по пользователю (автору)
     List<Artifact> findByUserIdLikeIgnoreCase(String user);
 
