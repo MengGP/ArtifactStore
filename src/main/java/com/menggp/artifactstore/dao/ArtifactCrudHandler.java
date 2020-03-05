@@ -26,17 +26,33 @@ public class ArtifactCrudHandler {
     // ARTIFACTES - фильтр по категрии
     public  ArrayList<Artifact> findByCategory(String category) {
         String clause;
-        clause = category + "%";
+        clause = "%" + category + "%";
         clause.toUpperCase();
         allArtifact = (ArrayList<Artifact>) artifactRepository.findByCategoryLikeIgnoreCase(clause);
         return allArtifact;
     } // end_method
 
+    // ARTIFACTES - фильтр по пользователю
+    public  ArrayList<Artifact> findByUser(String user) {
+        String clause;
+        clause = "%" + user + "%";
+        clause.toUpperCase();
+        allArtifact = (ArrayList<Artifact>) artifactRepository.findByUserIdLikeIgnoreCase(clause);
+        return allArtifact;
+    } // end_method
+
+    // Список категорий - ARTIFACT
     public ArrayList<String> readAllCategories() {
         allString = (ArrayList<String>) artifactRepository.findCategory();
         return allString;
+    } // end_method
 
-    }
+    // Список пользователей - ARTIFACT
+    public ArrayList<String> readAllUsers() {
+        allString = (ArrayList<String>) artifactRepository.findUser();
+        return allString;
+    } // end_method
+
 
 
 

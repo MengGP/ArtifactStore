@@ -5,11 +5,11 @@ import com.menggp.artifactstore.dao.Artifact;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoreisList {
+public class CategoriesList {
 
     private List<String> categoriesList;
 
-    public CategoreisList() {
+    public CategoriesList() {
         categoriesList = new ArrayList<>();
     } // end_controller
 

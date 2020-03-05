@@ -15,10 +15,16 @@ public interface ArtifactRepository extends CrudRepository<Artifact, Long> {
     // Поиск по категории
     List<Artifact> findByCategoryLikeIgnoreCase(String cat);
 
-    // Поиск категорий
+    // Поиск по пользователю (автору)
+    List<Artifact> findByUserIdLikeIgnoreCase(String user);
+
+    // Список категорий
     @Query(value = "SELECT category FROM artifacts GROUP BY category", nativeQuery = true)
     List<String> findCategory();
 
+    // Список пользователей
+    @Query(value = "SELECT user_id FROM artifacts GROUP BY user_id", nativeQuery = true)
+    List<String> findUser();
 
 
 

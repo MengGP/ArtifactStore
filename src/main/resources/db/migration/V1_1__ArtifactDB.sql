@@ -59,7 +59,7 @@ INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (6, 2, 'user
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (7, 2, 'user05', 'Комментарий к Oracle Cloud Infrastructure SDK Events #2');
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (8, 2, 'user04', 'Комментарий к Oracle Cloud Infrastructure SDK Events #3');
 
--- Artifact and comments 3: --
+-- Artifact and comments 4: --
 INSERT INTO artifacts(id, created, user_id, category, description) VALUES (
     3,
     '2020-02-14 21:13:37',
@@ -71,4 +71,14 @@ INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (9, 3, 'user
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (10, 3, 'user07', 'Комментарий к AWS Java SDK For Amazon Redshift #2');
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (11, 3, 'user04', 'Комментарий к AWS Java SDK For Amazon Redshift #3');
 
-
+-- Artifact and comments 5: --
+INSERT INTO artifacts(id, created, user_id, category, description) VALUES (
+    4,
+    '2020-02-09 12:08:26',
+    'Google',
+    'Service',
+    'Cloud Dataproc API V1 Rev149 1.25.0'
+);
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (12, 4, 'user08', 'Комментарий к Cloud Dataproc API #1');
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (13, 4, 'user09', 'Комментарий к Cloud Dataproc API #2');
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (14, 4, 'user07', 'Комментарий к Cloud Dataproc API #3');

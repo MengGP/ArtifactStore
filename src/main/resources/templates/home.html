@@ -15,6 +15,10 @@
     <option th:each="iter : ${categoriesList}" th:value="${iter}"/>
 </datalist>
 
+<datalist id="artifactUsers">
+    <option th:each="iter : ${usersList}" th:value="${iter}"/>
+</datalist>
+
 <table>
     <tr>
         <td><h3>Поиск по:</h3></td>
@@ -43,10 +47,18 @@
         </td>
     </tr>
     <tr>
-        <td align="right">Пользователь:</td>
-        <td><!-- empty --></td>
+        <td align="right">Автор:</td>
         <td>
-            <form th:action="@{/showAllArtifacts}">
+            <input
+                type="text"
+                name="artifactUser"
+                list="artifactUsers"
+                placeholder="Введите автора"
+                form = "filterByUser"
+            />
+        </td>
+        <td>
+            <form id="filterByUser" th:action="@{/showArtifactFilterByUser}">
                 <button>Искать</button>
             </form>
         </td>

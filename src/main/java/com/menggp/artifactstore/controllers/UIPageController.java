@@ -34,6 +34,7 @@ public class UIPageController {
     @RequestMapping("/")
     public String index(Model model) {
         model.addAttribute("categoriesList", restRequestHandler.getAllCategories());
+        model.addAttribute("usersList", restRequestHandler.getAllUsers());
         return "home";
     }
 
@@ -41,6 +42,8 @@ public class UIPageController {
     public String showAllArtifacts(Model model) {
 
         model.addAttribute("categoriesList", restRequestHandler.getAllCategories());
+        model.addAttribute("usersList", restRequestHandler.getAllUsers());
+
         model.addAttribute("artifactList", restRequestHandler.getAllArtifacs());
         return "home";
     } // end_method
@@ -50,9 +53,24 @@ public class UIPageController {
             @RequestParam(value = "artifactCatagory", required = false) String category,
             Model model) {
         model.addAttribute("categoriesList", restRequestHandler.getAllCategories());
+        model.addAttribute("usersList", restRequestHandler.getAllUsers());
+
         model.addAttribute("artifactList", restRequestHandler.getArtifacatsFilterByCategory(category));
         return "home";
     } // end_method
+
+    @RequestMapping("/showArtifactFilterByUser")
+    public String showArtifactFilterByUser(
+            @RequestParam(value = "artifactUser", required = false) String user,
+            Model model
+    ) {
+
+        model.addAttribute("categoriesList", restRequestHandler.getAllCategories());
+        model.addAttribute("usersList", restRequestHandler.getAllUsers());
+
+        model.addAttribute("artifactList", restRequestHandler.getArtifacatsFilterByUser(user));
+        return "home";
+    }
 
 
 
