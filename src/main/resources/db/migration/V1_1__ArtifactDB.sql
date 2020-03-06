@@ -5,7 +5,7 @@ CREATE TABLE artifacts
     created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     user_id VARCHAR(256) NOT NULL,
     category VARCHAR(256),
-    description VARCHAR(2048),
+    description VARCHAR(2048) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -15,7 +15,7 @@ CREATE TABLE commentaries
     id BIGINT NOT NULL AUTO_INCREMENT,
     artifact_id BIGINT NOT NULL,
     user_id VARCHAR(256) NOT NULL,
-    content VARCHAR(2048),
+    content VARCHAR(2048) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (artifact_id) REFERENCES artifacts (id)
 );

@@ -31,6 +31,7 @@ public class Artifact {
     String category;
 
     @Column(name = "description")
+    @NotNull
     String description;
 
     // -- Getters and Setters

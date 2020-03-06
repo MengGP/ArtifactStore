@@ -31,7 +31,7 @@ public class CreatePagesController {
             Model model) {
 
         int result = -1;
-        if ( userId.length()==0 || category.length()==0 || description.length()==0 )
+        if ( userId.length()==0 || description.length()==0 )
             result = 0;
         else {
             result = restCreateRequestHandler.createArtifact(userId, category, description);

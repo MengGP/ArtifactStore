@@ -25,6 +25,7 @@ public class RestFindRequestHandler {
 
     private static final Logger Log = LoggerFactory.getLogger(RestFindRequestHandler.class);
 
+    private static final String REST_URL_ARTIFACTS_BY_ID_REQUEST = "http://localhost:8077/artifactById";
     private static final String REST_URL_ALL_ARTIFACTS_REQUEST = "http://localhost:8077/allArtifactsRequest";
     private static final String REST_URL_ALL_CATEGORIES_REQUEST = "http://localhost:8077/allCategories";
     private static final String REST_URL_ALL_USERS_REQUEST = "http://localhost:8077/allUsers";
@@ -38,6 +39,21 @@ public class RestFindRequestHandler {
 
     @Autowired
     RestBasicAuthHendler restBasicAuthHendler;
+
+    // Метод возвращает Артифакт по ID
+    public Artifact getArtById(long id) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            HttpEntity<String> request = new HttpEntity<>(restBasicAuthHendler.getHeaders());
+            ResponseEntity<Artifact> responseResult
+                    = restTemplate.exchange(REST_URL_ARTIFACTS_BY_ID_REQUEST + "?id="+id, HttpMethod.GET, request, Artifact.class);
+
+            return responseResult.getBody();
+        } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
+            Log.debug( ex.getMessage() );
+        }
+        return null;
+    }
 
     // Метод возвращает список всех артификтов
     public List<Artifact> getAllArtifacs() {

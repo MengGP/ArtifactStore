@@ -19,6 +19,13 @@ public class DataSearchController {
     @Autowired
     ArtifactCrudSearchHandler artifactCrudSearchHandler;
 
+    @RequestMapping(value="/artifactById", method = RequestMethod.GET)
+    public Artifact getArtifactById(
+            @RequestParam Long id
+    ) {
+        return artifactCrudSearchHandler.findArtById( id );
+    }
+
     @RequestMapping(value="/allArtifactsRequest", method = RequestMethod.GET)
     public ArtifactList getAllArtifacts() {
         ArrayList<Artifact> artList = new ArrayList<>();

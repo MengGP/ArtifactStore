@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 
 /*
@@ -24,6 +25,11 @@ public class ArtifactCrudSearchHandler {
 
     @Autowired
     ArtifactRepository artifactRepository;
+
+    // Запись аритифакт по ID
+    public Artifact findArtById( long id ) {
+        return artifactRepository.findById( id ).get();
+    }
 
     // Все записи из таблицы ARTIFACTES
     public ArrayList<Artifact> readAll() {

@@ -207,7 +207,12 @@
         <td th:text="${iter.getCreated()}"></td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>
+            <form th:action="@{/editArtifactPage}">
+                <input hidden="true" name="artifactId" th:value="${iter.getId()}"/>
+                <button>EDIT</button>
+            </form>
+        </td>
 
     </tr>
 

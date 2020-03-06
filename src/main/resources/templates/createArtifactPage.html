@@ -7,7 +7,7 @@
 
 <body>
 <p th:text="(${result} == null) ? ' Введите данные нового артефакта' : ''" />
-<p th:text="(${result} == 0) ? ' Заполнены не все поля' : ''" />
+<p th:text="(${result} == 0) ? ' Заполнены не все обязательные поля' : ''" />
 <p th:text="(${result} == 1) ? ' Артефакт создан' : ''" />
 <p th:text="(${result} == -1) ? ' Ошибка БД ' : ''" />
 <p>--------------------------------------------------------</p>
@@ -15,27 +15,38 @@
 
 <p>
 <table>
-<form in="createArtifact" th:action="@{/createArtifact}">
-    <th>Автор</th>
-    <th>Категория</th>
-    <th>Описание</th>
-    <th><!-- empty --></th>
-    <tr>
-        <td>
-            <input type="text" placeholder="Ввведите автора" name="userId"/>
-        </td>
-        <td>
-            <input type="text" placeholder="Введите категорию" name="category"/>
-        </td>
-        <td>
-            <input type="text" placeholder="Введите описание" name="description"/>
-        </td>
-        <td>
-            <button> CREATE </button>
-        </td>
-    </tr>
-</form>
-
+    <form id="createArtifact" th:action="@{/createArtifact}">
+        <tr>
+            <td>
+                Автор:
+            </td>
+            <td>
+                <input type="text" size="100" placeholder="Ввведите автора" name="userId"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Категория:
+            </td>
+            <td>
+                <input type="text" size="100" placeholder="Введите категорию" name="category"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Описание:
+            </td>
+            <td>
+                <input type="text" size="100" placeholder="Введите описание" name="description"/>
+            </td>
+        </tr>
+        <tr>
+            <td> <!-- empty --> </td>
+            <td align="right">
+                <button> CREATE </button>
+            </td>
+        </tr>
+    </form>
 </table>
 </p>
 
