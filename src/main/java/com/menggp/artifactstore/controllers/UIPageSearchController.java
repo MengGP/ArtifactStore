@@ -71,6 +71,12 @@ public class UIPageSearchController {
             Model model
     ) {
 
+        // аттрибуты поиска - поиск по автору (user)
+        model.addAttribute("searchParamCategory",null);
+        model.addAttribute("searchParamUser",user);
+        model.addAttribute("searchParamDescription",null);
+        model.addAttribute("searchParamComment",null);
+
         model.addAttribute("categoriesList", restFindRequestHandler.getAllCategories());
         model.addAttribute("usersList", restFindRequestHandler.getAllUsers());
 
@@ -84,6 +90,12 @@ public class UIPageSearchController {
             Model model
     ) {
 
+        // аттрибуты поиска - поиск по описанию (desc)
+        model.addAttribute("searchParamCategory",null);
+        model.addAttribute("searchParamUser",null);
+        model.addAttribute("searchParamDescription",desc);
+        model.addAttribute("searchParamComment",null);
+
         model.addAttribute("categoriesList", restFindRequestHandler.getAllCategories());
         model.addAttribute("usersList", restFindRequestHandler.getAllUsers());
 
@@ -96,6 +108,12 @@ public class UIPageSearchController {
             @RequestParam(value = "artifactCommentContent", required = false) String comment,
             Model model
     ) {
+
+        // аттрибуты поиска - поиск по содержанию комментариев (comment)
+        model.addAttribute("searchParamCategory",null);
+        model.addAttribute("searchParamUser",null);
+        model.addAttribute("searchParamDescription",null);
+        model.addAttribute("searchParamComment",comment);
 
         model.addAttribute("categoriesList", restFindRequestHandler.getAllCategories());
         model.addAttribute("usersList", restFindRequestHandler.getAllUsers());

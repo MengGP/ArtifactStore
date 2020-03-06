@@ -21,8 +21,24 @@ public class DataSortController {
     @Autowired
     ArtifactCrudSortHandler artifactCrudSorthHandler;
 
+    // Сортировка артифактов - без фильтра
+    @RequestMapping(value="/artAllSort", method = RequestMethod.GET)
+    public ArtifactList getAllArtifactsSorted(
+            @RequestParam(value = "sortType") int sortType,
+            @RequestParam(value = "sortDirection") boolean sortDirection
+    ) {
+        ArrayList<Artifact> artList = new ArrayList<>();
+        ArtifactList response = new ArtifactList();
+
+        artList = artifactCrudSorthHandler.sortAllArtifacts(sortType, sortDirection);
+
+        response.setArtifactList(artList);
+        return response;
+    } // end_method
+
+    // Сортировка артификтов - отфильтрованных по категории
     @RequestMapping(value="/artFilterByCatSort", method = RequestMethod.GET)
-    public ArtifactList getArtifactsByUser(
+    public ArtifactList getArtifactsByCatSorted(
             @RequestParam(value = "cat") String cat,
             @RequestParam(value = "sortType") int sortType,
             @RequestParam(value = "sortDirection") boolean sortDirection
@@ -35,5 +51,54 @@ public class DataSortController {
         response.setArtifactList(artList);
         return response;
     } // end_method
+
+    // Сортировка артификтов - отфильтрованных по автору(userId)
+    @RequestMapping(value="/artFilterByUserSort", method = RequestMethod.GET)
+    public ArtifactList getArtifactsByUserIdSorted(
+            @RequestParam(value = "userId") String userId,
+            @RequestParam(value = "sortType") int sortType,
+            @RequestParam(value = "sortDirection") boolean sortDirection
+    ) {
+        ArrayList<Artifact> artList = new ArrayList<>();
+        ArtifactList response = new ArtifactList();
+
+        artList = artifactCrudSorthHandler.sortArtFilteredByUserId(userId, sortType, sortDirection);
+
+        response.setArtifactList(artList);
+        return response;
+    } // end_method
+
+    // Сортировка артификтов - отфильтрованных по описанию(desctiption)
+    @RequestMapping(value="/artFilterByDescSort", method = RequestMethod.GET)
+    public ArtifactList getArtifactsByDescriptionSorted(
+            @RequestParam(value = "desc") String desc,
+            @RequestParam(value = "sortType") int sortType,
+            @RequestParam(value = "sortDirection") boolean sortDirection
+    ) {
+        ArrayList<Artifact> artList = new ArrayList<>();
+        ArtifactList response = new ArtifactList();
+
+        artList = artifactCrudSorthHandler.sortArtFilteredByDescription(desc, sortType, sortDirection);
+
+        response.setArtifactList(artList);
+        return response;
+    } // end_method
+
+    // Сортировка артификтов - отфильтрованных по содержанию комментариев
+    @RequestMapping(value="/artFilterByCommentSort", method = RequestMethod.GET)
+    public ArtifactList getArtifactsByCommentSorted(
+            @RequestParam(value = "comment") String comment,
+            @RequestParam(value = "sortType") int sortType,
+            @RequestParam(value = "sortDirection") boolean sortDirection
+    ) {
+        ArrayList<Artifact> artList = new ArrayList<>();
+        ArtifactList response = new ArtifactList();
+
+        artList = artifactCrudSorthHandler.sortArtFilteredByCommentContent(comment, sortType, sortDirection);
+
+        response.setArtifactList(artList);
+        return response;
+    } // end_method
+
 
 } // end_class

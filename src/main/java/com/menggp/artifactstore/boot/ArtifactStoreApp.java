@@ -1,6 +1,7 @@
 package com.menggp.artifactstore.boot;
 
 import com.menggp.artifactstore.dao.Artifact;
+import com.menggp.artifactstore.dao.repo.ArtifactRepository;
 import com.menggp.artifactstore.services.ArtifactCrudSearchHandler;
 import com.menggp.artifactstore.dao.Comment;
 import org.flywaydb.core.Flyway;

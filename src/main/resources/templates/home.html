@@ -105,21 +105,89 @@
                <tr>
                    <td>Категория</td>
                    <td>
-                       <form th:action="@{/sortByCatASC}">
+                       <form th:action="@{/sortArtifacts}">
                            <input hidden="true" name="searchParamCategory" th:value="${searchParamCategory}"/>
                            <input hidden="true" name="searchParamUser" th:value="${searchParamUser}"/>
                            <input hidden="true" name="searchParamDescription" th:value="${searchParamDescription}"/>
                            <input hidden="true" name="searchParamComment" th:value="${searchParamComment}"/>
+                           <input hidden="true" name="sortType" th:value=1 />
+                           <input hidden="true" name="sortDirection" th:value=true />
                            <button>^</button>
                        </form>
                    </td>
-                   <td><button>v</button></td>
+                   <td>
+                       <form th:action="@{/sortArtifacts}">
+                           <input hidden="true" name="searchParamCategory" th:value="${searchParamCategory}"/>
+                           <input hidden="true" name="searchParamUser" th:value="${searchParamUser}"/>
+                           <input hidden="true" name="searchParamDescription" th:value="${searchParamDescription}"/>
+                           <input hidden="true" name="searchParamComment" th:value="${searchParamComment}"/>
+                           <input hidden="true" name="sortType" th:value=1 />
+                           <input hidden="true" name="sortDirection" th:value=false />
+                           <button>v</button>
+                       </form>
+                   </td>
                </tr>
            </table>
         </th>
         <th>Описание</th>
-        <th>Автор<button>^</button><button>v</button></th>
-        <th>Время создания<button>^</button><button>v</button></th>
+        <th>
+            <table>
+                <tr>
+                    <td>Автор</td>
+                    <td>
+                        <form th:action="@{/sortArtifacts}">
+                            <input hidden="true" name="searchParamCategory" th:value="${searchParamCategory}"/>
+                            <input hidden="true" name="searchParamUser" th:value="${searchParamUser}"/>
+                            <input hidden="true" name="searchParamDescription" th:value="${searchParamDescription}"/>
+                            <input hidden="true" name="searchParamComment" th:value="${searchParamComment}"/>
+                            <input hidden="true" name="sortType" th:value=2 />
+                            <input hidden="true" name="sortDirection" th:value=true />
+                            <button>^</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/sortArtifacts}">
+                            <input hidden="true" name="searchParamCategory" th:value="${searchParamCategory}"/>
+                            <input hidden="true" name="searchParamUser" th:value="${searchParamUser}"/>
+                            <input hidden="true" name="searchParamDescription" th:value="${searchParamDescription}"/>
+                            <input hidden="true" name="searchParamComment" th:value="${searchParamComment}"/>
+                            <input hidden="true" name="sortType" th:value=2 />
+                            <input hidden="true" name="sortDirection" th:value=false />
+                            <button>v</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </th>
+        <th>
+            <table>
+                <tr>
+                    <td>Время создания</td>
+                    <td>
+                        <form th:action="@{/sortArtifacts}">
+                            <input hidden="true" name="searchParamCategory" th:value="${searchParamCategory}"/>
+                            <input hidden="true" name="searchParamUser" th:value="${searchParamUser}"/>
+                            <input hidden="true" name="searchParamDescription" th:value="${searchParamDescription}"/>
+                            <input hidden="true" name="searchParamComment" th:value="${searchParamComment}"/>
+                            <input hidden="true" name="sortType" th:value=3 />
+                            <input hidden="true" name="sortDirection" th:value=true />
+                            <button>^</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/sortArtifacts}">
+                            <input hidden="true" name="searchParamCategory" th:value="${searchParamCategory}"/>
+                            <input hidden="true" name="searchParamUser" th:value="${searchParamUser}"/>
+                            <input hidden="true" name="searchParamDescription" th:value="${searchParamDescription}"/>
+                            <input hidden="true" name="searchParamComment" th:value="${searchParamComment}"/>
+                            <input hidden="true" name="sortType" th:value=3 />
+                            <input hidden="true" name="sortDirection" th:value=false />
+                            <button>v</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </th>
         <th><!-- empty --></th>
         <th><!-- empty --></th>
         <th><!-- empty --></th>

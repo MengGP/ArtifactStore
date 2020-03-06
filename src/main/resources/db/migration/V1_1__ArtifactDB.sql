@@ -40,7 +40,7 @@ INSERT INTO artifacts(id, created, user_id, category, description) VALUES (
     1,
     '2020-02-06 09:07:09',
     'Interledger',
-    'JSON Lib',
+    'No category',
     'Connector :: Routing API'
 );
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (3, 1, 'user02', 'Комментарий к Connector Routing API #1');
@@ -100,9 +100,45 @@ INSERT INTO artifacts(id, created, user_id, category, description) VALUES (
     6,
     '2020-02-16 11:18:29',
     'Jboss',
-    'Logging',
+    'REST',
     'RESTEasy JAX RS JSAPI'
 );
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (18, 6, 'user62', 'Комментарий к RESTEasy JAX RS JSAPI #1');
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (19, 6, 'user46', 'Комментарий к RESTEasy JAX RS JSAPI #2');
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (20, 6, 'user12', 'Комментарий к RESTEasy JAX RS JSAPI #3');
+
+-- Artifact and comments 8: --
+INSERT INTO artifacts(id, created, user_id, category, description) VALUES (
+    7,
+    '2020-02-14 03:38:54',
+    'Tesler',
+    'I/O Utilities',
+    'IO Tesler API'
+);
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (21, 7, 'user36', 'Комментарий к IO Tesler API #1');
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (22, 7, 'user90', 'Комментарий к IO Tesler API #2');
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (23, 7, 'user49', 'Комментарий к IO Tesler API #3');
+
+-- Artifact and comments 9: --
+INSERT INTO artifacts(id, created, user_id, category, description) VALUES (
+    8,
+    '2020-02-01 23:09:15',
+    'Spring.io',
+    'Security Frameworks',
+    'Spring Security Core'
+);
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (24, 8, 'user62', 'Комментарий к Spring Security Core #1');
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (25, 8, 'user06', 'Комментарий к Spring Security Core #2');
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (26, 8, 'user97', 'Комментарий к Spring Security Core #3');
+
+-- Artifact and comments 10: --
+INSERT INTO artifacts(id, created, user_id, category, description) VALUES (
+    9,
+    '2020-02-25 18:58:16',
+    'JetBrains',
+    'Kotlin core',
+    'Kotlinx Serialization Runtime'
+);
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (27, 9, 'user62', 'Комментарий к Kotlinx Serialization Runtime #1');
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (28, 9, 'user06', 'Комментарий к Kotlinx Serialization Runtime #2');
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (29, 9, 'user97', 'Комментарий к Kotlinx Serialization Runtime #3');
