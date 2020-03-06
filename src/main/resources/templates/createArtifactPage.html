@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Create artifact page</title>
+</head>
+
+<body>
+<p th:text="(${result} == null) ? ' Введите данные нового артефакта' : ''" />
+<p th:text="(${result} == 0) ? ' Заполнены не все поля' : ''" />
+<p th:text="(${result} == 1) ? ' Артефакт создан' : ''" />
+<p th:text="(${result} == -1) ? ' Ошибка БД ' : ''" />
+<p>--------------------------------------------------------</p>
+
+
+<p>
+<table>
+<form in="createArtifact" th:action="@{/createArtifact}">
+    <th>Автор</th>
+    <th>Категория</th>
+    <th>Описание</th>
+    <th><!-- empty --></th>
+    <tr>
+        <td>
+            <input type="text" placeholder="Ввведите автора" name="userId"/>
+        </td>
+        <td>
+            <input type="text" placeholder="Введите категорию" name="category"/>
+        </td>
+        <td>
+            <input type="text" placeholder="Введите описание" name="description"/>
+        </td>
+        <td>
+            <button> CREATE </button>
+        </td>
+    </tr>
+</form>
+
+</table>
+</p>
+
+
+
+
+<p>
+    <a th:href="@{/home}">
+        <button> HOME PAGE </button>
+    </a>
+</p>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти из системы"/>
+</form>
+
+</body>
+</html>

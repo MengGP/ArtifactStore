@@ -13,7 +13,7 @@ import static javax.persistence.GenerationType.AUTO;
 public class Artifact {
 
     @Id
-    @GeneratedValue(strategy = AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @NotNull
     long id;

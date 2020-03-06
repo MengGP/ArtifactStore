@@ -144,6 +144,8 @@ public interface ArtifactRepository extends CrudRepository<Artifact, Long> {
             "ORDER BY created DESC", nativeQuery = true)
     List<Artifact> findByCommentContentOrderByCreatedDesc(String content);
 
+    // --- --- CREATE
+
     // --- --- Прочие
 
     // Список категорий

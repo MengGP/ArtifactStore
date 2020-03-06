@@ -1,7 +1,7 @@
 -- Таблица Артефактов
 CREATE TABLE artifacts
 (
-    id BIGINT NOT NULL,
+    id BIGINT NOT NULL AUTO_INCREMENT,
     created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     user_id VARCHAR(256) NOT NULL,
     category VARCHAR(256),
@@ -12,7 +12,7 @@ CREATE TABLE artifacts
 -- Таблица комментариев
 CREATE TABLE commentaries
 (
-    id BIGINT NOT NULL,
+    id BIGINT NOT NULL AUTO_INCREMENT,
     artifact_id BIGINT NOT NULL,
     user_id VARCHAR(256) NOT NULL,
     content VARCHAR(2048),
