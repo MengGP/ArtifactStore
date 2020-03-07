@@ -1,7 +1,9 @@
 package com.menggp.artifactstore.controllersREST;
 
 import com.menggp.artifactstore.dao.Artifact;
+import com.menggp.artifactstore.dao.Comment;
 import com.menggp.artifactstore.services.ArtifactCrudCUDHandler;
+import com.menggp.artifactstore.services.CommentCrudHandler;
 import com.menggp.artifactstore.services.RestUpdateRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,14 +21,21 @@ public class DataUpdateControler {
     @Autowired
     ArtifactCrudCUDHandler artifactCrudCUDHandler;
 
+    @Autowired
+    CommentCrudHandler commentCrudHandler;
+
     @RequestMapping(value="/updateArt", method = RequestMethod.PUT)
     public Artifact updateArtifact(
             @RequestBody Artifact updatedArt
     ) {
+        return artifactCrudCUDHandler.updateArtifact(updatedArt);
+    } // end_method
 
-        Artifact response = artifactCrudCUDHandler.updateArtifact(updatedArt);
-
-        return response;
+    @RequestMapping(value="/updateComment", method = RequestMethod.PUT)
+    public Comment updateComment(
+            @RequestBody Comment updatedComment
+    ) {
+        return commentCrudHandler.updateComment(updatedComment);
     } // end_method
 
 } // end_class

@@ -20,14 +20,29 @@ public class CommentCrudHandler {
     @Autowired
     CommentRepository commentRepository;
 
+    // Метод возвращает комментарий по ID
+    public Comment findCommentById(long id){
+        return  commentRepository.findById( id ).get();
+    }
+
     // Метод возвращает комметнарии к Артефакту (по artifactId)
     public ArrayList<Comment> findByArtifactId(long artId){
         return (ArrayList<Comment>) commentRepository.findByArtifactId(artId);
     } // end_method
 
-    //
+    // Метод создает комментарий в БД
     public Comment createComment(Comment newComment) {
         return commentRepository.save( newComment );
     } // end_method
+
+    // Метод обновляет комментарий
+    public Comment updateComment(Comment updatedComment){
+
+        Comment comment = commentRepository.findById( updatedComment.getId() ).get();
+        comment.setUserId( updatedComment.getUserId() );
+        comment.setContent( updatedComment.getContent() );
+
+        return commentRepository.save( comment );
+    } // end_metod
 
 } // end_class

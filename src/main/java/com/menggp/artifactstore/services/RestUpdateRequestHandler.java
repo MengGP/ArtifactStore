@@ -1,6 +1,7 @@
 package com.menggp.artifactstore.services;
 
 import com.menggp.artifactstore.dao.Artifact;
+import com.menggp.artifactstore.dao.Comment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class RestUpdateRequestHandler {
     private static final Logger Log = LoggerFactory.getLogger(RestUpdateRequestHandler.class);
 
     private static final String REST_URL_UPDATE_ARTIFACT_REQUEST = "http://localhost:8077/updateArt";
+    private static final String REST_URL_UPDATE_COMMENT_REQUEST = "http://localhost:8077/updateComment";
 
     @Autowired
     RestTemplate restTemplate;
@@ -45,6 +47,29 @@ public class RestUpdateRequestHandler {
             HttpEntity<Object> request = new HttpEntity<>(updatedArt, restBasicAuthHendler.getHeaders());
             ResponseEntity<Artifact> responseResult
                     = restTemplate.exchange(REST_URL_UPDATE_ARTIFACT_REQUEST, HttpMethod.PUT, request, Artifact.class);
+            if ( responseResult.getStatusCode().toString().equals("200 OK") )
+                result = 1;
+        } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
+            Log.debug( ex.getMessage() );
+        }
+        return result;
+    } // end_method
+
+    // PUT - запрос на ихменене в БД комментария
+    public int updateComment(long id, String userId, String content, long artId) {
+        // Предпологаем возможность ошибки создания, изменятеся на 1 при подтверждении создания сервером
+        int result = -1;
+        try {
+            Comment updatedComment = new Comment();
+            updatedComment.setId(id);
+            updatedComment.setUserId(userId);
+            updatedComment.setContent(content);
+            updatedComment.setArtifactId(artId);
+
+            HttpHeaders headers = new HttpHeaders();
+            HttpEntity<Object> request = new HttpEntity<>(updatedComment, restBasicAuthHendler.getHeaders());
+            ResponseEntity<Comment> responseResult
+                    = restTemplate.exchange(REST_URL_UPDATE_COMMENT_REQUEST, HttpMethod.PUT, request, Comment.class);
             if ( responseResult.getStatusCode().toString().equals("200 OK") )
                 result = 1;
         } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {

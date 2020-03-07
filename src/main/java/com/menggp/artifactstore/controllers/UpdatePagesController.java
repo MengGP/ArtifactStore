@@ -1,6 +1,7 @@
 package com.menggp.artifactstore.controllers;
 
 import com.menggp.artifactstore.dao.Artifact;
+import com.menggp.artifactstore.dao.Comment;
 import com.menggp.artifactstore.services.RestReadRequestHandler;
 import com.menggp.artifactstore.services.RestUpdateRequestHandler;
 import org.slf4j.Logger;
@@ -54,6 +55,45 @@ public class UpdatePagesController {
         model.addAttribute("result", result);
         model.addAttribute("currArt", currArt);
         return "editArtifactPage";
+    } // end_method
+
+    @RequestMapping("/editCommentPage")
+    public String editArtifactPage(
+            @RequestParam(value = "artifactId", required = true) long artId,
+            @RequestParam(value = "commentId", required = true) long commentId,
+            Model model) {
+
+        Artifact currArt = restReadRequestHandler.getArtById( artId );
+        Comment currComment = restReadRequestHandler.getCommentById( commentId );
+
+        model.addAttribute("currArt", currArt);
+        model.addAttribute("currComment", currComment);
+        return "editCommentPage";
+    } // end_method
+
+    @RequestMapping("/updateComment")
+    public String updateComment(
+            @RequestParam(value = "artifactId", required = true) long artId,
+            @RequestParam(value = "commentId", required = true) long commentId,
+            @RequestParam(value = "userId", required = false) String userId,
+            @RequestParam(value = "content", required = false) String content,
+            Model model) {
+
+        Artifact currArt = restReadRequestHandler.getArtById( artId );
+        Comment currComment = restReadRequestHandler.getCommentById( commentId );
+
+        int result = -1;
+        if ( userId.length()==0 || content.length()==0 )
+            result = 0;
+        else {
+            result = restUpdateRequestHandler.updateComment(commentId, userId, content, artId);
+            currComment = restReadRequestHandler.getCommentById( commentId );
+        }
+
+        model.addAttribute("result", result);
+        model.addAttribute("currArt", currArt);
+        model.addAttribute("currComment", currComment);
+        return "editCommentPage";
     } // end_method
 
 } // end_class

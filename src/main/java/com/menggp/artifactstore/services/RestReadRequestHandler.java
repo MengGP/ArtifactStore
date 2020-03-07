@@ -27,6 +27,7 @@ public class RestReadRequestHandler {
     private static final Logger Log = LoggerFactory.getLogger(RestReadRequestHandler.class);
 
     private static final String REST_URL_ARTIFACTS_BY_ID_REQUEST = "http://localhost:8077/artifactById";
+    private static final String REST_URL_COMMENT_BY_ID_REQUEST = "http://localhost:8077/commentById";
     private static final String REST_URL_ALL_ARTIFACTS_REQUEST = "http://localhost:8077/allArtifactsRequest";
     private static final String REST_URL_ALL_CATEGORIES_REQUEST = "http://localhost:8077/allCategories";
     private static final String REST_URL_COMMENTS_NUM_REQUEST = "http://localhost:8077/commentsNum";
@@ -56,7 +57,22 @@ public class RestReadRequestHandler {
             Log.debug( ex.getMessage() );
         }
         return null;
-    }
+    } // end_method
+
+    // Метод возвращает Комментарий по ID
+    public Comment getCommentById(long id) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            HttpEntity<String> request = new HttpEntity<>(restBasicAuthHendler.getHeaders());
+            ResponseEntity<Comment> responseResult
+                    = restTemplate.exchange(REST_URL_COMMENT_BY_ID_REQUEST + "?id="+id, HttpMethod.GET, request, Comment.class);
+
+            return responseResult.getBody();
+        } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
+            Log.debug( ex.getMessage() );
+        }
+        return null;
+    } // end_method
 
     // Метод возвращает список всех артификтов
     public List<Artifact> getAllArtifacs() {

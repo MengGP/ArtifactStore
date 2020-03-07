@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Edit artifact page</title>
+</head>
+
+<body>
+<p th:text="(${result} == null) ? ' Редактируемый комментарий:' : ''" />
+<p th:text="(${result} == 0) ? ' Заполнены не все поля' : ''" />
+<p th:text="(${result} == 1) ? ' Данные артефакта изменены' : ''" />
+<p th:text="(${result} == -1) ? ' Ошибка БД ' : ''" />
+<p>--------------------------------------------------------</p>
+
+<p th:text="'Автор комментария: '+ ${currComment.getUserId()}"/>
+<p th:text="'Комментарий: '+ ${currComment.getContent()}"/>
+
+<p>--------------------------------------------------------</p>
+
+
+<p>
+<table>
+    <form id="updateComment" th:action="@{/updateComment}">
+        <tr>
+            <td>
+                Автор комментария:
+            </td>
+            <td>
+                <input type="text" size="100" placeholder="Ввведите автора" name="userId" th:value="${currComment.getUserId()}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Комментарий:
+            </td>
+            <td>
+                <input type="text" size="100" placeholder="Введите комментарий" name="content" th:value="${currComment.getContent()}"/>
+            </td>
+        </tr>
+        <tr>
+            <td> <!-- empty --> </td>
+            <td align="right">
+                <input hidden="true" name="artifactId" th:value="${currArt.getId()}"/>
+                <input hidden="true" name="commentId" th:value="${currComment.getId()}"/>
+                <button> UPDATE </button>
+            </td>
+        </tr>
+    </form>
+</table>
+</p>
+
+
+
+
+<p>
+    <form th:action="@{/commentPage}">
+        <input hidden="true" name="artifactId" th:value="${currArt.getId()}">
+        <button> COMMENTS PAGE </button>
+    </form>
+</p>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти из системы"/>
+</form>
+
+</body>
+</html>

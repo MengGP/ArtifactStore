@@ -30,7 +30,15 @@ public class DataReadController {
             @RequestParam Long id
     ) {
         return artifactCrudReadHandler.findArtById( id );
-    }
+    } // emd_method
+
+
+    @RequestMapping(value="/commentById", method = RequestMethod.GET)
+    public Comment getCommentById(
+            @RequestParam Long id
+    ) {
+        return commentCrudHandler.findCommentById( id );
+    } // emd_method
 
     @RequestMapping(value="/allArtifactsRequest", method = RequestMethod.GET)
     public ArtifactList getAllArtifacts() {

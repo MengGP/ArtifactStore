@@ -60,8 +60,9 @@
         <td th:text="${iter.getUserId()}"></td>
         <td th:text="${iter.getContent()}"></td>
         <td>
-            <form th:action="@{/editArtifactPage}">
-                <input hidden="true" name="artifactId" th:value="${iter.getId()}"/>
+            <form th:action="@{/editCommentPage}">
+                <input hidden="true" name="artifactId" th:value="${currArt.getId()}"/>
+                <input hidden="true" name="commentId" th:value="${iter.getId()}"/>
                 <button>EDIT</button>
             </form>
         </td>
