@@ -6,9 +6,9 @@ project-name: ArtifactStore
 
 Сборка и запуск:
 --------------------------------------
-* Автоматический запуск: запустить файл "StartAppScript.bat: в корне проекта  
-* Запуск из IDE: запустить выполение класса "com.menggp.artifactstore.boot.ArtifactStoreApp"
-* Ручная сборка и запуск (из каталога проета):
+* Автоматический запуск: запустить файл "StartAppScript.bat" в корне проекта  
+* Запуск из IDE: запустить на выполение класс "com.menggp.artifactstore.boot.ArtifactStoreApp"
+* Ручная сборка и запуск (из каталога проекта):
     * gradlew.bat :claen
     * gradlew.bat :build
     * java -jar ./build/libs/ArtifactStore.jar
