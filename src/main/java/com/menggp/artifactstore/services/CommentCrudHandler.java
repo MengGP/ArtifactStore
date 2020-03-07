@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class CommentCrudHandler {
@@ -22,6 +23,11 @@ public class CommentCrudHandler {
     // Метод возвращает комметнарии к Артефакту (по artifactId)
     public ArrayList<Comment> findByArtifactId(long artId){
         return (ArrayList<Comment>) commentRepository.findByArtifactId(artId);
+    } // end_method
+
+    //
+    public Comment createComment(Comment newComment) {
+        return commentRepository.save( newComment );
     } // end_method
 
 } // end_class

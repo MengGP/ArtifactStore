@@ -13,7 +13,41 @@
 <p th:text="'Описание: '+ ${currArt.getDescription()}"/>
 <p th:text="'Создан: '+ ${currArt.getCreated()}"/>
 <p>--------------------------------------------------------</p>
+<p th:text="(${result} == null) ? ' Введите новый комментарий:' : ''" />
+<p th:text="(${result} == 0) ? ' Заполнены не все обязательные поля' : ''" />
+<p th:text="(${result} == 1) ? ' Комментарий создан' : ''" />
+<p th:text="(${result} == -1) ? ' Ошибка БД ' : ''" />
+<p>
+<table>
+    <form id="createComment" th:action="@{/createComment}">
+        <tr>
+            <td>
+                Автор комментария:
+            </td>
+            <td>
+                <input type="text" size="100" placeholder="Ввведите автора" name="userId"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Комментарий:
+            </td>
+            <td>
+                <input type="text" size="100" placeholder="Введите комментарий" name="content"/>
+            </td>
+        </tr>
+        <tr>
+            <td> <!-- empty --> </td>
+            <td align="right">
+                <input hidden="true" name="artifactId" th:value="${currArt.getId()}"/>
+                <button> CREATE </button>
+            </td>
+        </tr>
+    </form>
+</table>
+</p>
 
+<p>--------------------------------------------------------</p>
 <!-- Блок вывода -->
 <table border="1" bordercolor="grey">
     <tr>

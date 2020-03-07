@@ -1,6 +1,7 @@
 package com.menggp.artifactstore.services;
 
 import com.menggp.artifactstore.dao.Artifact;
+import com.menggp.artifactstore.dao.Comment;
 import com.menggp.artifactstore.dto.ArtifactList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ public class RestCreateRequestHandler {
     private static final Logger Log = LoggerFactory.getLogger(RestCreateRequestHandler.class);
 
     private static final String REST_URL_CREATE_ARTIFACT_REQUEST = "http://localhost:8077/createArt";
+    private static final String REST_URL_CREATE_COMMENT_REQUEST = "http://localhost:8077/createComment";
 
     @Autowired
     RestTemplate restTemplate;
@@ -52,6 +54,30 @@ public class RestCreateRequestHandler {
         }
         return result;
     } // end_method
+
+    // POST - запрос на создание в БД нового комментария
+    public int createComment(String userId, String content, long artId) {
+        // Предпологаем возможность ошибки создания, изменятеся на 1 при подтверждении создания сервером
+        int result = -1;
+        try {
+            Comment newComment = new Comment();
+            newComment.setUserId(userId);
+            newComment.setContent(content);
+            newComment.setArtifactId(artId);
+
+            HttpHeaders headers = new HttpHeaders();
+            HttpEntity<Object> request = new HttpEntity<>(newComment, restBasicAuthHendler.getHeaders());
+            ResponseEntity<Comment> responseResult
+                    = restTemplate.exchange(REST_URL_CREATE_COMMENT_REQUEST, HttpMethod.POST, request, Comment.class);
+            if ( responseResult.getStatusCode().toString().equals("200 OK") )
+                result = 1;
+
+        } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
+            Log.debug( ex.getMessage() );
+        }
+        return result;
+    } // end_method
+
 
 } // end_class
 

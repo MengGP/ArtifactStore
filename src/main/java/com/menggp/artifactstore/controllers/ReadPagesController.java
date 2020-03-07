@@ -2,6 +2,8 @@ package com.menggp.artifactstore.controllers;
 
 import com.menggp.artifactstore.dao.Artifact;
 import com.menggp.artifactstore.services.RestReadRequestHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ReadPagesController {
+
+    private static final Logger Log = LoggerFactory.getLogger(ReadPagesController.class);
 
     @Autowired
     RestReadRequestHandler restReadRequestHandler;
@@ -40,13 +44,10 @@ public class ReadPagesController {
     public String commentPage(
             @RequestParam(value = "artifactId", required = true) long artId,
             Model model) {
-
         // Получаем артефакт по ID
         Artifact currArt = restReadRequestHandler.getArtById( artId );
         model.addAttribute("currArt", currArt);
         model.addAttribute("commentList", restReadRequestHandler.getCommentariesByArtifactId( artId ));
-
-
 
         return "commentPage";
     }
