@@ -96,6 +96,8 @@ public interface ArtifactRepository extends CrudRepository<Artifact, Long> {
     @Query(value = "SELECT user_id FROM artifacts GROUP BY user_id", nativeQuery = true)
     List<String> findUser();
 
-
+    // Количество комментариев к артефакту
+    @Query(value = "SELECT COUNT(*) FROM commentaries WHERE artifact_id = ?1", nativeQuery = true)
+    long findCommentsNumberByArtifactId( long id );
 
 } // end_interface

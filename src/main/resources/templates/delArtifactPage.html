@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Edit artifact page</title>
+</head>
+
+<body>
+<p th:text="(${result} == null) ? ' Удалить артефакт и комментарии к нему? ' : ''" />
+<!-- <p th:text="(${result} == 0) ? ' Заполнены не все поля' : ''" /> -->
+<!-- <p th:text="(${result} == 1) ? ' Данные артефакта изменены' : ''" /> -->
+<p th:text="(${result} == -1) ? ' Ошибка БД ' : ''" />
+<p>--------------------------------------------------------</p>
+
+<table>
+    <tr>
+        <td>
+            <form th:action="@{/delArtifact}">
+                <input hidden="true" name="artifactId" th:value="${currArt.getId()}">
+                <button> YES </button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/home}">
+                <button> NO </button>
+            </form>
+
+        </td>
+    </tr>
+</table>
+
+<p>--------------------------------------------------------</p>
+
+<p th:text="'Автор:    '+ ${currArt.getUserId()}"/>
+<p th:text="'Категория:'+ ${currArt.getCategory()}"/>
+<p th:text="'Описание: '+ ${currArt.getDescription()}"/>
+<p th:text="'Создан: '+ ${currArt.getCreated()}"/>
+<p th:text="'Количество комментариев: '+ ${commentsNum}"/>
+
+<p>--------------------------------------------------------</p>
+
+
+<!--
+<p>
+<table>
+    <form id="updateArtifact" th:action="@{/updateArtifact}">
+        <tr>
+            <td>
+                Автор:
+            </td>
+            <td>
+                <input type="text" size="100" placeholder="Ввведите автора" name="userId" th:value="${currArt.getUserId()}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Категория:
+            </td>
+            <td>
+                <input type="text" size="100" placeholder="Введите категорию" name="category" th:value="${currArt.getCategory()}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Описание:
+            </td>
+            <td>
+                <input type="text" size="100" placeholder="Введите описание" name="description" th:value="${currArt.getDescription()}"/>
+            </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td align="right">
+                <input hidden="true" name="artifactId" th:value="${currArt.getId()}">
+                <button> UPDATE </button>
+            </td>
+        </tr>
+    </form>
+</table>
+</p>
+-->
+
+
+
+<p>
+    <a th:href="@{/home}">
+        <button> HOME PAGE </button>
+    </a>
+</p>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти из системы"/>
+</form>
+
+</body>
+</html>

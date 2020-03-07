@@ -85,6 +85,11 @@ public class ArtifactCrudSearchHandler {
         return allString;
     } // end_method
 
+    // Количество комментариев к артифакту
+    public long readCommentsNumberByArtId( long artId ) {
+        return artifactRepository.findCommentsNumberByArtifactId( artId );
+    } // end_method
+
 
 
 

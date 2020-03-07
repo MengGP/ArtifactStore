@@ -28,6 +28,7 @@ public class RestFindRequestHandler {
     private static final String REST_URL_ARTIFACTS_BY_ID_REQUEST = "http://localhost:8077/artifactById";
     private static final String REST_URL_ALL_ARTIFACTS_REQUEST = "http://localhost:8077/allArtifactsRequest";
     private static final String REST_URL_ALL_CATEGORIES_REQUEST = "http://localhost:8077/allCategories";
+    private static final String REST_URL_COMMENTS_NUM_REQUEST = "http://localhost:8077/commentsNum";
     private static final String REST_URL_ALL_USERS_REQUEST = "http://localhost:8077/allUsers";
     private static final String REST_URL_ARTIFACTS_REQUEST_BY_CAT = "http://localhost:8077/artRequestByCategory";
     private static final String REST_URL_ARTIFACTS_REQUEST_BY_USER = "http://localhost:8077/artRequestByUser";
@@ -160,6 +161,20 @@ public class RestFindRequestHandler {
         return null;
     } // end_method
 
+    // Метод возвращает количество комментариев к артифату
+    public long getCommentsNumber( long artId ) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            HttpEntity<String> request = new HttpEntity<>(restBasicAuthHendler.getHeaders());
+            ResponseEntity<Long> responseResult
+                    = restTemplate.exchange(REST_URL_COMMENTS_NUM_REQUEST+"?id="+artId, HttpMethod.GET, request, Long.class);
+
+            return responseResult.getBody();
+        } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
+            Log.debug( ex.getMessage() );
+        }
+        return 0;
+    } // end_method
 
 
 

@@ -111,6 +111,13 @@ public class DataSearchController {
         return response;
     } // end_method
 
+    @RequestMapping(value = "/commentsNum", method = RequestMethod.GET)
+    public Long getAllusers(
+            @RequestParam long id
+    ) {
+        return artifactCrudSearchHandler.readCommentsNumberByArtId( id );
+    } // end_method
+
 
 
 

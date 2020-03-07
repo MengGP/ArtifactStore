@@ -20,7 +20,7 @@ public class DataUpdateControler {
     ArtifactCrudCUDHandler artifactCrudCUDHandler;
 
     @RequestMapping(value="/updateArt", method = RequestMethod.PUT)
-    public Artifact createArtifact(
+    public Artifact updateArtifact(
             @RequestBody Artifact updatedArt
     ) {
 

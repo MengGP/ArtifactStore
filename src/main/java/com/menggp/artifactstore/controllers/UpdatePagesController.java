@@ -23,7 +23,7 @@ public class UpdatePagesController {
     RestUpdateRequestHandler restUpdateRequestHandler;
 
     @RequestMapping("/editArtifactPage")
-    public String editArtifact(
+    public String editArtifactPage(
             @RequestParam(value = "artifactId", required = true) long id,
             Model model) {
 
