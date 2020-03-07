@@ -41,8 +41,6 @@ public class RestUpdateRequestHandler {
             updatedArt.setDescription(desc);
             updatedArt.setCreated(created);
 
-            Log.info( String.valueOf( updatedArt.getId() ));
-
             HttpHeaders headers = new HttpHeaders();
             HttpEntity<Object> request = new HttpEntity<>(updatedArt, restBasicAuthHendler.getHeaders());
             ResponseEntity<Artifact> responseResult

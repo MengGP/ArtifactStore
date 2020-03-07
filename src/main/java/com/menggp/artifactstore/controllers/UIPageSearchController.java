@@ -18,7 +18,13 @@ public class UIPageSearchController {
     RestFindRequestHandler restFindRequestHandler;
 
     @RequestMapping("/")
-    public String index(Model model) {
+    public String indexPage(Model model) {
+        homePage(model);
+        return "home";
+    }
+
+    @RequestMapping("/home")
+    public String homePage(Model model) {
 
         // однуляем атрибуты поиска
         model.addAttribute("searchParamCategory",null);
@@ -28,6 +34,8 @@ public class UIPageSearchController {
 
         model.addAttribute("categoriesList", restFindRequestHandler.getAllCategories());
         model.addAttribute("usersList", restFindRequestHandler.getAllUsers());
+
+        model.addAttribute("artifactList", restFindRequestHandler.getAllArtifacs());
         return "home";
     }
 

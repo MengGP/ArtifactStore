@@ -142,3 +142,15 @@ INSERT INTO artifacts(id, created, user_id, category, description) VALUES (
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (27, 9, 'user62', 'Комментарий к Kotlinx Serialization Runtime #1');
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (28, 9, 'user06', 'Комментарий к Kotlinx Serialization Runtime #2');
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (29, 9, 'user97', 'Комментарий к Kotlinx Serialization Runtime #3');
+
+-- Artifact and comments 11: --
+INSERT INTO artifacts(id, created, user_id, category, description) VALUES (
+    10,
+    '2020-02-09 18:31:18',
+    'amazon',
+    'Message Queue Clients',
+    'Amazon Kinesis Client Library For Java'
+);
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (30, 10, 'user62', 'Комментарий к Amazon Kinesis Client Library For Java #1');
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (31, 10, 'user65', 'Комментарий к Amazon Kinesis Client Library For Java #2');
+INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (32, 10, 'user51', 'Комментарий к Amazon Kinesis Client Library For Java #3');

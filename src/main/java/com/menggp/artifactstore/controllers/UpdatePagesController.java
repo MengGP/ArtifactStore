@@ -41,19 +41,18 @@ public class UpdatePagesController {
             @RequestParam(value = "description", required = false) String description,
             Model model) {
 
-        Log.info(String.valueOf(id));
-
         Artifact currArt = restFindRequestHandler.getArtById( id );
-        model.addAttribute("currArt", currArt);
 
         int result = -1;
         if ( userId.length()==0 || description.length()==0 )
             result = 0;
         else {
             result = restUpdateRequestHandler.updateArtifact(id, userId, category, description, currArt.getCreated() );
+            currArt = restFindRequestHandler.getArtById( id );
         }
-        model.addAttribute("result", result);
 
+        model.addAttribute("result", result);
+        model.addAttribute("currArt", currArt);
         return "editArtifactPage";
     } // end_method
 

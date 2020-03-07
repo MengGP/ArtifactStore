@@ -24,8 +24,6 @@ public class DataUpdateControler {
             @RequestBody Artifact updatedArt
     ) {
 
-        Log.info( String.valueOf( updatedArt.getId() ));
-
         Artifact response = artifactCrudCUDHandler.updateArtifact(updatedArt);
 
         return response;

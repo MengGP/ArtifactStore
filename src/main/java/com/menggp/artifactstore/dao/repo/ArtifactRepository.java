@@ -1,6 +1,7 @@
 package com.menggp.artifactstore.dao.repo;
 
 import com.menggp.artifactstore.dao.Artifact;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -14,92 +15,31 @@ public interface ArtifactRepository extends CrudRepository<Artifact, Long> {
 
     // --- --- --- Фильтр: нет
 
-    // Без фильтра - сортировка по категории ASC
-    List<Artifact> findAllByOrderByCategoryAsc();
-
-    // Без фильтра - сортировка по категории DESC
-    List<Artifact> findAllByOrderByCategoryDesc();
-
-    // Без фильтра - сортировка по автору(user_id) ASC
-    List<Artifact> findAllByOrderByUserIdAsc();
-
-    // Без фильтра - сортировка по автору(user_id) DESC
-    List<Artifact> findAllByOrderByUserIdDesc();
-
-    // Без фильтра - сортировка по времени создания(cerated) ASC
-    List<Artifact> findAllByOrderByCreatedAsc();
-
-    // Без фильтра - сортировка по времени создания(cerated) ASC
-    List<Artifact> findAllByOrderByCreatedDesc();
+    List<Artifact> findAll(Sort sort);
 
     // --- --- --- Фильтр: Category
 
     // Поиск по категории
     List<Artifact> findByCategoryLikeIgnoreCase(String cat);
 
-    // Поиск по категории - с сортировкой по категории ASC
-    List<Artifact> findByCategoryLikeIgnoreCaseOrderByCategory(String cat);
-
-    // Поиск по категории - с сортировкой по категории DESC
-    List<Artifact> findByCategoryLikeIgnoreCaseOrderByCategoryDesc(String cat);
-
-    // Поиск по категории - с сортировкой по автору(user_id) ASC
-    List<Artifact> findByCategoryLikeIgnoreCaseOrderByUserId(String cat);
-
-    // Поиск по категории - с сортировкой по автору(user_id) DESC
-    List<Artifact> findByCategoryLikeIgnoreCaseOrderByUserIdDesc(String cat);
-
-    // Поиск по категории - с сортировкой по времени создания(created) ASC
-    List<Artifact> findByCategoryLikeIgnoreCaseOrderByCreated(String cat);
-
-    // Поиск по категории - с сортировкой по времени создания(created) DESC
-    List<Artifact> findByCategoryLikeIgnoreCaseOrderByCreatedDesc(String cat);
+    // Поиск по категории - c сортировкой
+    List<Artifact> findByCategoryLikeIgnoreCase(String cat, Sort sort);
 
     // --- --- --- Фильтр: UserId
 
     // Поиск по пользователю (автору)
     List<Artifact> findByUserIdLikeIgnoreCase(String user);
 
-    // Поиск по пользователю (автору) - с сортировкой по категории ASC
-    List<Artifact> findByUserIdLikeIgnoreCaseOrderByCategory(String user);
-
-    // Поиск по пользователю (автору) - с сортировкой по категории DESC
-    List<Artifact> findByUserIdLikeIgnoreCaseOrderByCategoryDesc(String user);
-
-    // Поиск по пользователю (автору) - с сортировкой по автору(user_id) ASC
-    List<Artifact> findByUserIdLikeIgnoreCaseOrderByUserId(String user);
-
-    // Поиск по пользователю (автору) - с сортировкой по автору(user_id) DESC
-    List<Artifact> findByUserIdLikeIgnoreCaseOrderByUserIdDesc(String user);
-
-    // Поиск по пользователю (автору) - с сортировкой по времени создания(created) ASC
-    List<Artifact> findByUserIdLikeIgnoreCaseOrderByCreated(String user);
-
-    // Поиск по пользователю (автору) - с сортировкой по времени создания(created) DESC
-    List<Artifact> findByUserIdLikeIgnoreCaseOrderByCreatedDesc(String user);
+    // Поимск по категории - с сортировкий
+    List<Artifact> findByUserIdLikeIgnoreCase(String user, Sort sort);
 
     // --- --- --- Фильтр: Description
 
     // Поиск по описанию
     List<Artifact> findByDescriptionLikeIgnoreCase(String user);
 
-    // Поиск по описанию - с сортировкой по категории ASC
-    List<Artifact> findByDescriptionLikeIgnoreCaseOrderByCategory(String user);
-
-    // Поиск по описанию - с сортировкой по категории DESC
-    List<Artifact> findByDescriptionLikeIgnoreCaseOrderByCategoryDesc(String user);
-
-    // Поиск по описанию - с сортировкой по автору(user_id) ASC
-    List<Artifact> findByDescriptionLikeIgnoreCaseOrderByUserId(String user);
-
-    // Поиск по описанию - с сортировкой по автору(user_id) DESC
-    List<Artifact> findByDescriptionLikeIgnoreCaseOrderByUserIdDesc(String user);
-
-    // Поиск по описанию - с сортировкой по времени создания(created) ASC
-    List<Artifact> findByDescriptionLikeIgnoreCaseOrderByCreated(String user);
-
-    // Поиск по описанию - с сортировкой по времени создания(created) DESC
-    List<Artifact> findByDescriptionLikeIgnoreCaseOrderByCreatedDesc(String user);
+    // Поиск по описанию - с сортировкой
+    List<Artifact> findByDescriptionLikeIgnoreCase(String user, Sort sort);
 
     // --- --- --- Фильтр: Comment Content > вложенный запрос
 
@@ -111,25 +51,25 @@ public interface ArtifactRepository extends CrudRepository<Artifact, Long> {
     // Поиск по содержанию комментариев - с сортировкой по категории ASC
     @Query(value = "SELECT * FROM artifacts where ID IN " +
             "( SELECT artifact_id FROM commentaries where UPPER(content) LIKE ?1 )" +
-            "ORDER BY category", nativeQuery = true)
+            "ORDER BY UPPER(category)", nativeQuery = true)
     List<Artifact> findByCommentContentOrderByCategory(String content);
 
     // Поиск по содержанию комментариев - с сортировкой по категории DESC
     @Query(value = "SELECT * FROM artifacts where ID IN " +
             "( SELECT artifact_id FROM commentaries where UPPER(content) LIKE ?1 )" +
-            "ORDER BY category DESC", nativeQuery = true)
+            "ORDER BY UPPER(category) DESC", nativeQuery = true)
     List<Artifact> findByCommentContentOrderByCategoryDesc(String content);
 
     // Поиск по содержанию комментариев - с сортировкой по автору(user_id) ASC
     @Query(value = "SELECT * FROM artifacts where ID IN " +
             "( SELECT artifact_id FROM commentaries where UPPER(content) LIKE ?1 )" +
-            "ORDER BY user_id", nativeQuery = true)
+            "ORDER BY UPPER(user_id)", nativeQuery = true)
     List<Artifact> findByCommentContentOrderByUserId(String content);
 
     // Поиск по содержанию комментариев - с сортировкой по автору(user_id) DESC
     @Query(value = "SELECT * FROM artifacts where ID IN " +
             "( SELECT artifact_id FROM commentaries where UPPER(content) LIKE ?1 )" +
-            "ORDER BY user_id DESC", nativeQuery = true)
+            "ORDER BY UPPER(user_id) DESC", nativeQuery = true)
     List<Artifact> findByCommentContentOrderByUserIdDesc(String content);
 
     // Поиск по содержанию комментариев - с сортировкой по времени создания(created) ASC

@@ -5,6 +5,7 @@ import com.menggp.artifactstore.dao.repo.ArtifactRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,16 +32,34 @@ public class ArtifactCrudSortHandler {
     public ArrayList<Artifact> sortAllArtifacts(int sortType, boolean sortDirection) {
         switch (sortType) {
             case 1: // сортрировка по категории(category)
-                if ( sortDirection ) allArtifact = (ArrayList<Artifact>) artifactRepository.findAllByOrderByCategoryAsc();
-                else allArtifact = (ArrayList<Artifact>) artifactRepository.findAllByOrderByCategoryDesc();
+                if ( sortDirection ) {
+                    Sort.Order order = new Sort.Order(Sort.Direction.ASC, "category").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findAll( Sort.by(order) );
+                }
+                else {
+                    Sort.Order order = new Sort.Order(Sort.Direction.DESC, "category").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findAll( Sort.by(order) );
+                }
                 break;
             case 2: // сортрировка по автору(UserId)
-                if ( sortDirection ) allArtifact = (ArrayList<Artifact>) artifactRepository.findAllByOrderByUserIdAsc();
-                else allArtifact = (ArrayList<Artifact>) artifactRepository.findAllByOrderByUserIdDesc();
+                if ( sortDirection ) {
+                    Sort.Order order = new Sort.Order(Sort.Direction.ASC, "userId").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findAll( Sort.by(order) );
+                }
+                else {
+                    Sort.Order order = new Sort.Order(Sort.Direction.DESC, "userId").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findAll( Sort.by(order) );
+                }
                 break;
             case 3: // сортировка по времени создания(created)
-                if ( sortDirection ) allArtifact = (ArrayList<Artifact>) artifactRepository.findAllByOrderByCreatedAsc();
-                else allArtifact = (ArrayList<Artifact>) artifactRepository.findAllByOrderByCreatedDesc();
+                if ( sortDirection ) {
+                    Sort.Order order = new Sort.Order(Sort.Direction.ASC, "created").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findAll( Sort.by(order) );
+                }
+                else {
+                    Sort.Order order = new Sort.Order(Sort.Direction.DESC, "created").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findAll( Sort.by(order) );
+                }
                 break;
         }
         return allArtifact;
@@ -54,16 +73,34 @@ public class ArtifactCrudSortHandler {
 
         switch (sortType) {
             case 1: // сортрировка по категории(category)
-                if ( sortDirection ) allArtifact = (ArrayList<Artifact>) artifactRepository.findByCategoryLikeIgnoreCaseOrderByCategory(clause);
-                else allArtifact = (ArrayList<Artifact>) artifactRepository.findByCategoryLikeIgnoreCaseOrderByCategoryDesc(clause);
+                if ( sortDirection ) {
+                    Sort.Order order = new Sort.Order(Sort.Direction.ASC, "category").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByCategoryLikeIgnoreCase( clause, Sort.by(order) );
+                }
+                else {
+                    Sort.Order order = new Sort.Order(Sort.Direction.DESC, "category").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByCategoryLikeIgnoreCase( clause, Sort.by(order) );
+                }
                 break;
             case 2: // сортрировка по автору(UserId)
-                if ( sortDirection ) allArtifact = (ArrayList<Artifact>) artifactRepository.findByCategoryLikeIgnoreCaseOrderByUserId(clause);
-                else allArtifact = (ArrayList<Artifact>) artifactRepository.findByCategoryLikeIgnoreCaseOrderByUserIdDesc(clause);
+                if ( sortDirection ) {
+                    Sort.Order order = new Sort.Order(Sort.Direction.ASC, "userId").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByCategoryLikeIgnoreCase( clause, Sort.by(order) );
+                }
+                else {
+                    Sort.Order order = new Sort.Order(Sort.Direction.DESC, "userId").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByCategoryLikeIgnoreCase( clause, Sort.by(order) );
+                }
                 break;
             case 3: // сортировка по времени создания(created)
-                if ( sortDirection ) allArtifact = (ArrayList<Artifact>) artifactRepository.findByCategoryLikeIgnoreCaseOrderByCreated(clause);
-                else allArtifact = (ArrayList<Artifact>) artifactRepository.findByCategoryLikeIgnoreCaseOrderByCreatedDesc(clause);
+                if ( sortDirection ) {
+                    Sort.Order order = new Sort.Order(Sort.Direction.ASC, "created").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByCategoryLikeIgnoreCase( clause, Sort.by(order) );
+                }
+                else {
+                    Sort.Order order = new Sort.Order(Sort.Direction.DESC, "created").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByCategoryLikeIgnoreCase( clause, Sort.by(order) );
+                }
                 break;
         }
         return allArtifact;
@@ -77,16 +114,34 @@ public class ArtifactCrudSortHandler {
 
         switch (sortType) {
             case 1: // сортрировка по категории(category)
-                if ( sortDirection ) allArtifact = (ArrayList<Artifact>) artifactRepository.findByUserIdLikeIgnoreCaseOrderByCategory(clause);
-                else allArtifact = (ArrayList<Artifact>) artifactRepository.findByUserIdLikeIgnoreCaseOrderByCategoryDesc(clause);
+                if ( sortDirection ) {
+                    Sort.Order order = new Sort.Order(Sort.Direction.ASC, "category").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByUserIdLikeIgnoreCase( clause, Sort.by(order) );
+                }
+                else {
+                    Sort.Order order = new Sort.Order(Sort.Direction.DESC, "category").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByUserIdLikeIgnoreCase( clause, Sort.by(order) );
+                }
                 break;
             case 2: // сортрировка по автору(UserId)
-                if ( sortDirection ) allArtifact = (ArrayList<Artifact>) artifactRepository.findByUserIdLikeIgnoreCaseOrderByUserId(clause);
-                else allArtifact = (ArrayList<Artifact>) artifactRepository.findByUserIdLikeIgnoreCaseOrderByUserIdDesc(clause);
+                if ( sortDirection ) {
+                    Sort.Order order = new Sort.Order(Sort.Direction.ASC, "userId").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByUserIdLikeIgnoreCase( clause, Sort.by(order) );
+                }
+                else {
+                    Sort.Order order = new Sort.Order(Sort.Direction.DESC, "userId").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByUserIdLikeIgnoreCase( clause, Sort.by(order) );
+                }
                 break;
             case 3: // сортировка по времени создания(created)
-                if ( sortDirection ) allArtifact = (ArrayList<Artifact>) artifactRepository.findByUserIdLikeIgnoreCaseOrderByCreated(clause);
-                else allArtifact = (ArrayList<Artifact>) artifactRepository.findByUserIdLikeIgnoreCaseOrderByCreatedDesc(clause);
+                if ( sortDirection ) {
+                    Sort.Order order = new Sort.Order(Sort.Direction.ASC, "created").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByUserIdLikeIgnoreCase( clause, Sort.by(order) );
+                }
+                else {
+                    Sort.Order order = new Sort.Order(Sort.Direction.DESC, "created").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByUserIdLikeIgnoreCase( clause, Sort.by(order) );
+                }
                 break;
         }
         return allArtifact;
@@ -100,16 +155,34 @@ public class ArtifactCrudSortHandler {
 
         switch (sortType) {
             case 1: // сортрировка по категории(category)
-                if ( sortDirection ) allArtifact = (ArrayList<Artifact>) artifactRepository.findByDescriptionLikeIgnoreCaseOrderByCategory(clause);
-                else allArtifact = (ArrayList<Artifact>) artifactRepository.findByDescriptionLikeIgnoreCaseOrderByCategoryDesc(clause);
+                if ( sortDirection ) {
+                    Sort.Order order = new Sort.Order(Sort.Direction.ASC, "category").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByDescriptionLikeIgnoreCase( clause, Sort.by(order) );
+                }
+                else {
+                    Sort.Order order = new Sort.Order(Sort.Direction.DESC, "category").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByDescriptionLikeIgnoreCase( clause, Sort.by(order) );
+                }
                 break;
             case 2: // сортрировка по автору(UserId)
-                if ( sortDirection ) allArtifact = (ArrayList<Artifact>) artifactRepository.findByDescriptionLikeIgnoreCaseOrderByUserId(clause);
-                else allArtifact = (ArrayList<Artifact>) artifactRepository.findByDescriptionLikeIgnoreCaseOrderByUserIdDesc(clause);
+                if ( sortDirection ) {
+                    Sort.Order order = new Sort.Order(Sort.Direction.ASC, "userId").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByDescriptionLikeIgnoreCase( clause, Sort.by(order) );
+                }
+                else {
+                    Sort.Order order = new Sort.Order(Sort.Direction.DESC, "userId").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByDescriptionLikeIgnoreCase( clause, Sort.by(order) );
+                }
                 break;
             case 3: // сортировка по времени создания(created)
-                if ( sortDirection ) allArtifact = (ArrayList<Artifact>) artifactRepository.findByDescriptionLikeIgnoreCaseOrderByCreated(clause);
-                else allArtifact = (ArrayList<Artifact>) artifactRepository.findByDescriptionLikeIgnoreCaseOrderByCreatedDesc(clause);
+                if ( sortDirection ) {
+                    Sort.Order order = new Sort.Order(Sort.Direction.ASC, "created").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByDescriptionLikeIgnoreCase( clause, Sort.by(order) );
+                }
+                else {
+                    Sort.Order order = new Sort.Order(Sort.Direction.DESC, "created").ignoreCase();
+                    allArtifact = (ArrayList<Artifact>) artifactRepository.findByDescriptionLikeIgnoreCase( clause, Sort.by(order) );
+                }
                 break;
         }
         return allArtifact;

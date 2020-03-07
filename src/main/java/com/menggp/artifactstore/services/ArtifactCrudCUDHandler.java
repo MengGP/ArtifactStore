@@ -26,7 +26,6 @@ public class ArtifactCrudCUDHandler {
 
     // Метод обновляет артифакт
     public Artifact updateArtifact(Artifact updatedArt){
-        Log.info( String.valueOf( updatedArt.getId() ));
 
         Artifact art = artifactRepository.findById( updatedArt.getId() ).get();
         art.setCreated( updatedArt.getCreated()) ;
