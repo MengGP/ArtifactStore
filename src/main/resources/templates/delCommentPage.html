@@ -6,22 +6,22 @@
 </head>
 
 <body>
-<p th:text="(${result} == null) ? ' Удалить артефакт и комментарии к нему? ' : ''" />
-<!-- <p th:text="(${result} == 0) ? ' Заполнены не все поля' : ''" /> -->
-<!-- <p th:text="(${result} == 1) ? ' Данные артефакта изменены' : ''" /> -->
+<p th:text="(${result} == null) ? ' Удалить комментарий? ' : ''" />
 <p th:text="(${result} == -1) ? ' Ошибка БД ' : ''" />
 <p>--------------------------------------------------------</p>
 
 <table>
     <tr>
         <td>
-            <form th:action="@{/delArtifact}">
+            <form th:action="@{/delComment}">
                 <input hidden="true" name="artifactId" th:value="${currArt.getId()}">
+                <input hidden="true" name="commentId" th:value="${currComment.getId()}">
                 <button> YES </button>
             </form>
         </td>
         <td>
-            <form th:action="@{/home}">
+            <form th:action="@{/commentPage}">
+                <input hidden="true" name="artifactId" th:value="${currArt.getId()}">
                 <button> NO </button>
             </form>
 
@@ -31,18 +31,16 @@
 
 <p>--------------------------------------------------------</p>
 
-<p th:text="'Автор:    '+ ${currArt.getUserId()}"/>
-<p th:text="'Категория:'+ ${currArt.getCategory()}"/>
-<p th:text="'Описание: '+ ${currArt.getDescription()}"/>
-<p th:text="'Создан: '+ ${currArt.getCreated()}"/>
-<p th:text="'Количество комментариев: '+ ${commentsNum}"/>
+<p th:text="'Автор комментария: '+ ${currComment.getUserId()}"/>
+<p th:text="'Комментарий: '+ ${currComment.getContent()}"/>
 
 <p>--------------------------------------------------------</p>
 
 <p>
-    <a th:href="@{/home}">
-        <button> HOME PAGE </button>
-    </a>
+<form th:action="@{/commentPage}">
+    <input hidden="true" name="artifactId" th:value="${currArt.getId()}">
+    <button> COMMENTS PAGE </button>
+</form>
 </p>
 
 <form th:action="@{/logout}" method="post">

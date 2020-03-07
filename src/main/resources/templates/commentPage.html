@@ -67,8 +67,9 @@
             </form>
         </td>
         <td>
-            <form th:action="@{/delArtifactPage}">
-                <input hidden="true" name="artifactId" th:value="${iter.getId()}"/>
+            <form th:action="@{/delCommentPage}">
+                <input hidden="true" name="artifactId" th:value="${currArt.getId()}"/>
+                <input hidden="true" name="commentId" th:value="${iter.getId()}"/>
                 <button>DELETE</button>
             </form>
         </td>

@@ -22,6 +22,7 @@ public class RestDelRequestHandler {
     private static final Logger Log = LoggerFactory.getLogger(RestDelRequestHandler.class);
 
     private static final String REST_URL_DEL_ARTIFACT_REQUEST = "http://localhost:8077/delArt";
+    private static final String REST_URL_DEL_COMMENT_REQUEST = "http://localhost:8077/delComment";
 
     @Autowired
     RestTemplate restTemplate;
@@ -46,6 +47,22 @@ public class RestDelRequestHandler {
         return result;
     } // end_method
 
+    // DELETE - запрос на удаление в БД комментария
+    public int delComment(long id) {
+        // Предпологаем возможность ошибки создания, изменятеся на 1 при подтверждении создания сервером
+        int result = -1;
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            HttpEntity<String> request = new HttpEntity<>(restBasicAuthHendler.getHeaders());
+            ResponseEntity<String> responseResult
+                    = restTemplate.exchange(REST_URL_DEL_COMMENT_REQUEST+"?id="+id, HttpMethod.DELETE, request, String.class);
+            if ( responseResult.getStatusCode().toString().equals("200 OK") )
+                result = 1;
+        } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
+            Log.debug( ex.getMessage() );
+        }
+        return result;
+    } // end_method
 
 
 } // end_class

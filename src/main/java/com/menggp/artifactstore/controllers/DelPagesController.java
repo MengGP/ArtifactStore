@@ -1,6 +1,7 @@
 package com.menggp.artifactstore.controllers;
 
 import com.menggp.artifactstore.dao.Artifact;
+import com.menggp.artifactstore.dao.Comment;
 import com.menggp.artifactstore.services.RestDelRequestHandler;
 import com.menggp.artifactstore.services.RestReadRequestHandler;
 import org.slf4j.Logger;
@@ -58,6 +59,44 @@ public class DelPagesController {
 
         readPagesController.homePage(model);
         return "home";
+    } // end_method
+
+    @RequestMapping("/delCommentPage")
+    public String delCommentPage(
+            @RequestParam(value = "artifactId", required = true) long artId,
+            @RequestParam(value = "commentId", required = true) long commentId,
+            Model model) {
+
+        Artifact currArt = restReadRequestHandler.getArtById( artId );
+        Comment currComment = restReadRequestHandler.getCommentById( commentId );
+
+        model.addAttribute("currComment", currComment);
+        model.addAttribute("currArt", currArt);
+        return "delCommentPage";
+    } // end_method
+
+    @RequestMapping("/delComment")
+    public String delComment(
+            @RequestParam(value = "artifactId", required = true) long artId,
+            @RequestParam(value = "commentId", required = true) long commentId,
+            Model model) {
+
+        Artifact currArtifact = restReadRequestHandler.getArtById( artId );
+        model.addAttribute("currArt",currArtifact);
+
+        int result = -1;
+        result = restDelRequestHandler.delComment(commentId);
+
+        if (result==-1) {
+            Comment currComment = restReadRequestHandler.getCommentById( commentId );
+            model.addAttribute("currComment", currComment);
+
+            model.addAttribute("result", result);
+            return "delCommentPage";
+        }
+
+        model.addAttribute("commentList", restReadRequestHandler.getCommentariesByArtifactId(artId));
+        return "commentPage";
     } // end_method
 
 } // end_class

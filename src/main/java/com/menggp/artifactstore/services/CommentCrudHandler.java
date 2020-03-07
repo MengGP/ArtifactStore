@@ -43,6 +43,13 @@ public class CommentCrudHandler {
         comment.setContent( updatedComment.getContent() );
 
         return commentRepository.save( comment );
-    } // end_metod
+    } // end_method
+
+    // Метод удаляет комментарий
+    public void deleteComment(long id) {
+        commentRepository.deleteById(id);
+        return;
+    } // end_method
+
 
 } // end_class
