@@ -1,5 +1,6 @@
 package com.menggp.artifactstore.services;
 
+import com.menggp.artifactstore.boot.ArtifactStoreApp;
 import com.menggp.artifactstore.dao.Artifact;
 import com.menggp.artifactstore.dto.ArtifactList;
 import org.slf4j.Logger;
@@ -17,14 +18,17 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-/* Методы возвращает отсортированные артифакты c фильтроми,
-     параметры в запросе: содержание фильтра, поле сортировки, направление
-        - фильтр по:  категории:
+import static com.menggp.artifactstore.boot.ArtifactStoreApp.APP_URL;
+
+/*
+    Обрабочтки посылающие REST запросы на чтение-сортировку
+        параметры в запросе: содержание фильтра, поле сортировки, направление
+        - фильтр - по категории:
             - Категории - String cat
             - Автору - String userId
             - Описаиню - String desc
             - Содержанию комментариев - String comment
-        - поле сортривки: int sortType
+         - поле сортривки: int sortType
             1 - Категория(cat)
             2 - Автор(user)
             3 - Время создания(created)
@@ -37,11 +41,11 @@ public class RestSortRequestHandler {
 
     private static final Logger Log = LoggerFactory.getLogger(RestSortRequestHandler.class);
 
-    private static final String REST_URL_ART_ALL_SORT = "http://localhost:8077/artAllSort";
-    private static final String REST_URL_ART_FILTER_BY_CAT_SORT = "http://localhost:8077/artFilterByCatSort";
-    private static final String REST_URL_ART_FILTER_BY_USER_SORT = "http://localhost:8077/artFilterByUserSort";
-    private static final String REST_URL_ART_FILTER_BY_DESC_SORT = "http://localhost:8077/artFilterByDescSort";
-    private static final String REST_URL_ART_FILTER_BY_COMMENT_SORT = "http://localhost:8077//artFilterByCommentSort";
+    private static final String REST_URL_ART_ALL_SORT = APP_URL+"/artAllSort";
+    private static final String REST_URL_ART_FILTER_BY_CAT_SORT = APP_URL+"/artFilterByCatSort";
+    private static final String REST_URL_ART_FILTER_BY_USER_SORT = APP_URL+"/artFilterByUserSort";
+    private static final String REST_URL_ART_FILTER_BY_DESC_SORT = APP_URL+"/artFilterByDescSort";
+    private static final String REST_URL_ART_FILTER_BY_COMMENT_SORT = APP_URL+"/artFilterByCommentSort";
 
     @Autowired
     RestTemplate restTemplate;

@@ -1,5 +1,6 @@
 package com.menggp.artifactstore.services;
 
+import com.menggp.artifactstore.boot.ArtifactStoreApp;
 import com.menggp.artifactstore.dao.Artifact;
 import com.menggp.artifactstore.dao.Comment;
 import org.slf4j.Logger;
@@ -17,13 +18,18 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 
+import static com.menggp.artifactstore.boot.ArtifactStoreApp.APP_URL;
+
+/*
+    Обрабочтки посылающие REST запросы на обновлние
+ */
 @Service
 public class RestUpdateRequestHandler {
 
     private static final Logger Log = LoggerFactory.getLogger(RestUpdateRequestHandler.class);
 
-    private static final String REST_URL_UPDATE_ARTIFACT_REQUEST = "http://localhost:8077/updateArt";
-    private static final String REST_URL_UPDATE_COMMENT_REQUEST = "http://localhost:8077/updateComment";
+    private static final String REST_URL_UPDATE_ARTIFACT_REQUEST = APP_URL+"/updateArt";
+    private static final String REST_URL_UPDATE_COMMENT_REQUEST = APP_URL+"/updateComment";
 
     @Autowired
     RestTemplate restTemplate;

@@ -6,8 +6,9 @@ import javax.validation.constraints.NotNull;
 
 import java.util.Date;
 
-import static javax.persistence.GenerationType.AUTO;
-
+/*
+    Сущность Артефакт
+ */
 @Entity
 @Table(name="artifacts")
 public class Artifact {

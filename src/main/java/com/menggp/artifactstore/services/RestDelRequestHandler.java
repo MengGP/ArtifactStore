@@ -1,6 +1,6 @@
 package com.menggp.artifactstore.services;
 
-import com.menggp.artifactstore.dao.Artifact;
+import com.menggp.artifactstore.boot.ArtifactStoreApp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +16,18 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 
+import static com.menggp.artifactstore.boot.ArtifactStoreApp.APP_URL;
+
+/*
+    Обрабочтки посылающие REST запросы на удаление
+ */
 @Service
 public class RestDelRequestHandler {
 
     private static final Logger Log = LoggerFactory.getLogger(RestDelRequestHandler.class);
 
-    private static final String REST_URL_DEL_ARTIFACT_REQUEST = "http://localhost:8077/delArt";
-    private static final String REST_URL_DEL_COMMENT_REQUEST = "http://localhost:8077/delComment";
+    private static final String REST_URL_DEL_ARTIFACT_REQUEST = APP_URL+"/delArt";
+    private static final String REST_URL_DEL_COMMENT_REQUEST = APP_URL+"/delComment";
 
     @Autowired
     RestTemplate restTemplate;

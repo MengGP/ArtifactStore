@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 /*
+   Обработка "сотрировки" на главной странице
+       Сортировка с фильтром (адин из параметров) и параметрами сортировки:
         - поле сортривки: int sortType
             1 - Категория(cat)
             2 - Автор(user)
@@ -31,15 +33,6 @@ public class SortPagesController {
     @Autowired
     RestSortRequestHandler restSortRequestHandler;
 
-    /* Сортировка с фильтром (адин из параметров) и параметрами сортировки:
-         - поле сортривки: int sortType
-                1 - Категория(cat)
-                2 - Автор(user)
-                3 - Время создания(created)
-         - направлениe: boolean sortDirection
-                ASC по возрастанию = true
-                DESK по убыванию = false
-     */
     @RequestMapping("/sortArtifacts")
     public String sortByCatASC(
             @RequestParam(value = "searchParamCategory", required = false) String cat,
@@ -106,9 +99,5 @@ public class SortPagesController {
         }
         return "home";
     } // end_method
-
-
-
-
 
 } // end_class

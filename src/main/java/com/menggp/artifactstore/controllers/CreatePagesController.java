@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/*
+    Обработчка задачь "создания" с пользовательского интерфейса
+ */
 @Controller
 public class CreatePagesController {
 
@@ -21,12 +24,10 @@ public class CreatePagesController {
     @Autowired
     RestReadRequestHandler restReadRequestHandler;
 
-    /*  Обратка создания артефакта
-            коды результата:
-                0 - заполенены не все поля
-                1 - успех
-                -1 - ошибка БД
-     */
+    /*  Обратка создания артефакта, коды результата:
+                 0 - заполенены не все поля
+                 1 - успех
+                -1 - ошибка БД  */
     @RequestMapping("/createArtifact")
     public String createArtifact(
             @RequestParam(value = "userId", required = false) String userId,
@@ -45,12 +46,10 @@ public class CreatePagesController {
         return "createArtifactPage";
     } // end_method
 
-    /*  Обратка создания комментария
-        коды результата:
-            0 - заполенены не все поля
-            1 - успех
-            -1 - ошибка БД
-    */
+    /*  Обратка создания комментария, коды результата:
+             0 - заполенены не все поля
+             1 - успех
+            -1 - ошибка БД */
     @RequestMapping("/createComment")
     public String createComment(
             @RequestParam(value = "userId", required = false) String userId,
@@ -70,6 +69,6 @@ public class CreatePagesController {
         model.addAttribute("currArt", restReadRequestHandler.getArtById(artId));
         model.addAttribute("commentList", restReadRequestHandler.getCommentariesByArtifactId( artId ));
         return "commentPage";
-    }
+    } // end_method
 
 } // end_class

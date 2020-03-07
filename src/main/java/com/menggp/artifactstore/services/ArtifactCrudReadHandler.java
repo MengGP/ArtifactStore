@@ -9,10 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
-
 /*
-    Класс предоставляющий CRUD операции для работы с сущностью Artifact
-        - только операции поиска
+    Обработчик CRUD операций для сущности Артифакт - Read: чтение и поиск
  */
 @Service
 public class ArtifactCrudReadHandler {
@@ -74,24 +72,21 @@ public class ArtifactCrudReadHandler {
 
     // Список категорий - ARTIFACT
     public ArrayList<String> readAllCategories() {
-        allString = (ArrayList<String>) artifactRepository.findCategory();
-        return allString;
+//        allString = (ArrayList<String>) artifactRepository.findCategory();
+//        return allString;
+        return (ArrayList<String>) artifactRepository.findCategory();
     } // end_method
 
     // Список пользователей - ARTIFACT
     public ArrayList<String> readAllUsers() {
-        allString = (ArrayList<String>) artifactRepository.findUser();
-        return allString;
+//        allString = (ArrayList<String>) artifactRepository.findUser();
+//        return allString;
+        return (ArrayList<String>) artifactRepository.findUser();
     } // end_method
 
     // Количество комментариев к артифакту
     public long readCommentsNumberByArtId( long artId ) {
         return artifactRepository.findCommentsNumberByArtifactId( artId );
     } // end_method
-
-
-
-
-
 
 } // end_class

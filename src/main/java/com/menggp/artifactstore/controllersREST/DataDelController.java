@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/*
+    REST-контроллеры задач на "удаление данных"
+ */
 @RestController
 public class DataDelController {
 
@@ -19,6 +22,7 @@ public class DataDelController {
     @Autowired
     CommentCrudHandler commentCrudHandler;
 
+    // удаление артефакта
     @RequestMapping(value="/delArt", method = RequestMethod.DELETE)
     public void deleteArtifact(
             @RequestParam(value = "id") long id
@@ -27,7 +31,7 @@ public class DataDelController {
         return;
     } // end_method
 
-
+    // удаление комментария
     @RequestMapping(value="/delComment", method = RequestMethod.DELETE)
     public void delComment(
             @RequestParam(value = "id") long id

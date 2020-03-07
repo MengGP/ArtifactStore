@@ -12,6 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/*
+    Обработчка задачь "удаления" с пользовательского интерфейса
+ */
 @Controller
 public class DelPagesController {
 
@@ -26,6 +29,7 @@ public class DelPagesController {
     @Autowired
     ReadPagesController readPagesController;
 
+    // Загрука страницы удаления артефакта
     @RequestMapping("/delArtifactPage")
     public String delArtifactPage(
             @RequestParam(value = "artifactId", required = true) long id,
@@ -39,6 +43,9 @@ public class DelPagesController {
         return "delArtifactPage";
     } // end_method
 
+    /* Обработка удаления артефакта, коды результата:
+                     1 - успех
+                    -1 - ошибка БД  */
     @RequestMapping("/delArtifact")
     public String deleteArtifact(
             @RequestParam(value = "artifactId", required = true) long id,
@@ -61,6 +68,7 @@ public class DelPagesController {
         return "home";
     } // end_method
 
+    // Загрука страницы удаления комментария
     @RequestMapping("/delCommentPage")
     public String delCommentPage(
             @RequestParam(value = "artifactId", required = true) long artId,
@@ -75,6 +83,9 @@ public class DelPagesController {
         return "delCommentPage";
     } // end_method
 
+    /* Обработка удаления комментария, коды результата:
+                 1 - успех
+                -1 - ошибка БД  */
     @RequestMapping("/delComment")
     public String delComment(
             @RequestParam(value = "artifactId", required = true) long artId,

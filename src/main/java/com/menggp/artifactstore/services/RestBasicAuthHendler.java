@@ -4,6 +4,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
+// Класс для basic authentication в REST-запросах
 @Service
 public class RestBasicAuthHendler {
 

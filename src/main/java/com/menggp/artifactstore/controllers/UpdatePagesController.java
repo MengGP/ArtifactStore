@@ -12,6 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/*
+    Обработчка задачь "обновления" данных с пользовательского интерфейса
+ */
 @Controller
 public class UpdatePagesController {
 
@@ -23,6 +26,7 @@ public class UpdatePagesController {
     @Autowired
     RestUpdateRequestHandler restUpdateRequestHandler;
 
+    // Загрузка страницы измененияя артефакта
     @RequestMapping("/editArtifactPage")
     public String editArtifactPage(
             @RequestParam(value = "artifactId", required = true) long id,
@@ -34,6 +38,10 @@ public class UpdatePagesController {
         return "editArtifactPage";
     } // end_method
 
+    /*  Обратка изменения артефакта, коды результата:
+                 0 - заполенены не все поля
+                 1 - успех
+                -1 - ошибка БД  */
     @RequestMapping("/updateArtifact")
     public String updateAtifact(
             @RequestParam(value = "artifactId", required = true) long id,
@@ -57,6 +65,7 @@ public class UpdatePagesController {
         return "editArtifactPage";
     } // end_method
 
+    // Загразка страницы изменения комметания
     @RequestMapping("/editCommentPage")
     public String editArtifactPage(
             @RequestParam(value = "artifactId", required = true) long artId,
@@ -71,6 +80,10 @@ public class UpdatePagesController {
         return "editCommentPage";
     } // end_method
 
+    /*  Обратка изменения комментария, коды результата:
+                 0 - заполенены не все поля
+                 1 - успех
+                -1 - ошибка БД  */
     @RequestMapping("/updateComment")
     public String updateComment(
             @RequestParam(value = "artifactId", required = true) long artId,

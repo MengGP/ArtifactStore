@@ -2,10 +2,10 @@ package com.menggp.artifactstore.dao;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
-import static javax.persistence.GenerationType.AUTO;
-
+/*
+    Сущность Комментарий
+ */
 @Entity
 @Table(name = "commentaries")
 public class Comment {

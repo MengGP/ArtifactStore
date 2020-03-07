@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/*
+    REST-контроллеры задач на "обновление данных"
+ */
 @RestController
 public class DataUpdateControler {
 
@@ -24,6 +27,7 @@ public class DataUpdateControler {
     @Autowired
     CommentCrudHandler commentCrudHandler;
 
+    // Обновление Артефакта
     @RequestMapping(value="/updateArt", method = RequestMethod.PUT)
     public Artifact updateArtifact(
             @RequestBody Artifact updatedArt
@@ -31,6 +35,7 @@ public class DataUpdateControler {
         return artifactCrudCUDHandler.updateArtifact(updatedArt);
     } // end_method
 
+    // Обновление Комментария
     @RequestMapping(value="/updateComment", method = RequestMethod.PUT)
     public Comment updateComment(
             @RequestBody Comment updatedComment

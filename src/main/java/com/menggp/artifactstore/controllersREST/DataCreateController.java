@@ -2,15 +2,14 @@ package com.menggp.artifactstore.controllersREST;
 
 import com.menggp.artifactstore.dao.Artifact;
 import com.menggp.artifactstore.dao.Comment;
-import com.menggp.artifactstore.dto.ArtifactList;
 import com.menggp.artifactstore.services.ArtifactCrudCUDHandler;
 import com.menggp.artifactstore.services.CommentCrudHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-
+/*
+    REST-контроллеры задач на "создание данных"
+ */
 @RestController
 public class DataCreateController {
 
@@ -20,6 +19,7 @@ public class DataCreateController {
     @Autowired
     CommentCrudHandler commentCrudHandler;
 
+    // Создание артефакта
     @RequestMapping(value="/createArt", method = RequestMethod.POST)
     public Artifact createArtifact(
             @RequestBody Artifact newArt
@@ -27,7 +27,7 @@ public class DataCreateController {
         return artifactCrudCUDHandler.createArtifact(newArt);
     } // end_method
 
-
+    // Создание комметария
     @RequestMapping(value="/createComment", method = RequestMethod.POST)
     public Comment createComment(
             @RequestBody Comment newComment

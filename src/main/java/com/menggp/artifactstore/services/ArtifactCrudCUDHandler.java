@@ -13,6 +13,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 
+/*
+    Обработчик CRUD операций для сущности Артифакт - CUD
+        C - create
+        U - update
+        D - delete
+ */
 @Service
 public class ArtifactCrudCUDHandler {
 
@@ -52,7 +58,5 @@ public class ArtifactCrudCUDHandler {
         artifactRepository.deleteById( id );
         return;
     } // end_method
-
-
 
 } // end_class

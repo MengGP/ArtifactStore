@@ -5,6 +5,7 @@ import com.menggp.artifactstore.dao.Comment;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -36,6 +37,9 @@ import java.util.HashMap;
 @PropertySource("classpath:/application.properties")
 public class ArtifactStoreApp implements CommandLineRunner {
 
+    public static final String APP_URL = "http://localhost:8080";
+    // public static final String APP_URL = "http://localhost:8077";
+
     // получем строку подключения к БД из файла properties для Flyway
     @Value("${spring.datasource.url}")
     String dbUrl;
@@ -47,14 +51,16 @@ public class ArtifactStoreApp implements CommandLineRunner {
 
     // Запуск Spring Boot Application
     public static void main(String[] args){
-        // SpringApplication.run(ArtifactStoreApp.class, args);
+        SpringApplication.run(ArtifactStoreApp.class, args);
 
+        /* Запуск с нестандартным портом - 8077
         HashMap<String,Object> props = new HashMap<>();
         props.put("server.port",8077);
 
         new SpringApplicationBuilder(ArtifactStoreApp.class)
                 .properties(props)
                 .run(args);
+         */
     } // end_main
 
     // Задачи при старте

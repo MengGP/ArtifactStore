@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
-/*   - поле сортривки: int sortType
+/*
+    Обработчик CRUD операций для сущности Артифакт - Read: чтение и фильтр с сортировкой
+     - поле сортривки: int sortType
         1 - Категория(cat)
         2 - Автор(user)
         3 - Время создания(created)
@@ -210,7 +212,5 @@ public class ArtifactCrudSortHandler {
         }
         return allArtifact;
     } // end_method
-
-
 
 } // end_class

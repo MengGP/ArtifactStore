@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
+/*
+    REST-контроллеры задач на "чтение-сортировку данных"
+ */
 @RestController
 public class DataSortController {
 
@@ -99,6 +102,5 @@ public class DataSortController {
         response.setArtifactList(artList);
         return response;
     } // end_method
-
 
 } // end_class

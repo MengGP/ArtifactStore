@@ -6,6 +6,10 @@ import com.menggp.artifactstore.dao.Comment;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    Data Transfer Object -
+        для передачи List<Comment> в REST запросе
+ */
 public class CommentList {
 
     private List<Comment> commentList;

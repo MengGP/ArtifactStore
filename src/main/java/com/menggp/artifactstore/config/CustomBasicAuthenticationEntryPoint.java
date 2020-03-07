@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/*
-    Класс для реализации Basic auth для REST-запросов
- */
+//     Класс для реализации Basic auth для REST-запросов
 public class CustomBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
 
     @Override

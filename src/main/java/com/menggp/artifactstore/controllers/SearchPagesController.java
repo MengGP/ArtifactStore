@@ -9,6 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/*
+    Обработка запросов "поиска" на главной странице
+ */
 @Controller
 public class SearchPagesController {
 
@@ -17,6 +20,7 @@ public class SearchPagesController {
     @Autowired
     RestReadRequestHandler restReadRequestHandler;
 
+    // Все артифакты из БД
     @RequestMapping("/showAllArtifacts")
     public String showAllArtifacts(Model model) {
 
@@ -33,6 +37,7 @@ public class SearchPagesController {
         return "home";
     } // end_method
 
+    // Фильтр по категории
     @RequestMapping("/showArtifactFilterByCategory")
     public String showArtifactFilterByCategory(
             @RequestParam(value = "artifactCatagory", required = false) String category,
@@ -51,6 +56,7 @@ public class SearchPagesController {
         return "home";
     } // end_method
 
+    // Фильтр по автору
     @RequestMapping("/showArtifactFilterByUser")
     public String showArtifactFilterByUser(
             @RequestParam(value = "artifactUser", required = false) String user,
@@ -70,6 +76,7 @@ public class SearchPagesController {
         return "home";
     } // end_method
 
+    // Фильтр по описанию
     @RequestMapping("/showArtifactFilterByDescription")
     public String showArtifactFilterByDescription(
             @RequestParam(value = "artifactDescription", required = false) String desc,
@@ -89,6 +96,7 @@ public class SearchPagesController {
         return "home";
     } // end_method
 
+    // Фильтр по содержания комментариев
     @RequestMapping("/showArtifactFilterByCommentContent")
     public String showArtifactFilterByCommentContent(
             @RequestParam(value = "artifactCommentContent", required = false) String comment,
@@ -107,10 +115,5 @@ public class SearchPagesController {
         model.addAttribute("artifactList", restReadRequestHandler.getArtifacatsFilterByCommentContent(comment));
         return "home";
     } // end_method
-
-
-
-
-
 
 } // end_class

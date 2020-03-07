@@ -1,8 +1,8 @@
 package com.menggp.artifactstore.services;
 
+import com.menggp.artifactstore.boot.ArtifactStoreApp;
 import com.menggp.artifactstore.dao.Artifact;
 import com.menggp.artifactstore.dao.Comment;
-import com.menggp.artifactstore.dto.ArtifactList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +16,18 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
+import static com.menggp.artifactstore.boot.ArtifactStoreApp.APP_URL;
 
+/*
+    Обрабочтки посылающие REST запросы на создание
+ */
 @Service
 public class RestCreateRequestHandler {
 
     private static final Logger Log = LoggerFactory.getLogger(RestCreateRequestHandler.class);
 
-    private static final String REST_URL_CREATE_ARTIFACT_REQUEST = "http://localhost:8077/createArt";
-    private static final String REST_URL_CREATE_COMMENT_REQUEST = "http://localhost:8077/createComment";
+    private static final String REST_URL_CREATE_ARTIFACT_REQUEST = APP_URL+"/createArt";
+    private static final String REST_URL_CREATE_COMMENT_REQUEST = APP_URL+"/createComment";
 
     @Autowired
     RestTemplate restTemplate;

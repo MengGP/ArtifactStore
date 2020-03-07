@@ -12,6 +12,13 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 
+/*
+    Обработчик CRUD операций для сущности комментарий
+        C - create
+        R - чтение
+        U - update
+        D - delete
+ */
 @Service
 public class CommentCrudHandler {
 

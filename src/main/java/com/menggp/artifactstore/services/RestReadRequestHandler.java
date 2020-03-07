@@ -1,11 +1,11 @@
 package com.menggp.artifactstore.services;
 
+import com.menggp.artifactstore.boot.ArtifactStoreApp;
 import com.menggp.artifactstore.dao.Artifact;
 import com.menggp.artifactstore.dao.Comment;
 import com.menggp.artifactstore.dto.ArtifactList;
-import com.menggp.artifactstore.dto.CategoriesList;
+import com.menggp.artifactstore.dto.StringList;
 import com.menggp.artifactstore.dto.CommentList;
-import com.menggp.artifactstore.dto.UserList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +21,27 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+import static com.menggp.artifactstore.boot.ArtifactStoreApp.APP_URL;
+
+/*
+    Обрабочтки посылающие REST запросы на чтение-поиск
+ */
 @Service
 public class RestReadRequestHandler {
 
     private static final Logger Log = LoggerFactory.getLogger(RestReadRequestHandler.class);
 
-    private static final String REST_URL_ARTIFACTS_BY_ID_REQUEST = "http://localhost:8077/artifactById";
-    private static final String REST_URL_COMMENT_BY_ID_REQUEST = "http://localhost:8077/commentById";
-    private static final String REST_URL_ALL_ARTIFACTS_REQUEST = "http://localhost:8077/allArtifactsRequest";
-    private static final String REST_URL_ALL_CATEGORIES_REQUEST = "http://localhost:8077/allCategories";
-    private static final String REST_URL_COMMENTS_NUM_REQUEST = "http://localhost:8077/commentsNum";
-    private static final String REST_URL_ALL_USERS_REQUEST = "http://localhost:8077/allUsers";
-    private static final String REST_URL_ARTIFACTS_REQUEST_BY_CAT = "http://localhost:8077/artRequestByCategory";
-    private static final String REST_URL_ARTIFACTS_REQUEST_BY_USER = "http://localhost:8077/artRequestByUser";
-    private static final String REST_URL_ARTIFACTS_REQUEST_BY_DESC = "http://localhost:8077/artRequestByDesc";
-    private static final String REST_URL_ARTIFACTS_REQUEST_BY_COMMENT = "http://localhost:8077/artRequestByCommentContent";
-    private static final String REST_URL_COMMENT_REQUEST_BY_ART = "http://localhost:8077/commentRequestByArt";
+    private static final String REST_URL_ARTIFACTS_BY_ID_REQUEST = APP_URL+"/artifactById";
+    private static final String REST_URL_COMMENT_BY_ID_REQUEST = APP_URL+"/commentById";
+    private static final String REST_URL_ALL_ARTIFACTS_REQUEST = APP_URL+"/allArtifactsRequest";
+    private static final String REST_URL_ALL_CATEGORIES_REQUEST = APP_URL+"/allCategories";
+    private static final String REST_URL_COMMENTS_NUM_REQUEST = APP_URL+"/commentsNum";
+    private static final String REST_URL_ALL_USERS_REQUEST = APP_URL+"/allUsers";
+    private static final String REST_URL_ARTIFACTS_REQUEST_BY_CAT = APP_URL+"/artRequestByCategory";
+    private static final String REST_URL_ARTIFACTS_REQUEST_BY_USER = APP_URL+"/artRequestByUser";
+    private static final String REST_URL_ARTIFACTS_REQUEST_BY_DESC = APP_URL+"/artRequestByDesc";
+    private static final String REST_URL_ARTIFACTS_REQUEST_BY_COMMENT = APP_URL+"/artRequestByCommentContent";
+    private static final String REST_URL_COMMENT_REQUEST_BY_ART = APP_URL+"/commentRequestByArt";
 
     @Autowired
     RestTemplate restTemplate;
@@ -169,10 +174,10 @@ public class RestReadRequestHandler {
         try {
             HttpHeaders headers = new HttpHeaders();
             HttpEntity<String> request = new HttpEntity<>(restBasicAuthHendler.getHeaders());
-            ResponseEntity<CategoriesList> responseResult
-                    = restTemplate.exchange(REST_URL_ALL_CATEGORIES_REQUEST, HttpMethod.GET, request, CategoriesList.class);
+            ResponseEntity<StringList> responseResult
+                    = restTemplate.exchange(REST_URL_ALL_CATEGORIES_REQUEST, HttpMethod.GET, request, StringList.class);
 
-            return responseResult.getBody().getCategoriesList();
+            return responseResult.getBody().getStringList();
         } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
             Log.debug( ex.getMessage() );
         }
@@ -184,10 +189,10 @@ public class RestReadRequestHandler {
         try {
             HttpHeaders headers = new HttpHeaders();
             HttpEntity<String> request = new HttpEntity<>(restBasicAuthHendler.getHeaders());
-            ResponseEntity<UserList> responseResult
-                    = restTemplate.exchange(REST_URL_ALL_USERS_REQUEST, HttpMethod.GET, request, UserList.class);
+            ResponseEntity<StringList> responseResult
+                    = restTemplate.exchange(REST_URL_ALL_USERS_REQUEST, HttpMethod.GET, request, StringList.class);
 
-            return responseResult.getBody().getUserList();
+            return responseResult.getBody().getStringList();
         } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
             Log.debug( ex.getMessage() );
         }
