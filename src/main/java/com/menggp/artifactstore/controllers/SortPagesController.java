@@ -1,6 +1,6 @@
 package com.menggp.artifactstore.controllers;
 
-import com.menggp.artifactstore.services.RestFindRequestHandler;
+import com.menggp.artifactstore.services.RestReadRequestHandler;
 import com.menggp.artifactstore.services.RestSortRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
             DESK по убыванию = false
  */
 @Controller
-public class UIPageSortController {
+public class SortPagesController {
 
-    private static final Logger Log = LoggerFactory.getLogger(UIPageSortController.class);
+    private static final Logger Log = LoggerFactory.getLogger(SortPagesController.class);
 
     @Autowired
-    RestFindRequestHandler restFindRequestHandler;
+    RestReadRequestHandler restReadRequestHandler;
 
     @Autowired
     RestSortRequestHandler restSortRequestHandler;
@@ -50,8 +50,8 @@ public class UIPageSortController {
             @RequestParam(value = "sortDirection", required = true) boolean sortDirection,
             Model model) {
 
-        model.addAttribute("categoriesList", restFindRequestHandler.getAllCategories());
-        model.addAttribute("usersList", restFindRequestHandler.getAllUsers());
+        model.addAttribute("categoriesList", restReadRequestHandler.getAllCategories());
+        model.addAttribute("usersList", restReadRequestHandler.getAllUsers());
 
         // Определяем по какому параметру установлен фильтр
         if ( cat.length() != 0 ) {

@@ -1,10 +1,11 @@
 package com.menggp.artifactstore.services;
 
 import com.menggp.artifactstore.dao.Artifact;
+import com.menggp.artifactstore.dao.Comment;
 import com.menggp.artifactstore.dto.ArtifactList;
 import com.menggp.artifactstore.dto.CategoriesList;
+import com.menggp.artifactstore.dto.CommentList;
 import com.menggp.artifactstore.dto.UserList;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,9 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Service
-public class RestFindRequestHandler {
+public class RestReadRequestHandler {
 
-    private static final Logger Log = LoggerFactory.getLogger(RestFindRequestHandler.class);
+    private static final Logger Log = LoggerFactory.getLogger(RestReadRequestHandler.class);
 
     private static final String REST_URL_ARTIFACTS_BY_ID_REQUEST = "http://localhost:8077/artifactById";
     private static final String REST_URL_ALL_ARTIFACTS_REQUEST = "http://localhost:8077/allArtifactsRequest";
@@ -34,6 +35,7 @@ public class RestFindRequestHandler {
     private static final String REST_URL_ARTIFACTS_REQUEST_BY_USER = "http://localhost:8077/artRequestByUser";
     private static final String REST_URL_ARTIFACTS_REQUEST_BY_DESC = "http://localhost:8077/artRequestByDesc";
     private static final String REST_URL_ARTIFACTS_REQUEST_BY_COMMENT = "http://localhost:8077/artRequestByCommentContent";
+    private static final String REST_URL_COMMENT_REQUEST_BY_ART = "http://localhost:8077/commentRequestByArt";
 
     @Autowired
     RestTemplate restTemplate;
@@ -125,6 +127,21 @@ public class RestFindRequestHandler {
                     = restTemplate.exchange(REST_URL_ARTIFACTS_REQUEST_BY_COMMENT +"?comment="+comment, HttpMethod.GET, request, ArtifactList.class);
 
             return responseResult.getBody().getArtifactList();
+        } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
+            Log.debug( ex.getMessage() );
+        }
+        return null;
+    } // end_method
+
+    // Метод возвращвет комментарии к Артефаку (по artifactId)
+    public List<Comment> getCommentariesByArtifactId(long artId) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            HttpEntity<String> request = new HttpEntity<>(restBasicAuthHendler.getHeaders());
+            ResponseEntity<CommentList> responseResult
+                    = restTemplate.exchange(REST_URL_COMMENT_REQUEST_BY_ART +"?id="+artId, HttpMethod.GET, request, CommentList.class);
+
+            return responseResult.getBody().getCommentList();
         } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
             Log.debug( ex.getMessage() );
         }

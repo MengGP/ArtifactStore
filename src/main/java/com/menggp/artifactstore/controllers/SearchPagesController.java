@@ -1,6 +1,6 @@
 package com.menggp.artifactstore.controllers;
 
-import com.menggp.artifactstore.services.RestFindRequestHandler;
+import com.menggp.artifactstore.services.RestReadRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,34 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class UIPageSearchController {
+public class SearchPagesController {
 
-    private static final Logger Log = LoggerFactory.getLogger(UIPageSearchController.class);
+    private static final Logger Log = LoggerFactory.getLogger(SearchPagesController.class);
 
     @Autowired
-    RestFindRequestHandler restFindRequestHandler;
-
-    @RequestMapping("/")
-    public String indexPage(Model model) {
-        homePage(model);
-        return "home";
-    }
-
-    @RequestMapping("/home")
-    public String homePage(Model model) {
-
-        // однуляем атрибуты поиска
-        model.addAttribute("searchParamCategory",null);
-        model.addAttribute("searchParamUser",null);
-        model.addAttribute("searchParamDescription",null);
-        model.addAttribute("searchParamComment",null);
-
-        model.addAttribute("categoriesList", restFindRequestHandler.getAllCategories());
-        model.addAttribute("usersList", restFindRequestHandler.getAllUsers());
-
-        model.addAttribute("artifactList", restFindRequestHandler.getAllArtifacs());
-        return "home";
-    }
+    RestReadRequestHandler restReadRequestHandler;
 
     @RequestMapping("/showAllArtifacts")
     public String showAllArtifacts(Model model) {
@@ -48,10 +26,10 @@ public class UIPageSearchController {
         model.addAttribute("searchParamDescription",null);
         model.addAttribute("searchParamComment",null);
 
-        model.addAttribute("categoriesList", restFindRequestHandler.getAllCategories());
-        model.addAttribute("usersList", restFindRequestHandler.getAllUsers());
+        model.addAttribute("categoriesList", restReadRequestHandler.getAllCategories());
+        model.addAttribute("usersList", restReadRequestHandler.getAllUsers());
 
-        model.addAttribute("artifactList", restFindRequestHandler.getAllArtifacs());
+        model.addAttribute("artifactList", restReadRequestHandler.getAllArtifacs());
         return "home";
     } // end_method
 
@@ -66,10 +44,10 @@ public class UIPageSearchController {
         model.addAttribute("searchParamDescription",null);
         model.addAttribute("searchParamComment",null);
 
-        model.addAttribute("categoriesList", restFindRequestHandler.getAllCategories());
-        model.addAttribute("usersList", restFindRequestHandler.getAllUsers());
+        model.addAttribute("categoriesList", restReadRequestHandler.getAllCategories());
+        model.addAttribute("usersList", restReadRequestHandler.getAllUsers());
 
-        model.addAttribute("artifactList", restFindRequestHandler.getArtifacatsFilterByCategory(category));
+        model.addAttribute("artifactList", restReadRequestHandler.getArtifacatsFilterByCategory(category));
         return "home";
     } // end_method
 
@@ -85,10 +63,10 @@ public class UIPageSearchController {
         model.addAttribute("searchParamDescription",null);
         model.addAttribute("searchParamComment",null);
 
-        model.addAttribute("categoriesList", restFindRequestHandler.getAllCategories());
-        model.addAttribute("usersList", restFindRequestHandler.getAllUsers());
+        model.addAttribute("categoriesList", restReadRequestHandler.getAllCategories());
+        model.addAttribute("usersList", restReadRequestHandler.getAllUsers());
 
-        model.addAttribute("artifactList", restFindRequestHandler.getArtifacatsFilterByUser(user));
+        model.addAttribute("artifactList", restReadRequestHandler.getArtifacatsFilterByUser(user));
         return "home";
     } // end_method
 
@@ -104,10 +82,10 @@ public class UIPageSearchController {
         model.addAttribute("searchParamDescription",desc);
         model.addAttribute("searchParamComment",null);
 
-        model.addAttribute("categoriesList", restFindRequestHandler.getAllCategories());
-        model.addAttribute("usersList", restFindRequestHandler.getAllUsers());
+        model.addAttribute("categoriesList", restReadRequestHandler.getAllCategories());
+        model.addAttribute("usersList", restReadRequestHandler.getAllUsers());
 
-        model.addAttribute("artifactList", restFindRequestHandler.getArtifacatsFilterByDescription(desc));
+        model.addAttribute("artifactList", restReadRequestHandler.getArtifacatsFilterByDescription(desc));
         return "home";
     } // end_method
 
@@ -123,10 +101,10 @@ public class UIPageSearchController {
         model.addAttribute("searchParamDescription",null);
         model.addAttribute("searchParamComment",comment);
 
-        model.addAttribute("categoriesList", restFindRequestHandler.getAllCategories());
-        model.addAttribute("usersList", restFindRequestHandler.getAllUsers());
+        model.addAttribute("categoriesList", restReadRequestHandler.getAllCategories());
+        model.addAttribute("usersList", restReadRequestHandler.getAllUsers());
 
-        model.addAttribute("artifactList", restFindRequestHandler.getArtifacatsFilterByCommentContent(comment));
+        model.addAttribute("artifactList", restReadRequestHandler.getArtifacatsFilterByCommentContent(comment));
         return "home";
     } // end_method
 

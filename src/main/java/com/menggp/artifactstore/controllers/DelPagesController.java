@@ -2,8 +2,7 @@ package com.menggp.artifactstore.controllers;
 
 import com.menggp.artifactstore.dao.Artifact;
 import com.menggp.artifactstore.services.RestDelRequestHandler;
-import com.menggp.artifactstore.services.RestFindRequestHandler;
-import com.menggp.artifactstore.services.RestUpdateRequestHandler;
+import com.menggp.artifactstore.services.RestReadRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,21 +17,21 @@ public class DelPagesController {
     private static final Logger Log = LoggerFactory.getLogger(DelPagesController.class);
 
     @Autowired
-    RestFindRequestHandler restFindRequestHandler;
+    RestReadRequestHandler restReadRequestHandler;
 
     @Autowired
     RestDelRequestHandler restDelRequestHandler;
 
     @Autowired
-    UIPageSearchController uiPageSearchController;
+    ReadPagesController readPagesController;
 
     @RequestMapping("/delArtifactPage")
     public String delArtifactPage(
             @RequestParam(value = "artifactId", required = true) long id,
             Model model) {
 
-        Artifact currArt = restFindRequestHandler.getArtById( id );
-        long commentsNumber = restFindRequestHandler.getCommentsNumber( id );
+        Artifact currArt = restReadRequestHandler.getArtById( id );
+        long commentsNumber = restReadRequestHandler.getCommentsNumber( id );
 
         model.addAttribute("commentsNum", commentsNumber);
         model.addAttribute("currArt", currArt);
@@ -48,8 +47,8 @@ public class DelPagesController {
         result = restDelRequestHandler.delArtifact(id);
 
         if (result==-1) {
-            Artifact currArt = restFindRequestHandler.getArtById( id );
-            long commentsNumber = restFindRequestHandler.getCommentsNumber( id );
+            Artifact currArt = restReadRequestHandler.getArtById( id );
+            long commentsNumber = restReadRequestHandler.getCommentsNumber( id );
             model.addAttribute("currArt", currArt);
             model.addAttribute("commentsNum", commentsNumber);
 
@@ -57,7 +56,7 @@ public class DelPagesController {
             return "delArtifactPage";
         }
 
-        uiPageSearchController.homePage(model);
+        readPagesController.homePage(model);
         return "home";
     } // end_method
 

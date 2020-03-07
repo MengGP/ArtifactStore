@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Edit artifact page</title>
+</head>
+
+<body>
+<p> Комментарии к артефакту: </p>
+<p>--------------------------------------------------------</p>
+<p th:text="'Автор:    '+ ${currArt.getUserId()}"/>
+<p th:text="'Категория:'+ ${currArt.getCategory()}"/>
+<p th:text="'Описание: '+ ${currArt.getDescription()}"/>
+<p th:text="'Создан: '+ ${currArt.getCreated()}"/>
+<p>--------------------------------------------------------</p>
+
+<!-- Блок вывода -->
+<table border="1" bordercolor="grey">
+    <tr>
+        <th> Автор комментария</th>
+        <th>Комментарий</th>
+        <th><!-- empty --></th>
+        <th><!-- empty --></th>
+    </tr>
+    <tr th:each="iter : ${commentList}">
+        <td th:text="${iter.getUserId()}"></td>
+        <td th:text="${iter.getContent()}"></td>
+        <td>
+            <form th:action="@{/editArtifactPage}">
+                <input hidden="true" name="artifactId" th:value="${iter.getId()}"/>
+                <button>EDIT</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/delArtifactPage}">
+                <input hidden="true" name="artifactId" th:value="${iter.getId()}"/>
+                <button>DELETE</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<p>--------------------------------------------------------</p>
+<p>
+    <a th:href="@{/home}">
+        <button> HOME PAGE </button>
+    </a>
+</p>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти из системы"/>
+</form>
+
+</body>
+</html>

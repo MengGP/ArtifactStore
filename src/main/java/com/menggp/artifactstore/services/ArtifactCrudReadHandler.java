@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 
 /*
@@ -16,9 +15,9 @@ import java.util.Optional;
         - только операции поиска
  */
 @Service
-public class ArtifactCrudSearchHandler {
+public class ArtifactCrudReadHandler {
 
-    private static final Logger Log = LoggerFactory.getLogger(ArtifactCrudSearchHandler.class);
+    private static final Logger Log = LoggerFactory.getLogger(ArtifactCrudReadHandler.class);
 
     private ArrayList<Artifact> allArtifact;
     private ArrayList<String> allString;

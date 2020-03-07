@@ -1,7 +1,7 @@
 package com.menggp.artifactstore.controllers;
 
 import com.menggp.artifactstore.dao.Artifact;
-import com.menggp.artifactstore.services.RestFindRequestHandler;
+import com.menggp.artifactstore.services.RestReadRequestHandler;
 import com.menggp.artifactstore.services.RestUpdateRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,7 @@ public class UpdatePagesController {
     private static final Logger Log = LoggerFactory.getLogger(UpdatePagesController.class);
 
     @Autowired
-    RestFindRequestHandler restFindRequestHandler;
+    RestReadRequestHandler restReadRequestHandler;
 
     @Autowired
     RestUpdateRequestHandler restUpdateRequestHandler;
@@ -27,7 +27,7 @@ public class UpdatePagesController {
             @RequestParam(value = "artifactId", required = true) long id,
             Model model) {
 
-        Artifact currArt = restFindRequestHandler.getArtById( id );
+        Artifact currArt = restReadRequestHandler.getArtById( id );
 
         model.addAttribute("currArt", currArt);
         return "editArtifactPage";
@@ -41,14 +41,14 @@ public class UpdatePagesController {
             @RequestParam(value = "description", required = false) String description,
             Model model) {
 
-        Artifact currArt = restFindRequestHandler.getArtById( id );
+        Artifact currArt = restReadRequestHandler.getArtById( id );
 
         int result = -1;
         if ( userId.length()==0 || description.length()==0 )
             result = 0;
         else {
             result = restUpdateRequestHandler.updateArtifact(id, userId, category, description, currArt.getCreated() );
-            currArt = restFindRequestHandler.getArtById( id );
+            currArt = restReadRequestHandler.getArtById( id );
         }
 
         model.addAttribute("result", result);

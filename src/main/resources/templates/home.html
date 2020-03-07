@@ -205,7 +205,12 @@
         <td th:text="${iter.getDescription()}"></td>
         <td th:text="${iter.getUserId()}"></td>
         <td th:text="${iter.getCreated()}"></td>
-        <td></td>
+        <td>
+            <form th:action="@{/commentPage}">
+                <input hidden="true" name="artifactId" th:value="${iter.getId()}"/>
+                <button>COMMENTS</button>
+            </form>
+        </td>
         <td>
             <form th:action="@{/editArtifactPage}">
                 <input hidden="true" name="artifactId" th:value="${iter.getId()}"/>
@@ -220,7 +225,6 @@
         </td>
 
     </tr>
-
 
 </table>
 
