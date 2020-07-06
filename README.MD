@@ -4,6 +4,7 @@
 -----------------
     Тестовое задание Java: Artifact store
     Автор: Oleg Ustsov
+    Дата выполненения: 2020-03-07
     
 Задание:
 --------------------------------------
@@ -40,9 +41,9 @@
 Сборка и запуск:
 --------------------------------------
 * Автоматический запуск: запустить файл "StartAppScript.bat" в корне проекта  
-* Запуск из IDE: запустить на выполение класс "com.menggp.artifactstore.boot.ArtifactStoreApp"
+* Запуск из IDE: запустить на выполнение класс "com.menggp.artifactstore.boot.ArtifactStoreApp"
 * Ручная сборка и запуск (из каталога проекта):
-    * gradlew.bat :claen
+    * gradlew.bat :clean
     * gradlew.bat :build
     * java -jar ./build/libs/ArtifactStore.jar
 * В результате запуска проекта запускается сервлет, доступный по адресу:
