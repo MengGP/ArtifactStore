@@ -13,7 +13,11 @@ public class StringList {
 
     public StringList() {
         stringList = new ArrayList<>();
-    } // end_controller
+    } // end_constructor
+
+    public StringList(List<String> stringList) {
+        this.stringList = stringList;
+    } // end_constructor
 
     // -- Getters and Setters
     public List<String> getStringList() {

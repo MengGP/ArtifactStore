@@ -28,6 +28,10 @@ public class RestCreateRequestHandler {
     private static final String REST_URL_CREATE_ARTIFACT_REQUEST = APP_URL+"/createArt";
     private static final String REST_URL_CREATE_COMMENT_REQUEST = APP_URL+"/createComment";
 
+    private static final String REST_URL_ARTIFACTS = APP_URL + "/artifacts";
+    private static final String REST_URL_COMMENTS = APP_URL + "/comments";
+
+
     @Autowired
     RestTemplate restTemplate;
 
@@ -45,9 +49,12 @@ public class RestCreateRequestHandler {
             newArt.setDescription(desc);
 
             HttpHeaders headers = new HttpHeaders();
-            HttpEntity<Object> request = new HttpEntity<>(newArt, basicAuthHandler.getHeaders());
+            headers.addAll(basicAuthHandler.getHeaders());
+
+            HttpEntity<Object> request = new HttpEntity<>(newArt, headers);
+            String requestUri = REST_URL_ARTIFACTS;
             ResponseEntity<Artifact> responseResult
-                    = restTemplate.exchange(REST_URL_CREATE_ARTIFACT_REQUEST, HttpMethod.POST, request, Artifact.class);
+                    = restTemplate.exchange(requestUri, HttpMethod.POST, request, Artifact.class);
             if ( responseResult.getStatusCode().toString().equals("200 OK") )
                 result = 1;
 
@@ -68,9 +75,12 @@ public class RestCreateRequestHandler {
             newComment.setArtifactId(artId);
 
             HttpHeaders headers = new HttpHeaders();
-            HttpEntity<Object> request = new HttpEntity<>(newComment, basicAuthHandler.getHeaders());
+            headers.addAll(basicAuthHandler.getHeaders());
+
+            HttpEntity<Object> request = new HttpEntity<>(newComment, headers);
+            String requestUri = REST_URL_COMMENTS;
             ResponseEntity<Comment> responseResult
-                    = restTemplate.exchange(REST_URL_CREATE_COMMENT_REQUEST, HttpMethod.POST, request, Comment.class);
+                    = restTemplate.exchange(requestUri, HttpMethod.POST, request, Comment.class);
             if ( responseResult.getStatusCode().toString().equals("200 OK") )
                 result = 1;
 

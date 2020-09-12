@@ -17,6 +17,10 @@ public class CommentList {
         commentList = new ArrayList<>();
     } // end_constructor
 
+    public CommentList(List<Comment> commentList) {
+        this.commentList = commentList;
+    } // end_constructor
+
     // -- Getters and Setters
     public List<Comment> getCommentList() {
         return commentList;

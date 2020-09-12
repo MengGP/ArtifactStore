@@ -15,7 +15,11 @@ public class ArtifactList {
 
     public ArtifactList() {
         artifactList = new ArrayList<>();
-    } // end_controller
+    } // end_constructor
+
+    public ArtifactList(List<Artifact> artifactList) {
+        this.artifactList = artifactList;
+    } // end_constructor
 
     // -- Getters and Setters
     public List<Artifact> getArtifactList() {

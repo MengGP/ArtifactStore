@@ -30,6 +30,9 @@ public class RestUpdateRequestHandler {
     private static final String REST_URL_UPDATE_ARTIFACT_REQUEST = APP_URL+"/updateArt";
     private static final String REST_URL_UPDATE_COMMENT_REQUEST = APP_URL+"/updateComment";
 
+    private static final String REST_URL_ARTIFACTS = APP_URL + "/artifacts";
+    private static final String REST_URL_COMMENTS = APP_URL + "/comments";
+
     @Autowired
     RestTemplate restTemplate;
 
@@ -38,6 +41,7 @@ public class RestUpdateRequestHandler {
 
     // PUT - запрос на изменение в БД артефакта
     public int updateArtifact(long id, String user, String cat, String desc, Date created) {
+        /*
         // Предпологаем возможность ошибки создания, изменятеся на 1 при подтверждении создания сервером
         int result = -1;
         try {
@@ -57,11 +61,35 @@ public class RestUpdateRequestHandler {
         } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
             Log.debug( ex.getMessage() );
         }
+        return result;*/
+        // Предпологаем возможность ошибки создания, изменятеся на 1 при подтверждении создания сервером
+        int result = -1;
+        try {
+            Artifact updatedArt = new Artifact();
+            updatedArt.setId(id);
+            updatedArt.setUserId(user);
+            updatedArt.setCategory(cat);
+            updatedArt.setDescription(desc);
+            updatedArt.setCreated(created);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.addAll(basicAuthHandler.getHeaders());
+
+            HttpEntity<Object> request = new HttpEntity<>(updatedArt, headers);
+            String requestUri = REST_URL_ARTIFACTS;
+            ResponseEntity<Artifact> responseResult
+                    = restTemplate.exchange(requestUri, HttpMethod.PUT, request, Artifact.class);
+            if ( responseResult.getStatusCode().toString().equals("200 OK") )
+                result = 1;
+        } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
+            Log.debug( ex.getMessage() );
+        }
         return result;
     } // end_method
 
     // PUT - запрос на ихменене в БД комментария
     public int updateComment(long id, String userId, String content, long artId) {
+        /*
         // Предпологаем возможность ошибки создания, изменятеся на 1 при подтверждении создания сервером
         int result = -1;
         try {
@@ -75,6 +103,28 @@ public class RestUpdateRequestHandler {
             HttpEntity<Object> request = new HttpEntity<>(updatedComment, basicAuthHandler.getHeaders());
             ResponseEntity<Comment> responseResult
                     = restTemplate.exchange(REST_URL_UPDATE_COMMENT_REQUEST, HttpMethod.PUT, request, Comment.class);
+            if ( responseResult.getStatusCode().toString().equals("200 OK") )
+                result = 1;
+        } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
+            Log.debug( ex.getMessage() );
+        }
+        return result;*/
+        // Предпологаем возможность ошибки создания, изменятеся на 1 при подтверждении создания сервером
+        int result = -1;
+        try {
+            Comment updatedComment = new Comment();
+            updatedComment.setId(id);
+            updatedComment.setUserId(userId);
+            updatedComment.setContent(content);
+            updatedComment.setArtifactId(artId);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.addAll(basicAuthHandler.getHeaders());
+
+            HttpEntity<Object> request = new HttpEntity<>(updatedComment, headers);
+            String requestUri = REST_URL_COMMENTS;
+            ResponseEntity<Comment> responseResult
+                    = restTemplate.exchange(requestUri, HttpMethod.PUT, request, Comment.class);
             if ( responseResult.getStatusCode().toString().equals("200 OK") )
                 result = 1;
         } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
