@@ -1,14 +1,13 @@
 package com.menggp.artifactstore.boot;
 
-import com.menggp.artifactstore.dao.Artifact;
-import com.menggp.artifactstore.dao.Comment;
+import com.menggp.artifactstore.model.Artifact;
+import com.menggp.artifactstore.model.Comment;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,23 +15,14 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-
-/*
-    Гланый класс проекта
-        - настройка и запуск Spring Boot сервлета
-        - создание первоначальное наполнение БД средствами Flyway
+/**
+ *   Гланый класс проекта
+ *       - настройка и запуск Spring Boot сервлета
+ *       - создание первоначальное наполнение БД средствами Flyway
  */
 @SpringBootApplication
-@ComponentScan( {
-        "com.menggp.artifactstore.boot",
-        "com.menggp.artifactstore.config",
-        "com.menggp.artifactstore.controllers",
-        "com.menggp.artifactstore.controllersREST",
-        "com.menggp.artifactstore.services",
-        "com.menggp.artifactstore.dao"
-} )
-@EnableJpaRepositories("com.menggp.artifactstore.dao")
+@ComponentScan( "com.menggp.artifactstore.*" )
+@EnableJpaRepositories("com.menggp.artifactstore.model")
 @EntityScan(basePackageClasses = {Artifact.class, Comment.class})
 @PropertySource("classpath:/application.properties")
 public class ArtifactStoreApp implements CommandLineRunner {
