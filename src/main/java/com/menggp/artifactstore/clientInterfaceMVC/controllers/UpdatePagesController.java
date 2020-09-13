@@ -3,8 +3,6 @@ package com.menggp.artifactstore.clientInterfaceMVC.controllers;
 import com.menggp.artifactstore.clientInterfaceMVC.services.RequestHandler;
 import com.menggp.artifactstore.model.Artifact;
 import com.menggp.artifactstore.model.Comment;
-import com.menggp.artifactstore.clientInterfaceMVC.services.RestReadRequestHandler;
-import com.menggp.artifactstore.clientInterfaceMVC.services.RestUpdateRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +21,6 @@ public class UpdatePagesController {
 
     @Autowired
     RequestHandler requestHandler;
-
-    @Autowired
-    RestReadRequestHandler restReadRequestHandler;
-
-    @Autowired
-    RestUpdateRequestHandler restUpdateRequestHandler;
 
     // Загрузка страницы измененияя артефакта
     @RequestMapping("/editArtifactPage")

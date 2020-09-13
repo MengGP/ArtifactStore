@@ -1,7 +1,6 @@
 package com.menggp.artifactstore.clientInterfaceMVC.controllers;
 
 import com.menggp.artifactstore.clientInterfaceMVC.services.RequestHandler;
-import com.menggp.artifactstore.clientInterfaceMVC.services.RestReadRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,6 @@ public class SearchPagesController {
 
     @Autowired
     RequestHandler requestHandler;
-
-    @Autowired
-    RestReadRequestHandler restReadRequestHandler;
 
     // Все артифакты из БД
     @RequestMapping("/showAllArtifacts")

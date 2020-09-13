@@ -1,8 +1,6 @@
 package com.menggp.artifactstore.clientInterfaceMVC.controllers;
 
 import com.menggp.artifactstore.clientInterfaceMVC.services.RequestHandler;
-import com.menggp.artifactstore.clientInterfaceMVC.services.RestCreateRequestHandler;
-import com.menggp.artifactstore.clientInterfaceMVC.services.RestReadRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +19,6 @@ public class CreatePagesController {
 
     @Autowired
     RequestHandler requestHandler;
-
-    @Autowired
-    RestCreateRequestHandler restCreateRequestHandler;
-
-    @Autowired
-    RestReadRequestHandler restReadRequestHandler;
 
     /*  Обратка создания артефакта, коды результата:
                  0 - заполенены не все поля
