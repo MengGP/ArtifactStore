@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Репозиторий сущности - артефатк
+ * Репозиторий сущности - артефакт
  */
 @Repository
 public interface ArtifactRepository extends CrudRepository<Artifact, Long> {
@@ -86,4 +86,4 @@ public interface ArtifactRepository extends CrudRepository<Artifact, Long> {
     @Query(value = "SELECT COUNT(*) FROM commentaries WHERE artifact_id = ?1", nativeQuery = true)
     long findCommentsNumberByArtifactId( long id );
 
-} // end_interface
+}

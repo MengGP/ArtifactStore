@@ -15,13 +15,13 @@ public class ArtifactList {
 
     public ArtifactList() {
         artifactList = new ArrayList<>();
-    } // end_constructor
+    }
 
     public ArtifactList(List<Artifact> artifactList) {
         this.artifactList = artifactList;
-    } // end_constructor
+    }
 
-    // -- Getters and Setters
+
     public List<Artifact> getArtifactList() {
         return artifactList;
     }
@@ -29,6 +29,6 @@ public class ArtifactList {
     public void setArtifactList(List<Artifact> artifactList) {
         this.artifactList = artifactList;
     }
-    // -- end_getters_and_setters
 
-} // end_class
+
+}

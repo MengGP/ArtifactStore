@@ -34,8 +34,6 @@ public class CommentRestController {
     public Comment getCommentById(
             @PathVariable(name = "id") Long id
     ) {
-//        Log.info("CommentRestController.class - method - Comment getCommentById( ... )");
-
         return commentCrudHandler.findCommentById( id );
     }
 
@@ -48,8 +46,6 @@ public class CommentRestController {
     public CommentList getCommentsByArtifact(
             @RequestParam(value = "artId") long artId
     ) {
-//        Log.info("CommentRestController.class - method - Comment getCommentsByArtifact( ... )");
-
         return new CommentList( commentCrudHandler.findByArtifactId( artId ) );
     }
 
@@ -62,9 +58,6 @@ public class CommentRestController {
     public Comment createComment(
             @RequestBody Comment newComment
     ) {
-
-//        Log.info("CommentRestController.class - method - createComment( ... )");
-
         return commentCrudHandler.createComment(newComment);
     }
 
@@ -76,9 +69,6 @@ public class CommentRestController {
     public void delComment(
             @PathVariable("id") long id
     ) {
-
-//        Log.info("CommentRestController.class - method - delComment( ... )");
-
         commentCrudHandler.deleteComment(id);
     }
 
@@ -91,11 +81,7 @@ public class CommentRestController {
     public Comment updateComment(
             @RequestBody Comment updatedComment
     ) {
-
-//        Log.info("CommentRestController.class - method - updateComment( ... )");
-
         return commentCrudHandler.updateComment(updatedComment);
     }
-
 
 }

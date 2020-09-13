@@ -10,10 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *  Класс обрабатывает REST-запросы,
  *          к данными сущности Artifact
@@ -36,19 +32,8 @@ public class ArtifactRestController {
     public Artifact getArtifactById(
             @PathVariable("id") Long id
     ) {
-
-        // Log.info("ArtifactRestController.class - method - Artifact getArtifactById(@RequestParam(value = \"id\") Long id");
-
         return artifactCrudHandler.findArtById( id );
     }
-
-    /*
-     * Получить список артефактов
-     * /
-     /* @param cat  - строка фильтра по категории (опционально)
-     * @param user - строка фильтра по автору (опционально)
-     * @return
-     */
 
     /**
      * Получить список артефактов - фильтрация и сортировка, в зависимости от переданных параметров
@@ -74,15 +59,6 @@ public class ArtifactRestController {
             @RequestParam(value = "sortType", required = false) Integer sortType,
             @RequestParam(value = "sortDirection", required = false) Boolean sortDirection
     ) {
-
-//        Log.info("ArtifactRestController.class - method - ArtifactList getArtifactsWithFilter( ... )");
-//        Log.info("Cat = " + cat);
-//        Log.info("User = " + user);
-//        Log.info("Desc = " + desc);
-//        Log.info("Comment = " + comment);
-//        Log.info("SortType = " + sortType);
-//        Log.info("SortDirection = " + sortDirection);
-
         ArtifactList response = new ArtifactList();
 
         // Возвращаем список артефактов с заданным фильтром - только один фильтр и сортировкаой (если задана)
@@ -127,8 +103,6 @@ public class ArtifactRestController {
     public ArtifactHistList getArtifactsHistByArtifact(
             @RequestParam(value = "artId") long artId
     ) {
-        Log.info("ArtefactRestController.class - method - Comment getArtifactsHistByArtifact( ... )");
-
         return new ArtifactHistList( artifactCrudHandler.findArtifactsHistByArtifactId( artId ) );
     }
 
@@ -138,9 +112,6 @@ public class ArtifactRestController {
      */
     @GetMapping("/categories")
     public StringList getAllCategories() {
-
-//        Log.info("ArtifactRestController.class - method - ArtifactList getAllCategories( ... )");
-
         return new StringList( artifactCrudHandler.readAllCategories() );
     }
 
@@ -150,9 +121,6 @@ public class ArtifactRestController {
      */
     @GetMapping("/users")
     public StringList getAllusers() {
-
-//        Log.info("ArtifactRestController.class - method - ArtifactList getAllUsers( ... )");
-
         return new StringList( artifactCrudHandler.readAllUsers() );
     }
 
@@ -165,8 +133,6 @@ public class ArtifactRestController {
     public Long commentsNumByArtifact(
             @RequestParam(value="artId") long id
     ) {
-        Log.info("ArtifactRestController.class - method - ArtifactList commentsNumByArtifact( ... )");
-
         return artifactCrudHandler.readCommentsNumberByArtId( id );
     }
 
@@ -179,9 +145,6 @@ public class ArtifactRestController {
     public Artifact createArtifact(
             @RequestBody Artifact newArt
     ) {
-
-//        Log.info("ArtifactRestController.class - method - createArtifact( ... )");
-
         return artifactCrudHandler.createArtifact(newArt);
     }
 
@@ -193,9 +156,6 @@ public class ArtifactRestController {
     public void delArtifact(
             @PathVariable("id") long id
     ) {
-
-//        Log.info("ArtifactRestController.class - method - delArtifact( ... )");
-
         artifactCrudHandler.deleteArtifact(id);
     }
 
@@ -208,8 +168,6 @@ public class ArtifactRestController {
     public Artifact updateArtifact(
             @RequestBody Artifact updatedArt
     ) {
-        Log.info("ArtifactRestController.class - method - updateArtifact( ... )");
-
         return artifactCrudHandler.updateArtifact(updatedArt);
     }
 

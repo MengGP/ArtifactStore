@@ -5,6 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * Конфигурация MCV
+ *      для "клиентской" части
+ */
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
@@ -23,7 +27,6 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/error").setViewName("error");
         registry.addViewController("/login").setViewName("login");
 
-    } // end_method
+    }
 
-
-} // end_class
+}

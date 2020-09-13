@@ -19,4 +19,4 @@ public interface CommentRepository extends CrudRepository<Comment, Long> {
      */
     List<Comment> findByArtifactId(long artifactId);
 
-} // end_interface
+}

@@ -51,7 +51,6 @@ public class Artifact {
         this.created = created;
     }
 
-    // -- Getters and Setters
     public long getId() {
         return id;
     }
@@ -91,6 +90,6 @@ public class Artifact {
     public void setDescription(String description) {
         this.description = description;
     }
-    // end_getters_and_setters
 
-} // end_class
+
+}

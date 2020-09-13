@@ -3,14 +3,6 @@ package com.menggp.artifactstore.clientInterfaceMVC.services;
 import com.menggp.artifactstore.model.Artifact;
 import com.menggp.artifactstore.model.ArtifactHist;
 import com.menggp.artifactstore.model.Comment;
-import com.menggp.artifactstore.model.dto.ArtifactList;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.client.ResourceAccessException;
 
 import java.util.Date;
 import java.util.List;
@@ -27,8 +19,6 @@ import java.util.List;
  */
 public interface RequestHandler {
 
-    // POST - запрос на создание в БД нового артифакта
-
     /**
      * Запрос на создание нового артефакта
      * @param user  - автор
@@ -37,8 +27,6 @@ public interface RequestHandler {
      * @return  - результат выполнения
      */
     int createArtifact(String user, String cat, String desc);
-
-    // POST - запрос на создание в БД нового комментария
 
     /**
      * Запрос на создание нового комментария
@@ -194,8 +182,6 @@ public interface RequestHandler {
      * @return - список артефактов
      */
     List<Artifact> sortArtifactFilteredByComment(String comment, int sortType, boolean sortDirection);
-
-    // Метод возвращвет комментарии к Артефаку (по artifactId)
 
     /**
      * Запрос комментариев к артефакту (по id артефакта)

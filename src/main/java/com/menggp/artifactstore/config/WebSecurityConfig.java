@@ -1,6 +1,5 @@
 package com.menggp.artifactstore.config;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,9 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-/*
-    Конфигурация Spring Security
-        и basic authentication для REST-запросов
+/**
+ *   Конфигурация Spring Security
+ *       и basic authentication для REST-запросов
  */
 @Configuration
 @EnableWebSecurity
@@ -42,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .realmName(REALM)
                     .authenticationEntryPoint(getBasicAuthEntryPoint());
 
-    } // end_method
+    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -50,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("user")
                 .password( passwordEncoder().encode("user") )
                 .authorities("USER");
-    } // end_method
+    }
 
     // Password encoder для работы Spring Security
     @Bean
@@ -64,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new CustomBasicAuthenticationEntryPoint();
     }
 
-} // end_class
+}
 
 
 

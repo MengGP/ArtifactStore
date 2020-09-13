@@ -15,13 +15,13 @@ public class CommentList {
 
     public CommentList() {
         commentList = new ArrayList<>();
-    } // end_constructor
+    }
 
     public CommentList(List<Comment> commentList) {
         this.commentList = commentList;
-    } // end_constructor
+    }
 
-    // -- Getters and Setters
+
     public List<Comment> getCommentList() {
         return commentList;
     }
@@ -29,6 +29,6 @@ public class CommentList {
     public void setCommentList(List<Comment> commentList) {
         this.commentList = commentList;
     }
-    // -- end_getters_and_setters
 
-} // end_class
+
+}

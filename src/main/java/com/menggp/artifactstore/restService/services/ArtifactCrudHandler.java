@@ -34,8 +34,6 @@ public interface ArtifactCrudHandler {
      */
     Artifact updateArtifact(Artifact updatedArt);
 
-    // Метод удаляет артифакт
-
     /**
      * Удаление артефакта
      *      - связанные с артефактом комментарии - удаляются
@@ -51,15 +49,11 @@ public interface ArtifactCrudHandler {
      */
     Artifact findArtById( long id );
 
-    // Все записи из таблицы ARTIFACTES
-
     /**
      * Получение всех артифактов
      * @return - возвращает все артефакты в виде списка
      */
     List<Artifact> readAll();
-
-    // ARTIFACTES - фильтр по категрии
 
     /**
      * Получение артифактов с фильтром по категории
@@ -68,16 +62,12 @@ public interface ArtifactCrudHandler {
      */
     List<Artifact> findByCategory(String category);
 
-    // ARTIFACTES - фильтр по пользователю
-
     /**
      * Получение артефактов с фильтром по автору
      * @param user - строка фильтрации по автору
      * @return - артефакты в виде списка
      */
     List<Artifact> findByUser(String user);
-
-    // ARTIFACTES - фильтр по пользователю
 
     /**
      * Получение артефактов с фильтром по описанию
@@ -86,16 +76,12 @@ public interface ArtifactCrudHandler {
      */
     List<Artifact> findByDescription(String desc);
 
-    // ARTIFACTES - Фильтр по содержанию комментариев
-
     /**
      * Полчение артефактов с фильтром по содержнию комментариев
      * @param comment - строка фильтра по содержнию комментариев
      * @return - артефакты в виде списка
      */
     List<Artifact> findByCommentContent(String comment);
-
-    // Сортировка аритифактов без фильтров
 
     /**
      * Получение артифактов с cортировкой без фильтров
@@ -104,8 +90,6 @@ public interface ArtifactCrudHandler {
      * @return              - отсортированный список артефактов
      */
     List<Artifact> sortAllArtifacts(int sortType, boolean sortDirection);
-
-    // Сортировка аритифактов отфильтрованных по категории(category)
 
     /**
      * Получение артефактов с сортировкой и фильтром по категории
@@ -116,8 +100,6 @@ public interface ArtifactCrudHandler {
      */
     List<Artifact> sortArtFilteredByCategory(String cat, int sortType, boolean sortDirection);
 
-    // Сортировка аритифактов отфильтрованных по автору(user_id)
-
     /**
      * Получение артефактов с сортировкой и фильтром по автору
      * @param userId        - строка фильтра по автору
@@ -127,8 +109,6 @@ public interface ArtifactCrudHandler {
      */
     List<Artifact> sortArtFilteredByUserId(String userId, int sortType, boolean sortDirection);
 
-    // Сортировка аритифактов отфильтрованных по описанию(description)
-
     /**
      * Получение артефактов с сортировкой и фильтром по описанию
      * @param desc          - строка фильтра по описанию
@@ -137,8 +117,6 @@ public interface ArtifactCrudHandler {
      * @return              - отсортрованный списко артефактов с фильтромпо категории
      */
     List<Artifact> sortArtFilteredByDescription(String desc, int sortType, boolean sortDirection);
-
-    // Сортировка аритифактов отфильтрованных по соджержанию комментариев (comment - content)
 
     /**
      * Получение артефактов с сортировкой и фильтром по содержанию комментариев
@@ -155,15 +133,11 @@ public interface ArtifactCrudHandler {
      */
     List<String> readAllCategories();
 
-    // Список пользователей - ARTIFACT
-
     /**
      * Получение списка авторов артефактов
      * @return - список авторов
      */
     List<String> readAllUsers();
-
-    // Количество комментариев к артифакту
 
     /**
      * Полчение количества комментариев к артефакту (по id артефакта)

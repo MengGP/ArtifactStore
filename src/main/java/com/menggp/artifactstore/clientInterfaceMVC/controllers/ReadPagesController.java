@@ -75,9 +75,9 @@ public class ReadPagesController {
 
     /**
      * Обаботчик страницы истории изменения артифакта
-     * @param artId
-     * @param model
-     * @return
+     * @param artId - id артефакта
+     * @param model - модель
+     * @return  - имя вида
      */
     @RequestMapping("/artHistPage")
     public String artHistPage(
@@ -90,8 +90,6 @@ public class ReadPagesController {
 
         return "artHistPage";
     }
-
-
 
 } // end_class
 

@@ -31,16 +31,12 @@ public interface CommentCrudHandler {
      */
     Comment createComment(Comment newComment);
 
-    // Метод обновляет комментарий
-
     /**
      * Обновление комментария
      * @param updatedComment - обновленный комментарий
      * @return - комментарий после обновления
      */
     Comment updateComment(Comment updatedComment);
-
-    // Метод удаляет комментарий
 
     /**
      * Удаление комментария по id

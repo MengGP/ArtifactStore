@@ -3,8 +3,8 @@ package com.menggp.artifactstore.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-/*
-    Сущность Комментарий
+/**
+ * Сущность - комментарий
  */
 @Entity
 @Table(name = "commentaries")
@@ -45,7 +45,6 @@ public class Comment {
         this.artifactId = artifactId;
     }
 
-    // -- Getters and setters
     public long getId() {
         return id;
     }
@@ -77,6 +76,5 @@ public class Comment {
     public void setContent(String content) {
         this.content = content;
     }
-    // end_getters_end_setters
 
-} // end_class
+}
