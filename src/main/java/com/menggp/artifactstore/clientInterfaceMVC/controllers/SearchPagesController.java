@@ -1,5 +1,6 @@
 package com.menggp.artifactstore.clientInterfaceMVC.controllers;
 
+import com.menggp.artifactstore.clientInterfaceMVC.services.RequestHandler;
 import com.menggp.artifactstore.clientInterfaceMVC.services.RestReadRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,9 @@ public class SearchPagesController {
     private static final Logger Log = LoggerFactory.getLogger(SearchPagesController.class);
 
     @Autowired
+    RequestHandler requestHandler;
+
+    @Autowired
     RestReadRequestHandler restReadRequestHandler;
 
     // Все артифакты из БД
@@ -30,10 +34,10 @@ public class SearchPagesController {
         model.addAttribute("searchParamDescription",null);
         model.addAttribute("searchParamComment",null);
 
-        model.addAttribute("categoriesList", restReadRequestHandler.getAllCategories());
-        model.addAttribute("usersList", restReadRequestHandler.getAllUsers());
+        model.addAttribute("categoriesList", requestHandler.getAllCategories());
+        model.addAttribute("usersList", requestHandler.getAllUsers());
 
-        model.addAttribute("artifactList", restReadRequestHandler.getAllArtifacs());
+        model.addAttribute("artifactList", requestHandler.getAllArtifacs());
         return "home";
     } // end_method
 
@@ -49,10 +53,10 @@ public class SearchPagesController {
         model.addAttribute("searchParamDescription",null);
         model.addAttribute("searchParamComment",null);
 
-        model.addAttribute("categoriesList", restReadRequestHandler.getAllCategories());
-        model.addAttribute("usersList", restReadRequestHandler.getAllUsers());
+        model.addAttribute("categoriesList", requestHandler.getAllCategories());
+        model.addAttribute("usersList", requestHandler.getAllUsers());
 
-        model.addAttribute("artifactList", restReadRequestHandler.getArtifacatsFilterByCategory(category));
+        model.addAttribute("artifactList", requestHandler.getArtifacatsFilterByCategory(category));
         return "home";
     } // end_method
 
@@ -69,10 +73,10 @@ public class SearchPagesController {
         model.addAttribute("searchParamDescription",null);
         model.addAttribute("searchParamComment",null);
 
-        model.addAttribute("categoriesList", restReadRequestHandler.getAllCategories());
-        model.addAttribute("usersList", restReadRequestHandler.getAllUsers());
+        model.addAttribute("categoriesList", requestHandler.getAllCategories());
+        model.addAttribute("usersList", requestHandler.getAllUsers());
 
-        model.addAttribute("artifactList", restReadRequestHandler.getArtifacatsFilterByUser(user));
+        model.addAttribute("artifactList", requestHandler.getArtifacatsFilterByUser(user));
         return "home";
     } // end_method
 
@@ -89,10 +93,10 @@ public class SearchPagesController {
         model.addAttribute("searchParamDescription",desc);
         model.addAttribute("searchParamComment",null);
 
-        model.addAttribute("categoriesList", restReadRequestHandler.getAllCategories());
-        model.addAttribute("usersList", restReadRequestHandler.getAllUsers());
+        model.addAttribute("categoriesList", requestHandler.getAllCategories());
+        model.addAttribute("usersList", requestHandler.getAllUsers());
 
-        model.addAttribute("artifactList", restReadRequestHandler.getArtifacatsFilterByDescription(desc));
+        model.addAttribute("artifactList", requestHandler.getArtifacatsFilterByDescription(desc));
         return "home";
     } // end_method
 
@@ -109,10 +113,10 @@ public class SearchPagesController {
         model.addAttribute("searchParamDescription",null);
         model.addAttribute("searchParamComment",comment);
 
-        model.addAttribute("categoriesList", restReadRequestHandler.getAllCategories());
-        model.addAttribute("usersList", restReadRequestHandler.getAllUsers());
+        model.addAttribute("categoriesList", requestHandler.getAllCategories());
+        model.addAttribute("usersList", requestHandler.getAllUsers());
 
-        model.addAttribute("artifactList", restReadRequestHandler.getArtifacatsFilterByCommentContent(comment));
+        model.addAttribute("artifactList", requestHandler.getArtifacatsFilterByCommentContent(comment));
         return "home";
     } // end_method
 

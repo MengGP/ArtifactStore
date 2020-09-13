@@ -51,10 +51,12 @@ public class RestCreateRequestHandler {
             HttpHeaders headers = new HttpHeaders();
             headers.addAll(basicAuthHandler.getHeaders());
 
+            // Object[] uriVariables = new Object[] {} ;
+
             HttpEntity<Object> request = new HttpEntity<>(newArt, headers);
             String requestUri = REST_URL_ARTIFACTS;
             ResponseEntity<Artifact> responseResult
-                    = restTemplate.exchange(requestUri, HttpMethod.POST, request, Artifact.class);
+                    = restTemplate.exchange(requestUri, HttpMethod.POST, request, Artifact.class); //, uriVariables);
             if ( responseResult.getStatusCode().toString().equals("200 OK") )
                 result = 1;
 

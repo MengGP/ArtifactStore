@@ -1,5 +1,6 @@
 package com.menggp.artifactstore.clientInterfaceMVC.controllers;
 
+import com.menggp.artifactstore.clientInterfaceMVC.services.RequestHandler;
 import com.menggp.artifactstore.clientInterfaceMVC.services.RestCreateRequestHandler;
 import com.menggp.artifactstore.clientInterfaceMVC.services.RestReadRequestHandler;
 import org.slf4j.Logger;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CreatePagesController {
 
     private static final Logger Log = LoggerFactory.getLogger(CreatePagesController.class);
+
+    @Autowired
+    RequestHandler requestHandler;
 
     @Autowired
     RestCreateRequestHandler restCreateRequestHandler;
@@ -39,7 +43,7 @@ public class CreatePagesController {
         if ( userId.length()==0 || description.length()==0 )
             result = 0;
         else {
-            result = restCreateRequestHandler.createArtifact(userId, category, description);
+            result = requestHandler.createArtifact(userId, category, description);
         }
 
         model.addAttribute("result", result);
@@ -61,13 +65,13 @@ public class CreatePagesController {
         if ( userId.length()==0 || content.length()==0 )
             result = 0;
         else {
-            result = restCreateRequestHandler.createComment(userId, content, artId);
+            result = requestHandler.createComment(userId, content, artId);
         }
 
         // Возвращам на страницу код результата, текущий артефакт и список комментариев
         model.addAttribute("result", result);
-        model.addAttribute("currArt", restReadRequestHandler.getArtById(artId));
-        model.addAttribute("commentList", restReadRequestHandler.getCommentariesByArtifactId( artId ));
+        model.addAttribute("currArt", requestHandler.getArtById(artId));
+        model.addAttribute("commentList", requestHandler.getCommentariesByArtifactId( artId ));
         return "commentPage";
     } // end_method
 

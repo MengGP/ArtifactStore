@@ -28,6 +28,23 @@ public class Comment {
     @NotNull
     String content;
 
+    public Comment() {
+    }
+
+    public Comment(@NotNull String userId, @NotNull String content, @NotNull long artifactId) {
+        this.userId = userId;
+        this.content = content;
+        this.artifactId = artifactId;
+    }
+
+    public Comment(@NotNull long id, @NotNull String userId, @NotNull String content, @NotNull long artifactId) {
+        this.id = id;
+
+        this.userId = userId;
+        this.content = content;
+        this.artifactId = artifactId;
+    }
+
     // -- Getters and setters
     public long getId() {
         return id;

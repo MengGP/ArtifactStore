@@ -30,7 +30,7 @@ public class CommentRestController {
             @PathVariable(name = "id") Long id
     ) {
 
-        Log.info("CommentRestController.class - method - Comment getCommentById( ... )");
+//        Log.info("CommentRestController.class - method - Comment getCommentById( ... )");
 
         return commentCrudHandler.findCommentById( id );
     }
@@ -40,7 +40,7 @@ public class CommentRestController {
             @RequestParam(value = "artId") long artId
     ) {
 
-        Log.info("CommentRestController.class - method - Comment getCommentsByArtifact( ... )");
+//        Log.info("CommentRestController.class - method - Comment getCommentsByArtifact( ... )");
 
         return new CommentList( commentCrudHandler.findByArtifactId( artId ) );
     }
@@ -55,7 +55,7 @@ public class CommentRestController {
             @RequestBody Comment newComment
     ) {
 
-        Log.info("CommentRestController.class - method - createComment( ... )");
+//        Log.info("CommentRestController.class - method - createComment( ... )");
 
         return commentCrudHandler.createComment(newComment);
     }
@@ -69,7 +69,7 @@ public class CommentRestController {
             @PathVariable("id") long id
     ) {
 
-        Log.info("CommentRestController.class - method - delComment( ... )");
+//        Log.info("CommentRestController.class - method - delComment( ... )");
 
         commentCrudHandler.deleteComment(id);
     }
@@ -84,19 +84,10 @@ public class CommentRestController {
             @RequestBody Comment updatedComment
     ) {
 
-        Log.info("CommentRestController.class - method - updateComment( ... )");
+//        Log.info("CommentRestController.class - method - updateComment( ... )");
 
         return commentCrudHandler.updateComment(updatedComment);
     }
 
-    /*
-         // Обновление Комментария
-    @RequestMapping(value="/updateComment", method = RequestMethod.PUT)
-    public Comment updateComment(
-            @RequestBody Comment updatedComment
-    ) {
-        return commentCrudHandler1.updateComment(updatedComment);
-    } // end_method
-     */
 
 }

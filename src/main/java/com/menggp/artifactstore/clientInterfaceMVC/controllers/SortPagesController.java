@@ -1,5 +1,6 @@
 package com.menggp.artifactstore.clientInterfaceMVC.controllers;
 
+import com.menggp.artifactstore.clientInterfaceMVC.services.RequestHandler;
 import com.menggp.artifactstore.clientInterfaceMVC.services.RestReadRequestHandler;
 import com.menggp.artifactstore.clientInterfaceMVC.services.RestSortRequestHandler;
 import org.slf4j.Logger;
@@ -28,6 +29,9 @@ public class SortPagesController {
     private static final Logger Log = LoggerFactory.getLogger(SortPagesController.class);
 
     @Autowired
+    RequestHandler requestHandler;
+
+    @Autowired
     RestReadRequestHandler restReadRequestHandler;
 
     @Autowired
@@ -43,8 +47,8 @@ public class SortPagesController {
             @RequestParam(value = "sortDirection", required = true) boolean sortDirection,
             Model model) {
 
-        model.addAttribute("categoriesList", restReadRequestHandler.getAllCategories());
-        model.addAttribute("usersList", restReadRequestHandler.getAllUsers());
+        model.addAttribute("categoriesList", requestHandler.getAllCategories());
+        model.addAttribute("usersList", requestHandler.getAllUsers());
 
         // Определяем по какому параметру установлен фильтр
         if ( cat.length() != 0 ) {
@@ -55,7 +59,7 @@ public class SortPagesController {
             model.addAttribute("searchParamComment",null);
 
             // получаем отсортированные данные с фильтром и заданными параметрами сортировки
-            model.addAttribute("artifactList", restSortRequestHandler.sortArtifactFilteredByCategory(cat, sortType, sortDirection));
+            model.addAttribute("artifactList", requestHandler.sortArtifactFilteredByCategory(cat, sortType, sortDirection));
         }
         else if ( user.length() != 0 ) {
             // аттрибуты фильтра - фильтр по автору (user)
@@ -65,7 +69,7 @@ public class SortPagesController {
             model.addAttribute("searchParamComment",null);
 
             // получаем отсортированные данные с фильтром и заданными параметрами сортировки
-            model.addAttribute("artifactList", restSortRequestHandler.sortArtifactFilteredByUserId(user, sortType, sortDirection));
+            model.addAttribute("artifactList", requestHandler.sortArtifactFilteredByUserId(user, sortType, sortDirection));
         }
         else if ( desc.length() != 0 ) {
             // аттрибуты фильтра - фильтр по описанию (desc)
@@ -75,7 +79,7 @@ public class SortPagesController {
             model.addAttribute("searchParamComment",null);
 
             // получаем отсортированные данные с фильтром и заданными параметрами сортировки
-            model.addAttribute("artifactList", restSortRequestHandler.sortArtifactFilteredByDescription(desc, sortType, sortDirection));
+            model.addAttribute("artifactList", requestHandler.sortArtifactFilteredByDescription(desc, sortType, sortDirection));
         }
         else if ( comment.length() != 0 ) {
             // аттрибуты фильтра - фильтр по содержанию комментариев (comment)
@@ -85,7 +89,7 @@ public class SortPagesController {
             model.addAttribute("searchParamComment",comment);
 
             // получаем отсортированные данные с фильтром и заданными параметрами сортировки
-            model.addAttribute("artifactList", restSortRequestHandler.sortArtifactFilteredByComment(comment, sortType, sortDirection));
+            model.addAttribute("artifactList", requestHandler.sortArtifactFilteredByComment(comment, sortType, sortDirection));
         }
         else {
             // аттрибуты фильтра - фильтр по содержанию комментариев (comment)
@@ -95,7 +99,7 @@ public class SortPagesController {
             model.addAttribute("searchParamComment",null);
 
             // получаем отсортированные данные с фильтром и заданными параметрами сортировки
-            model.addAttribute("artifactList", restSortRequestHandler.sortAllArtifact(sortType, sortDirection));
+            model.addAttribute("artifactList", requestHandler.sortAllArtifact(sortType, sortDirection));
         }
         return "home";
     } // end_method

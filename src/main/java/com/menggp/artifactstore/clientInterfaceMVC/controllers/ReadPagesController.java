@@ -1,5 +1,6 @@
 package com.menggp.artifactstore.clientInterfaceMVC.controllers;
 
+import com.menggp.artifactstore.clientInterfaceMVC.services.RequestHandler;
 import com.menggp.artifactstore.model.Artifact;
 import com.menggp.artifactstore.clientInterfaceMVC.services.RestReadRequestHandler;
 import org.slf4j.Logger;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ReadPagesController {
 
     private static final Logger Log = LoggerFactory.getLogger(ReadPagesController.class);
+
+    @Autowired
+    RequestHandler requestHandler;
 
     @Autowired
     RestReadRequestHandler restReadRequestHandler;
@@ -38,10 +42,10 @@ public class ReadPagesController {
         model.addAttribute("searchParamDescription",null);
         model.addAttribute("searchParamComment",null);
 
-        model.addAttribute("categoriesList", restReadRequestHandler.getAllCategories());
-        model.addAttribute("usersList", restReadRequestHandler.getAllUsers());
+        model.addAttribute("categoriesList", requestHandler.getAllCategories());
+        model.addAttribute("usersList", requestHandler.getAllUsers());
 
-        model.addAttribute("artifactList", restReadRequestHandler.getAllArtifacs());
+        model.addAttribute("artifactList", requestHandler.getAllArtifacs());
         return "home";
     } // end_method
 
@@ -50,9 +54,9 @@ public class ReadPagesController {
     public String commentPage(
             @RequestParam(value = "artifactId", required = true) long artId,
             Model model) {
-        Artifact currArt = restReadRequestHandler.getArtById( artId );
+        Artifact currArt = requestHandler.getArtById( artId );
         model.addAttribute("currArt", currArt);
-        model.addAttribute("commentList", restReadRequestHandler.getCommentariesByArtifactId( artId ));
+        model.addAttribute("commentList", requestHandler.getCommentariesByArtifactId( artId ));
 
         return "commentPage";
     } // end_method

@@ -35,6 +35,23 @@ public class Artifact {
     @NotNull
     String description;
 
+    public Artifact() {
+    }
+
+    public Artifact(@NotNull String userId, String category, @NotNull String description) {
+        this.userId = userId;
+        this.category = category;
+        this.description = description;
+    }
+
+    public Artifact(@NotNull long id, @NotNull String userId, String category, @NotNull String description, @NotNull Date created) {
+        this.id = id;
+        this.userId = userId;
+        this.category = category;
+        this.description = description;
+        this.created = created;
+    }
+
     // -- Getters and Setters
     public long getId() {
         return id;

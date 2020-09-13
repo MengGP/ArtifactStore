@@ -36,7 +36,7 @@ public class ArtifactRestController {
             @PathVariable("id") Long id
     ) {
 
-        Log.info("ArtifactRestController.class - method - Artifact getArtifactById(@RequestParam(value = \"id\") Long id");
+        // Log.info("ArtifactRestController.class - method - Artifact getArtifactById(@RequestParam(value = \"id\") Long id");
 
         return artifactCrudHandler.findArtById( id );
     }
@@ -74,13 +74,13 @@ public class ArtifactRestController {
             @RequestParam(value = "sortDirection", required = false) Boolean sortDirection
     ) {
 
-        Log.info("ArtifactRestController.class - method - ArtifactList getArtifactsWithFilter( ... )");
-        Log.info("Cat = " + cat);
-        Log.info("User = " + user);
-        Log.info("Desc = " + desc);
-        Log.info("Comment = " + comment);
-        Log.info("SortType = " + sortType);
-        Log.info("SortDirection = " + sortDirection);
+//        Log.info("ArtifactRestController.class - method - ArtifactList getArtifactsWithFilter( ... )");
+//        Log.info("Cat = " + cat);
+//        Log.info("User = " + user);
+//        Log.info("Desc = " + desc);
+//        Log.info("Comment = " + comment);
+//        Log.info("SortType = " + sortType);
+//        Log.info("SortDirection = " + sortDirection);
 
         ArtifactList response = new ArtifactList();
 
@@ -129,7 +129,7 @@ public class ArtifactRestController {
     @GetMapping("/categories")
     public StringList getAllCategories() {
 
-        Log.info("ArtifactRestController.class - method - ArtifactList getAllCategories( ... )");
+//        Log.info("ArtifactRestController.class - method - ArtifactList getAllCategories( ... )");
 
         return new StringList( artifactCrudHandler.readAllCategories() );
     }
@@ -141,7 +141,7 @@ public class ArtifactRestController {
     @GetMapping("/users")
     public StringList getAllusers() {
 
-        Log.info("ArtifactRestController.class - method - ArtifactList getAllUsers( ... )");
+//        Log.info("ArtifactRestController.class - method - ArtifactList getAllUsers( ... )");
 
         return new StringList( artifactCrudHandler.readAllUsers() );
     }
@@ -156,7 +156,7 @@ public class ArtifactRestController {
             @RequestParam(value="artId") long id
     ) {
 
-        Log.info("ArtifactRestController.class - method - ArtifactList commentsNumByArtifact( ... )");
+//        Log.info("ArtifactRestController.class - method - ArtifactList commentsNumByArtifact( ... )");
 
         return artifactCrudHandler.readCommentsNumberByArtId( id );
     }
@@ -171,7 +171,7 @@ public class ArtifactRestController {
             @RequestBody Artifact newArt
     ) {
 
-        Log.info("ArtifactRestController.class - method - createArtifact( ... )");
+//        Log.info("ArtifactRestController.class - method - createArtifact( ... )");
 
         return artifactCrudHandler.createArtifact(newArt);
     }
@@ -185,7 +185,7 @@ public class ArtifactRestController {
             @PathVariable("id") long id
     ) {
 
-        Log.info("ArtifactRestController.class - method - delArtifact( ... )");
+//        Log.info("ArtifactRestController.class - method - delArtifact( ... )");
 
         artifactCrudHandler.deleteArtifact(id);
     }
@@ -200,21 +200,10 @@ public class ArtifactRestController {
             @RequestBody Artifact updatedArt
     ) {
 
-        Log.info("ArtifactRestController.class - method - updateArtifact( ... )");
+//        Log.info("ArtifactRestController.class - method - updateArtifact( ... )");
 
         return artifactCrudHandler.updateArtifact(updatedArt);
     }
-
-    /*
-    // Обновление Артефакта
-    @RequestMapping(value="/updateArt", method = RequestMethod.PUT)
-    public Artifact updateArtifact(
-            @RequestBody Artifact updatedArt
-    ) {
-        return artifactCrudCUDHandler.updateArtifact(updatedArt);
-    } // end_method
-
-*/
 
 
 }

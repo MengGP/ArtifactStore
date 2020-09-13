@@ -1,5 +1,6 @@
 package com.menggp.artifactstore.clientInterfaceMVC.controllers;
 
+import com.menggp.artifactstore.clientInterfaceMVC.services.RequestHandler;
 import com.menggp.artifactstore.model.Artifact;
 import com.menggp.artifactstore.model.Comment;
 import com.menggp.artifactstore.clientInterfaceMVC.services.RestDelRequestHandler;
@@ -21,6 +22,9 @@ public class DelPagesController {
     private static final Logger Log = LoggerFactory.getLogger(DelPagesController.class);
 
     @Autowired
+    RequestHandler requestHandler;
+
+    @Autowired
     RestReadRequestHandler restReadRequestHandler;
 
     @Autowired
@@ -35,8 +39,8 @@ public class DelPagesController {
             @RequestParam(value = "artifactId", required = true) long id,
             Model model) {
 
-        Artifact currArt = restReadRequestHandler.getArtById( id );
-        long commentsNumber = restReadRequestHandler.getCommentsNumber( id );
+        Artifact currArt = requestHandler.getArtById( id );
+        long commentsNumber = requestHandler.getCommentsNumber( id );
 
         model.addAttribute("commentsNum", commentsNumber);
         model.addAttribute("currArt", currArt);
@@ -52,11 +56,11 @@ public class DelPagesController {
             Model model) {
 
         int result = -1;
-        result = restDelRequestHandler.delArtifact(id);
+        result = requestHandler.delArtifact(id);
 
         if (result==-1) {
-            Artifact currArt = restReadRequestHandler.getArtById( id );
-            long commentsNumber = restReadRequestHandler.getCommentsNumber( id );
+            Artifact currArt = requestHandler.getArtById( id );
+            long commentsNumber = requestHandler.getCommentsNumber( id );
             model.addAttribute("currArt", currArt);
             model.addAttribute("commentsNum", commentsNumber);
 
@@ -75,8 +79,8 @@ public class DelPagesController {
             @RequestParam(value = "commentId", required = true) long commentId,
             Model model) {
 
-        Artifact currArt = restReadRequestHandler.getArtById( artId );
-        Comment currComment = restReadRequestHandler.getCommentById( commentId );
+        Artifact currArt = requestHandler.getArtById( artId );
+        Comment currComment = requestHandler.getCommentById( commentId );
 
         model.addAttribute("currComment", currComment);
         model.addAttribute("currArt", currArt);
@@ -92,21 +96,21 @@ public class DelPagesController {
             @RequestParam(value = "commentId", required = true) long commentId,
             Model model) {
 
-        Artifact currArtifact = restReadRequestHandler.getArtById( artId );
+        Artifact currArtifact = requestHandler.getArtById( artId );
         model.addAttribute("currArt",currArtifact);
 
         int result = -1;
-        result = restDelRequestHandler.delComment(commentId);
+        result = requestHandler.delComment(commentId);
 
         if (result==-1) {
-            Comment currComment = restReadRequestHandler.getCommentById( commentId );
+            Comment currComment = requestHandler.getCommentById( commentId );
             model.addAttribute("currComment", currComment);
 
             model.addAttribute("result", result);
             return "delCommentPage";
         }
 
-        model.addAttribute("commentList", restReadRequestHandler.getCommentariesByArtifactId(artId));
+        model.addAttribute("commentList", requestHandler.getCommentariesByArtifactId(artId));
         return "commentPage";
     } // end_method
 

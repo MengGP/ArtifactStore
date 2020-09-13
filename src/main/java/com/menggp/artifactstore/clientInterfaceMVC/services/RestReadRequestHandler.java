@@ -126,6 +126,8 @@ public class RestReadRequestHandler {
             ResponseEntity<ArtifactList> responseResult
                     = restTemplate.exchange(REST_URL_ARTIFACTS, HttpMethod.GET, request, ArtifactList.class);
 
+            Log.info(" === === === " +  responseResult.getStatusCode().toString());
+
             return responseResult.getBody().getArtifactList();
         } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
             Log.debug( ex.getMessage() );
