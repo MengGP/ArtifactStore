@@ -1,7 +1,9 @@
 package com.menggp.artifactstore.clientInterfaceMVC.services;
 
 import com.menggp.artifactstore.model.Artifact;
+import com.menggp.artifactstore.model.ArtifactHist;
 import com.menggp.artifactstore.model.Comment;
+import com.menggp.artifactstore.model.dto.ArtifactHistList;
 import com.menggp.artifactstore.model.dto.ArtifactList;
 import com.menggp.artifactstore.model.dto.CommentList;
 import com.menggp.artifactstore.model.dto.StringList;
@@ -34,6 +36,7 @@ public class RequestHandlerImpl implements RequestHandler{
     private static final String REST_URL_ARTIFACTS_CAT = APP_URL + "/artifacts/categories";
     private static final String REST_URL_ARTIFACTS_USER = APP_URL + "/artifacts/users";
     private static final String REST_URL_ARTIFACTS_COMMENT_NUM = APP_URL + "/artifacts/comment_num";
+    private static final String REST_URL_ARTIFACTS_HIST = APP_URL + "/artifacts/history";
     private static final String REST_URL_COMMENTS = APP_URL + "/comments";
     private static final String REST_URL_COMMENTS_ID = APP_URL + "/comments/{id}";
 
@@ -45,7 +48,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public int createArtifact(String user, String cat, String desc) {
-        Log.info("RequestHandlerImpl - method - createArtifact( ... )");
+//        Log.info("RequestHandlerImpl - method - createArtifact( ... )");
 
         return this.artifactChangeRequest(
                 new Artifact(user, cat, desc),
@@ -57,7 +60,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public int createComment(String userId, String content, long artId) {
-        Log.info("RequestHandlerImpl - method - createComment( ... )");
+//        Log.info("RequestHandlerImpl - method - createComment( ... )");
 
         return this.commentChangeRequest(
                 new Comment(userId, content, artId),
@@ -69,7 +72,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public int delArtifact(long id) {
-        Log.info("RequestHandlerImpl - method - delArtifact( ... )");
+//        Log.info("RequestHandlerImpl - method - delArtifact( ... )");
 
         return this.artifactChangeRequest(
                 null,
@@ -81,7 +84,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public int delComment(long id) {
-        Log.info("RequestHandlerImpl - method - delComment( ... )");
+//        Log.info("RequestHandlerImpl - method - delComment( ... )");
 
         return this.commentChangeRequest(
                 null,
@@ -93,7 +96,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public int updateArtifact(long id, String user, String cat, String desc, Date created) {
-        Log.info("RequestHandlerImpl - method - updateArtifact( ... )");
+//        Log.info("RequestHandlerImpl - method - updateArtifact( ... )");
 
         return  this.artifactChangeRequest(
                 new Artifact(id, user, cat, desc, created),
@@ -105,7 +108,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public int updateComment(long id, String userId, String content, long artId) {
-        Log.info("RequestHandlerImpl - method - updateComment( ... )");
+//        Log.info("RequestHandlerImpl - method - updateComment( ... )");
 
         return this.commentChangeRequest(
                 new Comment(id, userId, content, artId),
@@ -117,7 +120,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public Artifact getArtById(long id) {
-        Log.info("RequestHandlerImpl - method - getArtById( ... )");
+//        Log.info("RequestHandlerImpl - method - getArtById( ... )");
 
         return this.artifactSingleReadRequest(
                 REST_URL_ARTIFACTS_ID,
@@ -128,7 +131,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public Comment getCommentById(long id) {
-        Log.info("RequestHandlerImpl - method - getCommentById( ... )");
+//        Log.info("RequestHandlerImpl - method - getCommentById( ... )");
 
         return this.commentSingleReadRequest(
                 REST_URL_COMMENTS_ID,
@@ -139,7 +142,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public List<String> getAllCategories() {
-        Log.info("RequestHandlerImpl - method - getAllCategories( ... )");
+//        Log.info("RequestHandlerImpl - method - getAllCategories( ... )");
 
         return this.stringListReadRequest(
                 REST_URL_ARTIFACTS_CAT,
@@ -150,7 +153,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public List<String> getAllUsers() {
-        Log.info("RequestHandlerImpl - method - getAllUsers( ... )");
+//        Log.info("RequestHandlerImpl - method - getAllUsers( ... )");
 
         return this.stringListReadRequest(
                 REST_URL_ARTIFACTS_USER,
@@ -161,7 +164,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public long getCommentsNumber( long artId ) {
-        Log.info("RequestHandlerImpl - method - getCommentsNumber( ... )");
+//        Log.info("RequestHandlerImpl - method - getCommentsNumber( ... )");
 
         return this.longReadRequest(
                 REST_URL_ARTIFACTS_COMMENT_NUM +"?artId="+artId,
@@ -172,7 +175,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public List<Artifact> getAllArtifacs() {
-        Log.info("RequestHandlerImpl - method - getAllArtifacs( ... )");
+//        Log.info("RequestHandlerImpl - method - getAllArtifacs( ... )");
 
         return this.artifactListReadRequest(
                 REST_URL_ARTIFACTS,
@@ -183,7 +186,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public List<Artifact> getArtifacatsFilterByCategory(String cat) {
-        Log.info("RequestHandlerImpl - method - getArtifacatsFilterByCategory( ... )");
+//        Log.info("RequestHandlerImpl - method - getArtifacatsFilterByCategory( ... )");
 
         return this.artifactListReadRequest(
                 REST_URL_ARTIFACTS + "?cat="+cat,
@@ -194,7 +197,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public List<Artifact> getArtifacatsFilterByUser(String user) {
-        Log.info("RequestHandlerImpl - method - getArtifacatsFilterByUser( ... )");
+//        Log.info("RequestHandlerImpl - method - getArtifacatsFilterByUser( ... )");
 
         return this.artifactListReadRequest(
                 REST_URL_ARTIFACTS + "?user="+user,
@@ -205,7 +208,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public List<Artifact> getArtifacatsFilterByDescription(String desc) {
-        Log.info("RequestHandlerImpl - method - getArtifacatsFilterByDescription( ... )");
+//        Log.info("RequestHandlerImpl - method - getArtifacatsFilterByDescription( ... )");
 
         return this.artifactListReadRequest(
                 REST_URL_ARTIFACTS + "?desc="+desc,
@@ -216,7 +219,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public List<Artifact> getArtifacatsFilterByCommentContent(String comment) {
-        Log.info("RequestHandlerImpl - method - getArtifacatsFilterByCommentContent( ... )");
+//        Log.info("RequestHandlerImpl - method - getArtifacatsFilterByCommentContent( ... )");
 
         return this.artifactListReadRequest(
                 REST_URL_ARTIFACTS +"?comment="+comment,
@@ -227,7 +230,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public List<Artifact> sortAllArtifact(int sortType, boolean sortDirection) {
-        Log.info("RequestHandlerImpl - method - sortAllArtifact( ... )");
+//        Log.info("RequestHandlerImpl - method - sortAllArtifact( ... )");
 
         return this.artifactListReadRequest(
                 REST_URL_ARTIFACTS
@@ -240,7 +243,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public List<Artifact> sortArtifactFilteredByCategory(String cat, int sortType, boolean sortDirection) {
-        Log.info("RequestHandlerImpl - method - sortArtifactFilteredByCategory( ... )");
+//        Log.info("RequestHandlerImpl - method - sortArtifactFilteredByCategory( ... )");
 
         return this.artifactListReadRequest(
                 REST_URL_ARTIFACTS
@@ -254,7 +257,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public List<Artifact> sortArtifactFilteredByUserId(String user, int sortType, boolean sortDirection) {
-        Log.info("RequestHandlerImpl - method - sortArtifactFilteredByUserId( ... )");
+//        Log.info("RequestHandlerImpl - method - sortArtifactFilteredByUserId( ... )");
 
         return this.artifactListReadRequest(
                 REST_URL_ARTIFACTS
@@ -268,7 +271,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public List<Artifact> sortArtifactFilteredByDescription(String desc, int sortType, boolean sortDirection) {
-        Log.info("RequestHandlerImpl - method - sortArtifactFilteredByDescription( ... )");
+//        Log.info("RequestHandlerImpl - method - sortArtifactFilteredByDescription( ... )");
 
         return this.artifactListReadRequest(
                 REST_URL_ARTIFACTS
@@ -282,7 +285,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public List<Artifact> sortArtifactFilteredByComment(String comment, int sortType, boolean sortDirection) {
-        Log.info("RequestHandlerImpl - method - sortArtifactFilteredByComment( ... )");
+//        Log.info("RequestHandlerImpl - method - sortArtifactFilteredByComment( ... )");
 
         return this.artifactListReadRequest(
                 REST_URL_ARTIFACTS
@@ -296,7 +299,7 @@ public class RequestHandlerImpl implements RequestHandler{
 
     @Override
     public List<Comment> getCommentariesByArtifactId(long artId) {
-        Log.info("RequestHandlerImpl - method - getCommentariesByArtifactId( ... )");
+//        Log.info("RequestHandlerImpl - method - getCommentariesByArtifactId( ... )");
 
         return this.commentListReadRequest(
                 REST_URL_COMMENTS +"?artId="+artId,
@@ -304,6 +307,40 @@ public class RequestHandlerImpl implements RequestHandler{
                 new Object[] {}
         );
     } // end_method
+
+    @Override
+    public List<ArtifactHist> getArtifactsHistByArtifactId(long artId) {
+        Log.info("RequestHandlerImpl - method - getArtifactsHistByArtifactId( ... )");
+
+        return this.artifactHistListReadRequest(
+                REST_URL_ARTIFACTS_HIST +"?artId="+artId,
+                HttpMethod.GET,
+                new Object[] {}
+        );
+    }
+
+    /**
+     * Метод генерирует запрос на получение списка истории изменения артефакта по id артефакта
+     * @param requestUri    - строка URI - запроса
+     * @param httpMethod    - тип HTTP метода
+     * @param uriVariables  - переменные запроса
+     * @return - список исторических комментариев
+     */
+    private List<ArtifactHist> artifactHistListReadRequest(String requestUri, HttpMethod httpMethod, Object[] uriVariables) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.addAll(basicAuthHandler.getHeaders());
+            HttpEntity<String> request = new HttpEntity<>(headers);
+
+            ResponseEntity<ArtifactHistList> responseResult
+                    = restTemplate.exchange(requestUri, httpMethod, request, ArtifactHistList.class, uriVariables);
+
+            return responseResult.getBody().getArtifactHistList();
+        } catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
+            Log.debug( ex.getMessage() );
+        }
+        return null;
+    }
 
 
     /**

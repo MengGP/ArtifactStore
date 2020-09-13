@@ -10,8 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/*
-   Обработка открытия страниц с базовой для для них информацией
+/**
+ *  Контроллер отображения страниц с базовой информацией (без фильтров и сортировок)
+ *      - домашняя страница
+ *      - страница комментариев
+ *      - страница истории изменений артефактов
  */
 @Controller
 public class ReadPagesController {
@@ -21,14 +24,22 @@ public class ReadPagesController {
     @Autowired
     RequestHandler requestHandler;
 
-    // home - page
+    /**
+     * Обработчик корневой страницы - редирект
+     * @param model - модель
+     * @return  - имя вида
+     */
     @RequestMapping("/")
     public String indexPage(Model model) {
         homePage(model);
         return "home";
-    } // end_method
+    }
 
-    // home - page
+    /**
+     * Обработчик домашней страницы
+     * @param model - модель
+     * @return - имя вида
+     */
     @RequestMapping("/home")
     public String homePage(Model model) {
 
@@ -43,9 +54,14 @@ public class ReadPagesController {
 
         model.addAttribute("artifactList", requestHandler.getAllArtifacs());
         return "home";
-    } // end_method
+    }
 
-    // Страница комментариев
+    /**
+     * Обработчик страницы комментариев
+     * @param artId - id артефакта
+     * @param model - модель
+     * @return - имя вида
+     */
     @RequestMapping("/commentPage")
     public String commentPage(
             @RequestParam(value = "artifactId", required = true) long artId,
@@ -55,7 +71,27 @@ public class ReadPagesController {
         model.addAttribute("commentList", requestHandler.getCommentariesByArtifactId( artId ));
 
         return "commentPage";
-    } // end_method
+    }
+
+    /**
+     * Обаботчик страницы истории изменения артифакта
+     * @param artId
+     * @param model
+     * @return
+     */
+    @RequestMapping("/artHistPage")
+    public String artHistPage(
+            @RequestParam(value = "artifactId", required = true) long artId,
+            Model model
+    ) {
+        Artifact currArt = requestHandler.getArtById( artId );
+        model.addAttribute("currArt", currArt);
+        model.addAttribute("artifactsHistList", requestHandler.getArtifactsHistByArtifactId(artId));
+
+        return "artHistPage";
+    }
+
+
 
 } // end_class
 

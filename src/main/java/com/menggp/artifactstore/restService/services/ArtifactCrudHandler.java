@@ -1,6 +1,8 @@
 package com.menggp.artifactstore.restService.services;
 
 import com.menggp.artifactstore.model.Artifact;
+import com.menggp.artifactstore.model.ArtifactHist;
+import com.menggp.artifactstore.model.Comment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,8 @@ public interface ArtifactCrudHandler {
     Artifact createArtifact(Artifact newArt);
 
     /**
-     * Обновление данные артифакта
+     * Обновление данных артифакта
+     *        - создается историческая версия артефакта
      * @param updatedArt - обновляемый артифакт
      * @return - возвращает обнолвенный артифакт
      */
@@ -35,7 +38,8 @@ public interface ArtifactCrudHandler {
 
     /**
      * Удаление артефакта
-     *      - связанные с артефактом комментарии, также удаляются
+     *      - связанные с артефактом комментарии - удаляются
+     *      - исторические версии артефакта - удаляются
      * @param id - id удаляемого артефакта
      */
     void deleteArtifact(long id);
@@ -167,5 +171,12 @@ public interface ArtifactCrudHandler {
      * @return - количество комментариев
      */
     long readCommentsNumberByArtId( long artId );
+
+    /**
+     * Получение списка "исторических версий артефакта" для артифакта - по id артифакта
+     * @param artId - id артифакта
+     * @return  - артефакты-историчсекие в виде списка
+     */
+    List<ArtifactHist> findArtifactsHistByArtifactId(long artId);
 
 }

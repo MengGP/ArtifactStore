@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Comment page</title>
+</head>
+
+<body>
+<p> История изменений артефакта: </p>
+<p>--------------------------------------------------------</p>
+<p th:text="'Автор:    '+ ${currArt.getUserId()}"/>
+<p th:text="'Категория:'+ ${currArt.getCategory()}"/>
+<p th:text="'Описание: '+ ${currArt.getDescription()}"/>
+<p th:text="'Создан: '+ ${currArt.getCreated()}"/>
+<p>--------------------------------------------------------</p>
+<!-- Блок вывода -->
+<table border="1" bordercolor="grey">
+    <tr>
+        <th>Категория</th>
+        <th>Описание</th>
+        <th>Автор</th>
+        <th>Изменен</th>
+    </tr>
+    <tr th:each="iter : ${artifactsHistList}">
+        <td th:text="${iter.getCategory()}"></td>
+        <td th:text="${iter.getDescription()}"></td>
+        <td th:text="${iter.getUserId()}"></td>
+        <td th:text="${iter.getModified()}"></td>
+    </tr>
+
+</table>
+
+<p>--------------------------------------------------------</p>
+<p>
+    <a th:href="@{/home}">
+        <button> HOME PAGE </button>
+    </a>
+</p>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти из системы"/>
+</form>
+
+</body>
+</html>

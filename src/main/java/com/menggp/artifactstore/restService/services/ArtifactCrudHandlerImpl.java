@@ -1,7 +1,9 @@
 package com.menggp.artifactstore.restService.services;
 
 import com.menggp.artifactstore.model.Artifact;
+import com.menggp.artifactstore.model.ArtifactHist;
 import com.menggp.artifactstore.model.Comment;
+import com.menggp.artifactstore.model.repo.ArtifactHistRepository;
 import com.menggp.artifactstore.model.repo.ArtifactRepository;
 import com.menggp.artifactstore.model.repo.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,36 +26,58 @@ public class ArtifactCrudHandlerImpl implements ArtifactCrudHandler {
     @Autowired
     CommentRepository commentRepository;
 
+    @Autowired
+    ArtifactHistRepository artifactHistRepository;
+
     private List<Artifact> allArtifact;
 
     @Override
     public Artifact createArtifact(Artifact newArt){
         newArt.setCreated( new Date() );
         return artifactRepository.save( newArt );
-    } // end_method
+    }
 
     @Override
     public Artifact updateArtifact(Artifact updatedArt){
 
+        // Получение текущей версии артефакта
         Artifact art = artifactRepository.findById( updatedArt.getId() ).get();
+
+        // Создание "исторической версии артифакта"
+        ArtifactHist artHist = new ArtifactHist(
+                art.getId(),
+                new Date(),
+                art.getUserId(),
+                art.getCategory(),
+                art.getDescription()
+        );
+        artifactHistRepository.save( artHist );
+
+        // Обновление артифакта
         art.setCreated( updatedArt.getCreated()) ;
         art.setDescription( updatedArt.getDescription() );
         art.setCategory( updatedArt.getCategory() );
         art.setUserId( updatedArt.getUserId() );
 
         return artifactRepository.save( art );
-    } // end_metod
+    }
 
     @Override
     public void deleteArtifact(long id) {
 
-        ArrayList<Comment> commentsList = (ArrayList<Comment>) commentRepository.findByArtifactId( id );
+        // Удвление связанных комментариев
+        List<Comment> commentsList = (List<Comment>) commentRepository.findByArtifactId( id );
         for (Comment iter : commentsList)
             commentRepository.delete( iter );
 
+        // Удаление "исторических версий артефакта"
+        List<ArtifactHist> artifactHistList = (List<ArtifactHist>) artifactHistRepository.findByArtifactId(id);
+        for (ArtifactHist iter : artifactHistList)
+            artifactHistRepository.delete( iter );
+
+        // Удаление артефакта
         artifactRepository.deleteById( id );
-        return;
-    } // end_method
+    }
 
     @Override
     public Artifact findArtById( long id ) {
@@ -64,7 +88,7 @@ public class ArtifactCrudHandlerImpl implements ArtifactCrudHandler {
     public List<Artifact> readAll() {
         allArtifact = (List<Artifact>) artifactRepository.findAll();
         return allArtifact;
-    } // end_method
+    }
 
     @Override
     public  List<Artifact> findByCategory(String category) {
@@ -73,7 +97,7 @@ public class ArtifactCrudHandlerImpl implements ArtifactCrudHandler {
         clause = clause.toUpperCase();
         allArtifact = (List<Artifact>) artifactRepository.findByCategoryLikeIgnoreCase(clause);
         return allArtifact;
-    } // end_method
+    }
 
     @Override
     public  List<Artifact> findByUser(String user) {
@@ -82,7 +106,7 @@ public class ArtifactCrudHandlerImpl implements ArtifactCrudHandler {
         clause = clause.toUpperCase();
         allArtifact = (List<Artifact>) artifactRepository.findByUserIdLikeIgnoreCase(clause);
         return allArtifact;
-    } // end_method
+    }
 
     @Override
     public  List<Artifact> findByDescription(String desc) {
@@ -91,7 +115,7 @@ public class ArtifactCrudHandlerImpl implements ArtifactCrudHandler {
         clause = clause.toUpperCase();
         allArtifact = (List<Artifact>) artifactRepository.findByDescriptionLikeIgnoreCase(clause);
         return allArtifact;
-    } // end_method
+    }
 
     @Override
     public List<Artifact> findByCommentContent(String comment) {
@@ -137,7 +161,7 @@ public class ArtifactCrudHandlerImpl implements ArtifactCrudHandler {
                 break;
         }
         return allArtifact;
-    } // end_method
+    }
 
     @Override
     public List<Artifact> sortArtFilteredByCategory(String cat, int sortType, boolean sortDirection) {
@@ -178,7 +202,7 @@ public class ArtifactCrudHandlerImpl implements ArtifactCrudHandler {
                 break;
         }
         return allArtifact;
-    } // end_method
+    }
 
     @Override
     public List<Artifact> sortArtFilteredByUserId(String userId, int sortType, boolean sortDirection) {
@@ -219,7 +243,7 @@ public class ArtifactCrudHandlerImpl implements ArtifactCrudHandler {
                 break;
         }
         return allArtifact;
-    } // end_method
+    }
 
     @Override
     public List<Artifact> sortArtFilteredByDescription(String desc, int sortType, boolean sortDirection) {
@@ -260,7 +284,7 @@ public class ArtifactCrudHandlerImpl implements ArtifactCrudHandler {
                 break;
         }
         return allArtifact;
-    } // end_method
+    }
 
     @Override
     public List<Artifact> sortArtFilteredByCommentContent(String comment, int sortType, boolean sortDirection) {
@@ -283,7 +307,7 @@ public class ArtifactCrudHandlerImpl implements ArtifactCrudHandler {
                 break;
         }
         return allArtifact;
-    } // end_method
+    }
 
     @Override
     public List<String> readAllCategories() {
@@ -298,6 +322,10 @@ public class ArtifactCrudHandlerImpl implements ArtifactCrudHandler {
     @Override
     public long readCommentsNumberByArtId( long artId ) {
         return artifactRepository.findCommentsNumberByArtifactId( artId );
-    } // end_method
+    }
 
+    @Override
+    public List<ArtifactHist> findArtifactsHistByArtifactId(long artId) {
+        return (List<ArtifactHist>) artifactHistRepository.findByArtifactId(artId);
+    }
 }

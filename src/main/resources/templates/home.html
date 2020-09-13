@@ -199,6 +199,7 @@
         <th><!-- empty --></th>
         <th><!-- empty --></th>
         <th><!-- empty --></th>
+        <th><!-- empty --></th>
     </tr>
     <tr th:each="iter : ${artifactList}">
         <td th:text="${iter.getCategory()}"></td>
@@ -215,6 +216,12 @@
             <form th:action="@{/editArtifactPage}">
                 <input hidden="true" name="artifactId" th:value="${iter.getId()}"/>
                 <button>EDIT</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/artHistPage}">
+                <input hidden="true" name="artifactId" th:value="${iter.getId()}"/>
+                <button>HISTORY</button>
             </form>
         </td>
         <td>

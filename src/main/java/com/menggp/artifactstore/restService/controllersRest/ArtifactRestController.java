@@ -1,6 +1,7 @@
 package com.menggp.artifactstore.restService.controllersRest;
 
 import com.menggp.artifactstore.model.Artifact;
+import com.menggp.artifactstore.model.dto.ArtifactHistList;
 import com.menggp.artifactstore.model.dto.ArtifactList;
 import com.menggp.artifactstore.model.dto.StringList;
 import com.menggp.artifactstore.restService.services.ArtifactCrudHandler;
@@ -117,10 +118,19 @@ public class ArtifactRestController {
         return response;
     }
 
-    /* ------------------------------------------------------------------------------------------------
-    sortArtFilteredByCommentContent(comment, sortType, sortDirection)
+    /**
+     * Получить список "исторических версий артефакта" по id артефакта
+     * @param artId - id артефакта
+     * @return - список исторических комментариев
+     */
+    @GetMapping("/history")
+    public ArtifactHistList getArtifactsHistByArtifact(
+            @RequestParam(value = "artId") long artId
+    ) {
+        Log.info("ArtefactRestController.class - method - Comment getArtifactsHistByArtifact( ... )");
 
-    -------------------------------------------------------------------------------------------------- */
+        return new ArtifactHistList( artifactCrudHandler.findArtifactsHistByArtifactId( artId ) );
+    }
 
     /**
      * Получить список категорий артефактов
@@ -149,14 +159,13 @@ public class ArtifactRestController {
     /**
      * Получить количество комментариев у артифакта (по id артефакта)
      * @param id - id артефакта
-     * @return   - количество кмментариев
+     * @return   - количество комментариев
      */
     @GetMapping("/comment_num")
     public Long commentsNumByArtifact(
             @RequestParam(value="artId") long id
     ) {
-
-//        Log.info("ArtifactRestController.class - method - ArtifactList commentsNumByArtifact( ... )");
+        Log.info("ArtifactRestController.class - method - ArtifactList commentsNumByArtifact( ... )");
 
         return artifactCrudHandler.readCommentsNumberByArtId( id );
     }
@@ -199,8 +208,7 @@ public class ArtifactRestController {
     public Artifact updateArtifact(
             @RequestBody Artifact updatedArt
     ) {
-
-//        Log.info("ArtifactRestController.class - method - updateArtifact( ... )");
+        Log.info("ArtifactRestController.class - method - updateArtifact( ... )");
 
         return artifactCrudHandler.updateArtifact(updatedArt);
     }

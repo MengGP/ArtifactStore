@@ -1,6 +1,7 @@
 package com.menggp.artifactstore.clientInterfaceMVC.services;
 
 import com.menggp.artifactstore.model.Artifact;
+import com.menggp.artifactstore.model.ArtifactHist;
 import com.menggp.artifactstore.model.Comment;
 import com.menggp.artifactstore.model.dto.ArtifactList;
 import org.springframework.http.HttpEntity;
@@ -203,10 +204,11 @@ public interface RequestHandler {
      */
     List<Comment> getCommentariesByArtifactId(long artId);
 
+    /**
+     * Запрос "истории изменения артефактов" для артефакта по id
+     * @param artId - id артефакта
+     * @return - список "исторических артефактов"
+     */
+    List<ArtifactHist> getArtifactsHistByArtifactId(long artId);
 
-
-
-
-
-
-    }
+}

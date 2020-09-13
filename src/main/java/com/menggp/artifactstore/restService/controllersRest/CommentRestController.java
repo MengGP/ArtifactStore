@@ -25,21 +25,29 @@ public class CommentRestController {
     @Autowired
     CommentCrudHandler commentCrudHandler;
 
+    /**
+     * Получить комментарий по id
+     * @param id - id комментария
+     * @return - комменатрий
+     */
     @GetMapping("/{id}")
     public Comment getCommentById(
             @PathVariable(name = "id") Long id
     ) {
-
 //        Log.info("CommentRestController.class - method - Comment getCommentById( ... )");
 
         return commentCrudHandler.findCommentById( id );
     }
 
+    /**
+     * Получить список комментариев к артефакту по id артефакта
+     * @param artId - id артефакта
+     * @return - список комментариев
+     */
     @GetMapping
     public CommentList getCommentsByArtifact(
             @RequestParam(value = "artId") long artId
     ) {
-
 //        Log.info("CommentRestController.class - method - Comment getCommentsByArtifact( ... )");
 
         return new CommentList( commentCrudHandler.findByArtifactId( artId ) );

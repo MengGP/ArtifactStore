@@ -40,6 +40,14 @@ public class ArtifactHist {
     public ArtifactHist() {
     }
 
+    public ArtifactHist(@NotNull long artifactId, @NotNull Date modified, @NotNull String userId, String category, @NotNull String description) {
+        this.artifactId = artifactId;
+        this.modified = modified;
+        this.userId = userId;
+        this.category = category;
+        this.description = description;
+    }
+
     public long getId() {
         return id;
     }
