@@ -48,18 +48,18 @@
 API REST-сервиса: <br>
 root: localhost:8080
 
-<table>
+<table> 
     <tr>
         <td><b>GET</b></td>    
     </tr>
     <tr>   
         <td>/artifact
-            <br> @RequestParam(value = "cat", required = false) String					
-            <br> @RequestParam(value = "user", required = false) String				
-        	<br> @RequestParam(value = "desc", required = false) String				
-        	<br> @RequestParam(value = "comment", required = false) String			
-        	<br> @RequestParam(value = "sortType", required = false) Integer			
-        	<br> @RequestParam(value = "sortDirection", required = false) Boolean
+            <br> @RequestParam("cat", required=false) String					
+            <br> @RequestParam("user", required=false) String				
+        	<br> @RequestParam("desc", required=false) String				
+        	<br> @RequestParam("comment", required=false) String			
+        	<br> @RequestParam("sortType", required=false) Integer			
+        	<br> @RequestParam("sortDirection", required=false) Boolean
         </td>
         <td>получение списка артефактов, согласно переданным параметрам</td>
     </tr>
@@ -70,7 +70,7 @@ root: localhost:8080
     </tr>
     <tr>
         <td>/artifact/history
-            <br>@RequestParam(value = "artId") long</td>
+            <br>@RequestParam("artId") long</td>
         <td>получение истории изменения артефакта</td>
     </tr>
     <tr>
@@ -83,12 +83,12 @@ root: localhost:8080
     </tr>
     <tr>
         <td>/artifact/comment_num
-            	<br>@RequestParam(value="artId") long</td>
+            	<br>@RequestParam("artId") long</td>
         <td>получение количества комментариев к артефакту</td>
     </tr>
     <tr>
         <td>/comments
-            	<br>@RequestParam(value = "artId") long</td>
+            	<br>@RequestParam("artId") long</td>
         <td>получение списка комментариев к артефакту</td>
     </tr>
     <tr>
