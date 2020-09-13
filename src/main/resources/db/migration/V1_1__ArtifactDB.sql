@@ -20,20 +20,54 @@ CREATE TABLE commentaries
     FOREIGN KEY (artifact_id) REFERENCES artifacts (id)
 );
 
+-- Таблица предыдущих версий Артефактов
+CREATE TABLE artifacts_hist
+(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    artifact_id BIGINT NOT NULL,
+    modified TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    user_id VARCHAR(256) NOT NULL,
+    category VARCHAR(256),
+    description VARCHAR(2048) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (artifact_id) REFERENCES artifacts (id)
+);
+
 -- Заполенение БД начальными данными
 --
 
 -- Artifact and comments 1: --
+-- добавлены 2 исторические версии --
 INSERT INTO artifacts(id, created, user_id, category, description) VALUES (
     1,
     '2020-02-06 09:07:09',
     'Interledger',
     'No category',
-    'Connector :: Routing API'
+    'Connector :: Routing API --- HAVE HISTORY VERSION ---'
 );
+-- commentaries
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (1, 1, 'user02', 'Комментарий к Connector Routing API #1');
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (2, 1, 'user03', 'Комментарий к Connector Routing API #2');
 INSERT INTO commentaries (id, artifact_id, user_id, content) VALUES (3, 1, 'user04', 'Комментарий к Connector Routing API #3');
+-- artifacts_hist
+INSERT INTO artifacts_hist (id, artifact_id, modified, user_id, category, description) VALUES (
+    1,
+    1,
+    '2020-03-07 10:08:19',
+    'Interledger',
+    'Routing and Switching',
+    'Connector :: Routing API'
+);
+INSERT INTO artifacts_hist (id, artifact_id, modified, user_id, category, description) VALUES (
+    2,
+    1,
+    '2020-04-08 11:09:29',
+    'Interledger protocol',
+    'Routing and Switching',
+    'Routing API'
+);
+
+
 
 -- Artifact and comments 2 --
 INSERT INTO artifacts(id, created, user_id, category, description) VALUES (

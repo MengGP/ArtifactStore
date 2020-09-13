@@ -2,15 +2,14 @@ package com.menggp.artifactstore.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
 import java.util.Date;
 
 /**
- *  Сущность - артефакт
+ * Сущность артефакт-исторический
  */
 @Entity
-@Table(name="artifacts")
-public class Artifact {
+@Table(name="artifacts_hist")
+public class ArtifactHist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,10 +17,14 @@ public class Artifact {
     @NotNull
     long id;
 
-    @Column(name = "created")
+    @Column(name = "artifact_id")
+    @NotNull
+    long artifactId;
+
+    @Column(name = "modified")
     @Temporal(TemporalType.TIMESTAMP)
     @NotNull
-    Date created;
+    Date modified;
 
     @Column(name = "user_id")
     @NotNull
@@ -34,24 +37,9 @@ public class Artifact {
     @NotNull
     String description;
 
-    public Artifact() {
+    public ArtifactHist() {
     }
 
-    public Artifact(@NotNull String userId, String category, @NotNull String description) {
-        this.userId = userId;
-        this.category = category;
-        this.description = description;
-    }
-
-    public Artifact(@NotNull long id, @NotNull String userId, String category, @NotNull String description, @NotNull Date created) {
-        this.id = id;
-        this.userId = userId;
-        this.category = category;
-        this.description = description;
-        this.created = created;
-    }
-
-    // -- Getters and Setters
     public long getId() {
         return id;
     }
@@ -60,12 +48,20 @@ public class Artifact {
         this.id = id;
     }
 
-    public Date getCreated() {
-        return created;
+    public long getArtifactId() {
+        return artifactId;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
+    public void setArtifactId(long artifactId) {
+        this.artifactId = artifactId;
+    }
+
+    public Date getModified() {
+        return modified;
+    }
+
+    public void setModified(Date modified) {
+        this.modified = modified;
     }
 
     public String getUserId() {
@@ -91,6 +87,4 @@ public class Artifact {
     public void setDescription(String description) {
         this.description = description;
     }
-    // end_getters_and_setters
-
-} // end_class
+}

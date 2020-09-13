@@ -5,9 +5,9 @@ import com.menggp.artifactstore.model.Artifact;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-    Data Transfer Object -
-        для передачи List<Artifact> в REST запросе
+/**
+ *  Data Transfer Object
+ *      для передачи List<Artifact> в REST запросе/ответе
  */
 public class ArtifactList {
 

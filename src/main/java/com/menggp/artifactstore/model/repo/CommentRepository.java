@@ -6,13 +6,17 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/*
-    Репозиторий сущности Комментарий
+/**
+ * Репозиторий сущности - комментарий
  */
 @Repository
 public interface CommentRepository extends CrudRepository<Comment, Long> {
 
-    // Поиск комментариев по артефакту (artefactId)
+    /**
+     * Поиск комментариев к артефакту - по id артефакта
+     * @param artifactId - id артефакта
+     * @return - список комментариев
+     */
     List<Comment> findByArtifactId(long artifactId);
 
 } // end_interface

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/*
-    Репозирорий сущности Артифакт
+/**
+ * Репозиторий сущности - артефатк
  */
 @Repository
 public interface ArtifactRepository extends CrudRepository<Artifact, Long> {
