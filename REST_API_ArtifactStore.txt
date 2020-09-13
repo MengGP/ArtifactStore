@@ -1,0 +1,56 @@
+GET
+------------------------------------------------------------------------
+/artifact	
+		:: получение списка артефактов, согласно переланным параметрам
+	@RequestParam(value = "cat", required = false) String					
+	@RequestParam(value = "user", required = false) String				
+	@RequestParam(value = "desc", required = false) String				
+	@RequestParam(value = "comment", required = false) String			
+	@RequestParam(value = "sortType", required = false) Integer			
+	@RequestParam(value = "sortDirection", required = false) Boolean	
+/artifact/{id}	
+		:: получение одного артефакта по id
+	@PathVariable("id") long
+/artifact/history	
+		:: получение истории изменения артефакта
+	@RequestParam(value = "artId") long
+/artifact/categories	
+		:: получение списка категорий
+/artifact/users	
+		:: полчение списка авторов артефактов
+/artifact/comment_num
+		:: получение количества комментариев к артефакту
+	@RequestParam(value="artId") long
+/comments
+		:: получение списка комментариев к артефакту
+	@RequestParam(value = "artId") long
+/comments/{id}
+		:: получние одного артефакта по id
+	@PathVariable("id") long
+
+POST
+--------------------------------------------------------------------------
+/artifact
+		:: создание артефакта
+	@RequestBody Artifact
+/comments
+		:: создание комментария
+	@RequestBody Comment
+
+DELETE
+--------------------------------------------------------------------------
+/artifact/{id}
+		:: удаление артефакта
+	@PathVariable("id") long
+/comments/{id}
+		:: удаление комментария
+	@PathVariable("id") long
+		
+PUT	
+--------------------------------------------------------------------------
+/artifact
+		:: изменение артефакта
+	@RequestBody Artifact
+/comments
+		:: изменение комментария
+	@RequestBody Comment

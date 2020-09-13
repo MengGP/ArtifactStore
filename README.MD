@@ -32,11 +32,111 @@
         * время создания
         * категория
         * пользователь
-    4. Сервис защищен basic auth    
+    4. Сервис защищен basic auth
+    5. расширенное задание: для операций UPDATE хранить предыдущие версии объектов    
     
     Требования к разработке
     1. Фреймворк: Spring Boot + JPA + REST
     2. Проект создаётся и хранится в git (github, gitlab, etc)
+
+Описание реализации:
+--------------------------------------
+Проект можно разделить на две части: <br>
+    - RESTful сервис хранения и доступа к данным. <br>
+    - Интерфейс (web) реализованный в виде MVC, взаимодействие с REST-сервисом в помощью Spring RestTemplate.
+
+API REST-сервиса: <br>
+root: localhost:8080
+
+<table>
+    <tr>
+        <td><b>GET</b></td>    
+    </tr>
+    <tr>   
+        <td>/artifact
+            <br> @RequestParam(value = "cat", required = false) String					
+            <br> @RequestParam(value = "user", required = false) String				
+        	<br> @RequestParam(value = "desc", required = false) String				
+        	<br> @RequestParam(value = "comment", required = false) String			
+        	<br> @RequestParam(value = "sortType", required = false) Integer			
+        	<br> @RequestParam(value = "sortDirection", required = false) Boolean
+        </td>
+        <td>получение списка артефактов, согласно переданным параметрам</td>
+    </tr>
+    <tr>
+        <td>/artifact/{id}
+            <br>@PathVariable("id") long</td>
+        <td>получение одного артефакта по id</td>
+    </tr>
+    <tr>
+        <td>/artifact/history
+            <br>@RequestParam(value = "artId") long</td>
+        <td>получение истории изменения артефакта</td>
+    </tr>
+    <tr>
+        <td>/artifact/categories</td>
+        <td>получение списка категорий</td>
+    </tr>
+    <tr>
+        <td>/artifact/users</td>
+        <td>получение списка авторов артефактов</td>
+    </tr>
+    <tr>
+        <td>/artifact/comment_num
+            	<br>@RequestParam(value="artId") long</td>
+        <td>получение количества комментариев к артефакту</td>
+    </tr>
+    <tr>
+        <td>/comments
+            	<br>@RequestParam(value = "artId") long</td>
+        <td>получение списка комментариев к артефакту</td>
+    </tr>
+    <tr>
+        <td>/comments/{id}
+            	<br>@PathVariable("id") long</td>
+        <td>получние одного артефакта по id</td>
+    </tr>
+    <tr>
+        <td><b>POST</b></td>
+    </tr>
+    <tr>
+        <td>/artifact 
+            	<br>@RequestBody Artifact</td>
+        <td>создание артефакта</td>
+    </tr>
+    <tr>
+        <td>/comments 
+            	<br>@RequestBody Comment</td>
+        <td>создание комментария</td>
+    </tr>
+    <tr>
+        <td><b>DELETE</b></td>
+    </tr>
+    <tr>
+        <td>/artifact/{id}
+            	<br>@PathVariable("id") long</td>
+        <td>удаление артефакта</td>
+    </tr>
+    <tr>
+        <td>/comments/{id}
+            	<br>@PathVariable("id") long</td>
+        <td>удаление комментария</td>
+    </tr>
+    <tr>
+        <td><b>PUT</b></td>
+    </tr>
+    <tr>
+        <td>/artifact
+            	<br>@RequestBody Artifact</td>
+        <td>изменение артефакта</td>
+    </tr>
+    <tr>
+        <td>/comments
+            	<br>@RequestBody Comment</td>
+        <td>изменение комментария</td>
+    </tr>
+</table>
+
 
 Сборка и запуск:
 --------------------------------------
@@ -49,6 +149,7 @@
 * В результате запуска проекта запускается сервлет, доступный по адресу:
     * http://localhost:8080/
     * login/pass: user/user
+
 
 Используемые в проекте средства:
 --------------------------------------
